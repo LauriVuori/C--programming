@@ -1,12 +1,3 @@
-/*Vihje:
-Neliöjuuren voi laskea seuraavasti (palauttaa double-tyypin arvon):
-double juuri = sqrt(double_luku);
-Tarvitset cmath-kirjastoa.
-
-Example output:
-Anna ensimmäinen kateetti:34
-Anna toinen kateetti:11
-Hypotenuusan pituus: 35.7351*/
 
 #include <iostream>
 #include <cmath>
