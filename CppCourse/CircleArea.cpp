@@ -1,10 +1,4 @@
-/*
-Tee ohjelma, joka kysyy käyttäjältä ympyrän säteen ja laskee annetun säteen
-perusteella ympyrän pinta-alan. Lopuksi pinta-ala tulostetaan näytölle. 
-Piin (π) arvona käytetään likiarvoa 3.142. Käyttäjän oletetaan syöttävän säteen 
-arvoksi kokonaislukuja.
 
-*/
 #include <cmath>
 #include <iostream>
 using namespace std;
