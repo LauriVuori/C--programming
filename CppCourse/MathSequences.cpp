@@ -1,24 +1,19 @@
-/*
-1 0 2 1 3 2 4 3 5...
-1 1 1 3 5 9 17...
--1 0 -3 -2 -5 -4 -7...*/
-
-
 #include <iostream>
 #include <cmath>
 
 void FirstProblem();
 void SecondProblem();
-Void ThirdPorblem();
+void ThirdPorblem();
 
 using namespace std;
 int main(void){
 	FirstProblem();
 	SecondProblem();
-	ThirdPorblem();
+	// ThirdPorblem();
 }
 
 void FirstProblem(){
+	// 1 0 2 1 3 2 4 3 5...
 	float result = 0;
 	cout << "First numerical sequence"<< endl;
 	
@@ -26,10 +21,11 @@ void FirstProblem(){
 		result = (-1.0/4.0) + (i/2.0) - (pow(-1.0, i) * 3.0/4.0);
 		cout << result << " ";
 	}
-	cout << endl;
+	cout << "\n"<< endl;
 }
 
 void SecondProblem(){
+	// 1 1 1 3 5 9 17...
 	int num1 = 1, num2 = 1, num3 = 1, result = 0;
 	cout << "Second numerical sequence"<< endl;
 	cout << num1 << " " << num2 << " " << num3 << " ";
@@ -41,7 +37,7 @@ void SecondProblem(){
 		num3 = result;
 		cout << result << " ";
 	}
-	cout << endl;
+	cout<< "\n" << endl;
 }
 
 void ThirdPorblem(){
