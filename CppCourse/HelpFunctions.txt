@@ -1,0 +1,31 @@
+cout.fill
+cout.width
+cout<< internal
+
+cout.precision
+
+cout << left <<
+cout << right <<
+
+
+cout.width(15)
+cout.fill('@')
+cout << right << "ok" << endl;
+@@@@ok
+
+//using namespace std; if not -> std::
+std::strcopy(array, "hello")
+std::cout<<("asd") << endl; endl also from namespace std
+
+// allow spaces, \n end of string
+cin.getline(line, 15, '\n');
+
+//null terminated strings
+str1[10];
+str2[10];
+!!!!! no str1 == str2
+if(!strcmp(str1, str2)){
+
+} 
+
+str1.compare(str2) != 0
