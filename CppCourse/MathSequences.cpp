@@ -12,23 +12,35 @@ using namespace std;
 int main(void){
 	// First problem
 	FirstSequence();
-	SecondSequence();
-	ThirdSequence();
-	// Second problem
-	SecondProblem();
-	// Third problem
-	ThirdProblem();
+	// SecondSequence();
+	// ThirdSequence();
+	// // Second problem
+	// SecondProblem();
+	// // Third problem
+	// ThirdProblem();
 }
 
 void FirstSequence(){
 	// 1 0 2 1 3 2 4 3 5...
-	float result = 0;
+
 	cout << "First numerical sequence"<< endl;
 	
-	for (float i = 1; i <= 15; i++){
-		result = (-1.0/4.0) + (i/2.0) - (pow(-1.0, i) * 3.0/4.0);
-		cout << result << " ";
+	int result = 0;
+	float ii = 0;
+	for (ii = 1; ii <= 15; ii++){
+		if (int(ii) % 2 == 0){
+			result = ii/2-1;
+		}
+		else{
+			result = ii / 2.0 + 1.0/2.0;
+		}
+		cout << result << endl;
 	}
+	// for (float i = 1; i <= 15; i++){
+	// 	result = (-1.0/4.0) + (i/2.0) - (pow(-1.0, i) * 3.0/4.0);
+	// 	cout << result << " ";
+	// }
+
 	cout << "\n"<< endl;
 }
 
@@ -77,14 +89,20 @@ void SecondProblem(){
 	// A program, which receives two numbers and prints to the standard output device the sum of 
 	// numbers between the given numbers.
 	int num1, num2, result = 0;
-	
+
 	cout << "Second problem\n"<< endl;
 
 	cout << "Give first number" << endl;
 	cin >> num1;
 	cout << "Give second number" << endl;
 	cin >> num2;
-	result = num1 + num2;
+	while (num1 < num2){
+		num1 += 1;
+		if (num1 < num2){
+			result += num1;
+		}
+
+	}
 	cout << "Sum is "<< result << "\n" <<endl;
 }
 
