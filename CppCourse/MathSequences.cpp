@@ -12,12 +12,12 @@ using namespace std;
 int main(void){
 	// First problem
 	FirstSequence();
-	// SecondSequence();
-	// ThirdSequence();
+	SecondSequence();
+	ThirdSequence();
 	// // Second problem
-	// SecondProblem();
+	SecondProblem();
 	// // Third problem
-	// ThirdProblem();
+	ThirdProblem();
 }
 
 void FirstSequence(){
