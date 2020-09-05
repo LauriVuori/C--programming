@@ -29,8 +29,7 @@ void subMat(int firstMatr[MATMAXROW][MATMAXCOL],
             int matriceRows, int matriceColums);
 
 void multiMat(int firstMatr[MATMAXROW][MATMAXCOL], 
-              int secondMatr[MATMAXROW][MATMAXCOL], 
-              int matriceRows, int matriceColums);
+              int secondMatr[MATMAXROW][MATMAXCOL]);
 
 int main(void){
     int matriceRows = 0, matriceColums = 0;
@@ -57,9 +56,7 @@ int main(void){
     printMat(firstMatr, secondMatr, matriceRows, matriceColums);
     sumMat(firstMatr, secondMatr, matriceRows, matriceColums);
     subMat(firstMatr, secondMatr, matriceRows, matriceColums);
-    cout << "Multiplication of two matrices is: " << endl;
-
-    multiMat(firstMatr, secondMatr, matriceRows, matriceColums);
+    multiMat(firstMatr, secondMatr);
     
 }
 
@@ -84,6 +81,7 @@ void printMat(int firstMatr[MATMAXROW][MATMAXCOL],
         }
         cout << endl;
     }
+    cout << "\n\n" << endl;
 }
 
 void sumMat(int firstMatr[MATMAXROW][MATMAXCOL], 
@@ -101,6 +99,7 @@ void sumMat(int firstMatr[MATMAXROW][MATMAXCOL],
         }
     cout << endl;
     }
+    cout << "\n\n" << endl;
 }
 
 void subMat(int firstMatr[MATMAXROW][MATMAXCOL], 
@@ -118,31 +117,60 @@ void subMat(int firstMatr[MATMAXROW][MATMAXCOL],
             }
             cout << endl;
         }
+    cout << "\n\n" << endl;
 }
 
 void multiMat(int firstMatr[MATMAXROW][MATMAXCOL], 
-              int secondMatr[MATMAXROW][MATMAXCOL], 
-              int matriceRows, int matriceColums){
+              int secondMatr[MATMAXROW][MATMAXCOL]) {
+
     int multiMat[MATMAXROW][MATMAXCOL];
+    int rowMat1, columMat1, rowMat2, columMat2;
     int row, colum;
     int ii, jj , kk;
-    
-    for (row = 0; row < matriceRows; row++) {
-        for(colum = 0; colum < matriceColums; colum++) {
+    cout << "Multiplication of two matrices is: " << endl;
+    rowMat1 = rand() % MAXROWS + MINROWS;
+    columMat1 = rand() % MAXCOLUMS + MINCOLUMS;
+    rowMat2 = rand() % MAXROWS + MINROWS;
+    columMat2 = rand() % MAXCOLUMS + MINCOLUMS;
+
+    while (columMat1 != rowMat2){
+        columMat1 = rand() % MAXCOLUMS + MINCOLUMS;
+        rowMat2 = rand() % MAXROWS + MINROWS;
+    }
+
+    cout << "First mat: " << endl;
+    for (row = 0; row < rowMat1; row++) {
+        for(colum = 0; colum < columMat1; colum++) {
+            firstMatr[row][colum] = rand() % 10 + 1;
+            cout << setw(3) << firstMatr[row][colum] << " ";
+        }
+        cout << endl;
+    }
+    cout << "Second mat: " << endl;
+    for (row = 0; row < rowMat2; row++) {
+        for(colum = 0; colum < columMat2; colum++) {
+            secondMatr[row][colum] = rand() % 10 + 1;
+            cout << setw(3) << secondMatr[row][colum] << " ";
+        }
+        cout << endl;
+    }
+
+    for (row = 0; row < rowMat1; row++) {
+        for(colum = 0; colum < columMat2; colum++) {
             multiMat[row][colum] = 0;
         }
     }
 
-    for(ii = 0; ii < row; ii++){
-        for(jj = 0; jj < colum; jj++){
-            for(kk = 0; kk < row; kk++){
+    for(ii = 0; ii < rowMat1; ii++){
+        for(jj = 0; jj < columMat2; jj++){
+            for(kk = 0; kk < rowMat2; kk++){
                 multiMat[ii][jj] += firstMatr[ii][kk] * secondMatr[kk][jj];
             }
         }
     }
-
-    for (row = 0; row < matriceRows; row++) {
-        for(colum = 0; colum < matriceColums; colum++) {
+    cout << "\n" << "Result of mult: " << endl;
+    for (row = 0; row < rowMat1; row++) {
+        for(colum = 0; colum < columMat2; colum++) {
             cout << setw(3) << multiMat[row][colum] <<  " ";
         }
         cout << endl;
