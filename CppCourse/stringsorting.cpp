@@ -10,9 +10,18 @@ int main(void){
     string temp;
 
     for (int ii = 0; ii < 5; ii++){
-        cout << "Give name " << ii << ":";
+        cout << "Give name " << ii+1 << ":";
         cin >> names[ii];
+        if ((names[ii][0] >= 'a') && (names[ii][0] <= 'z')){
+            names[ii][0] -= 32;
+        }
+        for (int jj = 1; names[ii][jj] != '\0'; jj++) {
+            if ((names[ii][jj] >= 'A') && (names[ii][jj] <= 'Z')) {
+                names[ii][jj] += 32;
+            }
+        }
     }
+
     int ii = 0;
     int bb = 0;
     for (ii = 0; ii < 5; ii++){
@@ -22,7 +31,7 @@ int main(void){
                     sortstring(&names[ii], &names[bb]);
                 }
             }
-            else if (names[ii][0] > names[bb][0]){
+            if (names[ii][0] > names[bb][0]){
                 sortstring(&names[ii], &names[bb]);
             }
 
