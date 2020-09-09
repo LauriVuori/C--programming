@@ -15,52 +15,56 @@
 // for whether the course has been passed or not, is set based on the total values of other variables.
 
 #include <iostream>
-
+#define ARLLEN 3
 using namespace std;
 
 struct StudentInfo{
-    char name[15] = {"Paavo"};
-    double activeness = 57.54;
-    bool project = 1;
-    double exampoints = 65.45;
+    char name[15];
+    double activeness;
+    bool project;
+    double exampoints;
     unsigned int passing : 1;
     unsigned int grade : 3;
 };
 
 int main(void){
-    struct StudentInfo Student;
-    char choice;
+    struct StudentInfo Student[ARLLEN] = {
+                                     {{"Ville"}, 57.54, 1, 65.45},
+                                     {{"Aapeli"}, 85.55, 1, 45.22}
+                                     };
 
-    cout << "Do you want give student info y/n:" << endl;
-    cin >> choice;
-
-    if (choice == 'y' || choice == 'Y'){
-        cout << "Give student name: "<< endl;
-        cin >> Student.name;
-        cout << "Student activity(double): " << endl;
-        cin >> Student.activeness;
-        cout << "Does student have done project (1/0): " << endl;
-        cin >> Student.project;
-        cout << "Give exam points: " << endl;
-        cin >> Student.exampoints;
-    }
-    if (Student.exampoints >= 40.0 && Student.project == 1){
-        Student.passing = 1;
-        Student.grade = 1;
-        if (Student.exampoints >= 55.0 && Student.exampoints < 70.0){
-            Student.grade = 2;
-        }
-        else if (Student.exampoints >= 70.0 && Student.exampoints < 85.0){
-            Student.grade = 3;
-        }
-        else if (Student.exampoints >= 85.0){
-            Student.grade = 4;
-        }
-        if (Student.activeness >= 50.0){
-            Student.grade += 1;
+    cout << "Give one student info: " << endl;
+    cout << "Give student name: "<< endl;
+    cin >> Student[2].name;
+    cout << "Student activity(double0-100.0): " << endl;
+    cin >> Student[2].activeness;
+    cout << "Does student have done project (1/0): " << endl;
+    cin >> Student[2].project;
+    cout << "Give exam points(double 0-100.): " << endl;
+    cin >> Student[2].exampoints;
+    for (int i = 0; i < ARLLEN; i++){
+        if (Student[i].exampoints >= 40.0 && Student[i].project == 1){
+            Student[i].passing = 1;
+            Student[i].grade = 1;
+            if (Student[i].exampoints >= 55.0 && Student[i].exampoints < 70.0){
+                Student[i].grade = 2;
+            }
+            else if (Student[i].exampoints >= 70.0 && Student[i].exampoints < 85.0){
+                Student[i].grade = 3;
+            }
+            else if (Student[i].exampoints >= 85.0){
+                Student[i].grade = 4;
+            }
+            if (Student[i].activeness >= 50.0){
+                Student[i].grade += 1;
+            }
         }
     }
-    cout << boolalpha << "Student: "<< Student.name << " Students exam points: " << Student.exampoints << "%"
-    <<" Activity: "<< Student.activeness << "%" << " Project: "
-    << Student.project << " Passed: " << Student.passing << " Grade: " << Student.grade << endl;
+    cout << "Student grades: " << endl;
+    for (int i = 0; i < ARLLEN; i++){
+        cout << boolalpha << "Student: "<< Student[i].name << " Students exam points: " << Student[i].exampoints << "%"
+        <<" Activity: "<< Student[i].activeness << "%" << " Project: "
+        << Student[i].project << " Passed: " << Student[i].passing << " Grade: " << Student[i].grade << endl;
+    cout << "\n" << endl;
+    }
 }
