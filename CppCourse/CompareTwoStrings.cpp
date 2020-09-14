@@ -3,38 +3,44 @@
 // character by character and inform what characters in the strings are different.
 
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 
 void compare(char * ptr1, char * ptr2);
 
 int main(void){
-    int same = 0;
-    char str1[25] = {"aapeli"};
-    char str2[25] = {"aapeli"}; 
-    printf("<main:%p>", str1);
+    char *str1, *str2;
+    int i, size;
 
-    // for (int i = 0; str1[i] != '\0'; i++){
-    //     cout << str1[i];
-    // }
-    // cout << endl;
-    // printf("main %p\n", &str2[3]);
-    same = compare(str1, str2);
-    if (same == 0) {
-        cout << "Not same strings" << endl;
-    }
-    else {
-        cout << "Same strings"
-    }
+    cout << "Enter array size: ";
+    cin >> size;
+    getchar();
 
-}
+    str1 = (char*) malloc(size * sizeof(char));
+    str2 = (char*) malloc(size * sizeof(char));
 
-int compare(char * ptr1, char * ptr2){
-    printf("%p", ptr1);
-    for (int i = 0; ptr1[i] != '\0'; i++){
-        if (ptr1[i] != ptr2){
-            return 0;
+    cout << "Write first string: " << endl;
+    cin.getline(str1, size);
+
+    cout << "Write second string: " << endl;
+    cin.getline(str2, size);
+
+
+    if (strlen(str1) > strlen(str2)){
+        for (i = 0; i < strlen(str1); i++){
+            compare(&str1[i], &str2[i]);
         }
     }
-    return 1;
+    else{
+        for (i = 0; i < strlen(str2); i++){
+            compare(&str1[i], &str2[i]);
+        }
+    }    
+}
+
+void compare(char * ptr1, char * ptr2){
+    if (*ptr1 != *ptr2){
+        cout << *ptr1 << " is different than " << *ptr2 << endl;
+    }
 }
