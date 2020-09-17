@@ -15,21 +15,23 @@
 
 using namespace std;
 
-void printMat(int firstMatr[MATMAXROW][MATMAXCOL], 
-              int secondMatr[MATMAXROW][MATMAXCOL], 
-              int matriceRows, 
-              int matriceColums);
+void printMat(int [][MATMAXCOL], 
+              int [][MATMAXCOL], 
+              int , 
+              int );
 
-void sumMat(int firstMatr[MATMAXROW][MATMAXCOL], 
-            int secondMatr[MATMAXROW][MATMAXCOL], 
-            int matriceRows, int matriceColums);
+void sumMat(int [][MATMAXCOL], 
+              int [][MATMAXCOL], 
+              int , 
+              int );
 
-void subMat(int firstMatr[MATMAXROW][MATMAXCOL], 
-            int secondMatr[MATMAXROW][MATMAXCOL], 
-            int matriceRows, int matriceColums);
+void subMat(int [][MATMAXCOL], 
+              int [][MATMAXCOL], 
+              int , 
+              int );
 
-void multiMat(int firstMatr[MATMAXROW][MATMAXCOL], 
-              int secondMatr[MATMAXROW][MATMAXCOL]);
+void multiMat(int [][MATMAXCOL], 
+              int [][MATMAXCOL]);
 
 int main(void){
     int matriceRows = 0, matriceColums = 0;
@@ -74,7 +76,7 @@ void printMat(int firstMatr[MATMAXROW][MATMAXCOL],
         }
         cout << endl;
     }
-    cout << "Secodn matrices:" << endl;
+    cout << "Second matrices:" << endl;
     for (row = 0; row < matriceRows; row++) {
         for(colum = 0; colum < matriceColums; colum++) {
             cout << setw(3) << secondMatr[row][colum] <<  " ";
@@ -130,13 +132,9 @@ void multiMat(int firstMatr[MATMAXROW][MATMAXCOL],
     cout << "Multiplication of two matrices is: " << endl;
     rowMat1 = rand() % MAXROWS + MINROWS;
     columMat1 = rand() % MAXCOLUMS + MINCOLUMS;
-    rowMat2 = rand() % MAXROWS + MINROWS;
+    rowMat2 = columMat1;
     columMat2 = rand() % MAXCOLUMS + MINCOLUMS;
 
-    while (columMat1 != rowMat2){
-        columMat1 = rand() % MAXCOLUMS + MINCOLUMS;
-        rowMat2 = rand() % MAXROWS + MINROWS;
-    }
 
     cout << "First mat: " << endl;
     for (row = 0; row < rowMat1; row++) {
@@ -155,14 +153,15 @@ void multiMat(int firstMatr[MATMAXROW][MATMAXCOL],
         cout << endl;
     }
 
-    for (row = 0; row < rowMat1; row++) {
-        for(colum = 0; colum < columMat2; colum++) {
-            multiMat[row][colum] = 0;
-        }
-    }
+    // for (row = 0; row < rowMat1; row++) {
+    //     for(colum = 0; colum < columMat2; colum++) {
+    //         multiMat[row][colum] = 0;
+    //     }
+    // }
 
     for(ii = 0; ii < rowMat1; ii++){
         for(jj = 0; jj < columMat2; jj++){
+            multiMat[ii][jj] = 0;
             for(kk = 0; kk < rowMat2; kk++){
                 multiMat[ii][jj] += firstMatr[ii][kk] * secondMatr[kk][jj];
             }
