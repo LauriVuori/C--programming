@@ -5,17 +5,19 @@
 // them and read data for them. After 
 // reading the data, the program must print a list which shows which room (room_id) 
 // is occupied by which customer and displays the customer information.
-
+// huoneiden tiedot, asiakkaan tiedot, huoneen id, ohjelma tulostaa vaihtoehdot, syötetään väärä id ei hyväksytä
 #include <iostream>
 #include <new>
 #include <cstring>
-using namespace std;
 
+using namespace std;
 
 #define ARSIZE 30
 
+struct test(room * roomData);
+
 struct room {
-    int room_id;
+    char room_id[ARSIZE];
     char type[ARSIZE];
     int price;
 };
@@ -48,32 +50,57 @@ int main(void) {
      cout<<"Memory allocation Failed!";
      return 1;
     }
-    // cout << "Give number:" << endl;
-    // cin >> roomNumber;
-    // cout << roomNumber;
-    // for (i = 0; i <= roomNumber; i++){
-    //     // cout << "Give room type(single,double,triple):" << endl;
-    //     // cin.getline(temp, 30, '\n');
-    //     roomData->room_id = i;
-    //     roomData++;
+    
+    cout << "Give number of rooms:" << endl;
+    cin >> roomNumber;
+    cin.get();
+    cout << roomNumber << " rooms: " << endl;
+    for (i = 0; i < roomNumber; i++){
+        cout << "Give room " << i+1 << ":" <<endl;
+        cout << "room id: " << endl;
+        cin.getline(roomData->room_id, 30, '\n');
+
+        cout << "type(single,double,triple):" << endl;
+        cin.getline(roomData->type, 30, '\n');
+
+        cout << "price per night:" << endl;
+        cin >> roomData->price;
+        fflush(stdin);
+        roomData++;
+    }
+    roomData -= roomNumber;
+    test(&roomData);
+    // cout << "Give number of customers:" << endl;
+    // cin >> customerNumber;
+    // cin.get();
+    // // fflush(stdin);
+    // // customerNumber = 3;
+    // cout << customerNumber << " rooms: " << endl;
+    // for (i = 0; i < customerNumber; i++){
+    //     cout << "Give room " << i+1 << ":" <<endl;
+    //     cout << "room id: " << endl;
+    //     cin.getline(customerData->room_id, 30, '\n');
+
+    //     cout << "type(single,double,triple):" << endl;
+    //     cin.getline(customerData->type, 30, '\n');
+
+    //     cout << "price per night:" << endl;
+    //     cin >> customerData->price;
+    //     fflush(stdin);
+    //     customerData++;
     // }
-    // while (i > 0){
-    //     roomData--;
-    //     i--;
-    // }
-    roomData->room_id = 1;
-    roomData++;
-    roomData->room_id = 2;
-    roomData++;
-    roomData->room_id = 3;
-    roomData++;
-    roomData->room_id = 4;
-    roomData++;
-    roomData->room_id = 5;
-    roomData -= 4;
-    for (i = 0; i < 5; i++){
+    // customerData -= customerNumber;
+
+    for (i = 0; i < roomNumber; i++){
+        cout << "Room data " << i+1 << ": " << endl;
         cout << roomData -> room_id << endl;
+        cout << roomData -> type << endl;
+        cout << roomData -> price << endl;
         roomData++;
     }
     
+}
+
+struct test(room * roomData){
+
 }
