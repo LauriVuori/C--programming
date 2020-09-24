@@ -14,7 +14,6 @@ using namespace std;
 
 #define ARSIZE 30
 
-struct test(room * roomData);
 
 struct room {
     char room_id[ARSIZE];
@@ -33,6 +32,7 @@ int main(void) {
     room * roomData;
     customer * customerData;
     int roomNumber, customerNumber, i;
+    char newInfo;
     char temp[30];
     try {
     roomData = new room[5];
@@ -54,10 +54,9 @@ int main(void) {
     cout << "Give number of rooms:" << endl;
     cin >> roomNumber;
     cin.get();
-    cout << roomNumber << " rooms: " << endl;
+    cout <<"Assing data for " << roomNumber << " rooms: " << endl;
     for (i = 0; i < roomNumber; i++){
-        cout << "Give room " << i+1 << ":" <<endl;
-        cout << "room id: " << endl;
+        cout << "Give room " << i+1 << " id:" <<endl;
         cin.getline(roomData->room_id, 30, '\n');
 
         cout << "type(single,double,triple):" << endl;
@@ -65,11 +64,44 @@ int main(void) {
 
         cout << "price per night:" << endl;
         cin >> roomData->price;
-        fflush(stdin);
+        cin.get();
+
+        cout << endl;
+        cout << "Room " << i+1 << " data is: " << endl;
+        cout << "Id:" << roomData -> room_id << endl;
+        cout << "Type:" << roomData -> type << endl;
+        cout << "Price:" << roomData -> price << "e" << endl;
+        cout << "Do you want to change information: (y/n)" << endl;
+        cin >> newInfo;
+        cin.get();
+        while ((newInfo != 'y') && (newInfo != 'n')){
+            cout << "Give (y/n):" << endl;
+            cin >> newInfo;
+            cin.get();
+        }
+        if (newInfo == 'y'){
+            cout << "Give room " << i+1 << " id:" <<endl;
+            cin.getline(roomData->room_id, 30, '\n');
+
+            cout << "type(single,double,triple):" << endl;
+            cin.getline(roomData->type, 30, '\n');
+
+            cout << "price per night:" << endl;
+            cin >> roomData->price;
+            cin.get();
+        }
+        cout << "Room data saved" << endl;
         roomData++;
     }
     roomData -= roomNumber;
-    test(&roomData);
+
+    // cout << "There is " << roomNumber << " rooms available" << endl;
+    // cout << "Give number of customers: " << endl;
+    // cin >> customerNumber;
+    // cin.get();
+
+
+    // test(&roomData);
     // cout << "Give number of customers:" << endl;
     // cin >> customerNumber;
     // cin.get();
@@ -90,17 +122,14 @@ int main(void) {
     //     customerData++;
     // }
     // customerData -= customerNumber;
-
+    cout << "Room data starts here--->: " << endl;
     for (i = 0; i < roomNumber; i++){
-        cout << "Room data " << i+1 << ": " << endl;
-        cout << roomData -> room_id << endl;
-        cout << roomData -> type << endl;
-        cout << roomData -> price << endl;
+        cout << "Room " << i+1 << " data is: " << endl;
+        cout << "Id:" << roomData -> room_id << endl;
+        cout << "Type:" << roomData -> type << endl;
+        cout << "Price:" << roomData -> price << "e" << endl;
         roomData++;
+        cout << endl;
     }
     
-}
-
-struct test(room * roomData){
-
 }
