@@ -32,10 +32,12 @@ int main(void) {
     room * roomData;
     customer * customerData;
     int roomNumber, customerNumber, i;
+    bool roomAssigned = false;
+    char compareId[ARSIZE];
     char newInfo;
     char temp[30];
     try {
-    roomData = new room[5];
+    roomData = new room[ARSIZE];
     
 	}catch (bad_alloc xa) {
      cout<<"Memory allocation Failed!";
@@ -44,7 +46,7 @@ int main(void) {
 
     try {
 
-    customerData = new customer[3];
+    customerData = new customer[ARSIZE];
     
 	}catch (bad_alloc xa) {
      cout<<"Memory allocation Failed!";
@@ -91,14 +93,74 @@ int main(void) {
             cin.get();
         }
         cout << "Room data saved" << endl;
+        cout << endl;
         roomData++;
     }
     roomData -= roomNumber;
 
-    // cout << "There is " << roomNumber << " rooms available" << endl;
-    // cout << "Give number of customers: " << endl;
-    // cin >> customerNumber;
-    // cin.get();
+    //Customer part here--->>
+    cout << "There is " << roomNumber << " rooms available" << endl;
+    cout << "Give number of customers: " << endl;
+    cin >> customerNumber;
+    cin.get();
+    for (i = 0; i < customerNumber; i++){
+        cout << "Give customer name: " << endl;
+        cin.getline(customerData -> name, 30, '\n');
+
+        cout << "Rooms available are: " << endl;
+        for (int ii = 0; ii < roomNumber; ii++){
+            cout << "Room " << ii+1 << " data is: " << endl;
+            cout << "Id:" << roomData -> room_id << endl;
+            cout << "Type:" << roomData -> type << endl;
+            cout << "Price:" << roomData -> price << "e" << endl;
+            roomData++;
+            cout << endl;
+        }
+
+        roomData -= roomNumber;
+        cout << "What room customer wants(Give room id): " << endl;
+        cin.getline(compareId, 30, '\n');
+        strcpy(customerData -> room_id, compareId);
+        
+        // wrong
+        // i = 0;
+        // while (roomAssigned == false){
+        //     if ((strcmp(compareId, roomData->room_id)) != 0 || (i < roomNumber)){
+        //         roomData++;
+        //         i++;
+        //     }
+        //     else if (strcmp(compareId, roomData->room_id) == 0){
+        //         roomAssigned = true;
+                
+        //         strcpy(customerData -> room_id, compareId);
+        //     }
+        //     else{
+        //         roomData -= i;
+        //         i = 0;
+        //         cout << "room id incorrect, give new" << endl;
+        //         cin.getline(compareId, 30, '\n');
+        //     }
+        
+        // }
+        // roomAssigned = false;
+        // // while (strcmp(compareId, roomData->room_id) != 0){
+        // //     for (int ii = 0; i < roomNumber; i++){
+
+        // //     }
+        // //     cout << "room id incorrect" << endl;
+        // //     cout << "Give new room id:" << endl;
+        // //     cin.getline(compareId, 30, '\n');
+        // //     roomData++;
+        // //     i++;
+        // // }
+
+        // cout << "Room assigned " << endl;
+        // roomData -= i;
+        customerData++;
+    }
+    customerData -= customerNumber;
+
+
 
 
     // test(&roomData);
@@ -131,5 +193,14 @@ int main(void) {
         roomData++;
         cout << endl;
     }
+
+    cout << "Customer data starts here---->" << endl;
+    for (i = 0; i < customerNumber; i++){
+        cout << "Customer name:" << customerData -> name << endl;
+        cout << "Id:" << customerData -> room_id << endl;
+        customerData++;
+        cout << endl;
+    }
+
     
 }
