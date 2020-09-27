@@ -16,13 +16,14 @@ biggest value. The program must use these memory addresses to print the smallest
 #include <ctime>
 
 using namespace std;
-int * smallestNum(int [], int nums);
-void biggestNum(int []);
+int * smallestNum(int [], int);
+int * biggestNum(int [], int);
 void readNums(int [], int);
 
 int main(void){
     int *numArr;
     int *smallest;
+    int *biggest;
     int maxArrSize = 0;
     srand(time(NULL));
 
@@ -39,24 +40,55 @@ int main(void){
 
     readNums(numArr, maxArrSize);
     smallest = smallestNum(numArr, maxArrSize);
-    cout << numArr[0] << endl;
-    cout << *smallest << endl;
-    // cout << "main-->" << endl;
-    // for (int i = 0; i < maxArrSize; i++){
-    //     cout << numArr[i] << endl;
-    // }
-    // works
+    cout <<"Smallest num is: " << *smallest << " its address is: " << smallest << endl;
+    biggest = biggestNum(numArr, maxArrSize);
+    cout <<"Biggest num is: " << *biggest << " its address is: " << biggest << endl;
+
+
+    // cout << "test:" << numArr[0] << " <test" << endl;
+    delete [] numArr;
+    // cout << "test:" << numArr[0] << " <test" << endl;
 
 }
 void readNums(int numArr[], int maxNums){
-    cout << "Func" << endl;
+    cout << "Numbers: " << endl;
     for (int i = 0; i < maxNums; i++){
-        numArr[i] = rand() % 10 + 1;
-        // cout << numArr[i] << endl;
+        numArr[i] = rand() % 100 + 1;
+        cout << numArr[i] << endl;
     }
 }
 
 
 int * smallestNum(int numArr[], int maxNums){
-    return numArr;
+    int smallest = 1000, i, counter = 0;
+    for (i = 0; i < maxNums; i++){
+        if (numArr[i] < smallest){
+            smallest = numArr[i];
+        }
+    }
+    cout <<"smallest:" << smallest << endl;
+    for (i = 0; i < maxNums; i++){
+        if (numArr[i] == smallest){
+            cout << "smallest address in function: " << numArr+i << endl;
+            return numArr + i;
+        }
+    }
+    return 0;
+}
+
+int * biggestNum(int numArr[], int maxNums){
+    int biggest = -1000, i, counter = 0;
+    for (i = 0; i < maxNums; i++){
+        if (numArr[i] > biggest){
+            biggest = numArr[i];
+        }
+    }
+    cout <<"biggest:" << biggest << endl;
+    for (i = 0; i < maxNums; i++){
+        if (numArr[i] == biggest){
+            cout << "biggest address in function: " << numArr+i << endl;
+            return numArr + i;
+        }
+    }
+    return 0;
 }
