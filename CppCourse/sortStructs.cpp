@@ -19,7 +19,7 @@ using namespace std;
 struct customers{
     char name[ARSIZE];
     char customerId[ARSIZE];
-    double totalCost;
+    long double totalCost;
 };
 
 int allocateMem(customers *); 
@@ -33,6 +33,7 @@ int main(void){
 
     numberOfCustomers = allocateMem(customerData);
     readCustomerData(customerData, numberOfCustomers);
+    sortCustomers(customerData, numberOfCustomers);
     printCustomerData(customerData, numberOfCustomers);
 
     // delete [] customerData;
@@ -78,5 +79,24 @@ void printCustomerData(customers * customerData, int numberOfCustomers){
 }
 
 void sortCustomers(customers * customerData, int numberOfCustomers){
+    customers * temp;
+    int i, ii;
+    try {
+    temp = new customers[1];
+    }
+    catch (bad_alloc xa) {
+       cout<<"Memory allocation Failed!";
+    }
 
+    for (i = 0; i < numberOfCustomers; i++){
+        for (ii = i+1; ii < numberOfCustomers; ii++){
+            if (customerData[i].totalCost < customerData[ii].totalCost){
+                temp = &customerData[i];
+                customerData[i] = customerData[ii];
+                customerData[ii] = *temp;
+            }
+        }
+    }
+    delete [] temp;
+    cout << "test" << endl;
 }
