@@ -1,4 +1,4 @@
-// A program in which you define two data structures: room and customer. 
+//  A program in which you define two data structures: room and customer. 
 // The fields for room should be: room_id, type (single, double, ...) and 
 // price per night. The fields for customer should be: name, room_id and number_of_nights. 
 // The program must ask the number of rooms and customers from the user, allocate memory for 
@@ -25,39 +25,73 @@ struct customer {
     char name[ARSIZE];
     char room_id[ARSIZE];
     int number_of_nights;
+    int totalPrice;
+
 
 };
+
+void readRoomData(room *, int );
+//menu
+void updateRoomData(room *, int);
+
+void readCustomerData(room *, customer *, int, int);
+
+void printRoomData(room *, int );
+void printCustomerData(room *, customer *, int, int);
+
 
 int main(void) {
     room * roomData;
     customer * customerData;
+    int numberOfRooms = 0, numberOfCustomers;
+    
     int roomNumber, customerNumber, i, counter;
     bool roomAssigned = false;
     char compareId[ARSIZE];
     char newInfo;
     char temp[30];
-    try {
-    roomData = new room[ARSIZE];
-    
-	}catch (bad_alloc xa) {
-     cout<<"Memory allocation Failed!";
-     return 1;
-    }
 
-    try {
-
-    customerData = new customer[ARSIZE];
-    
-	}catch (bad_alloc xa) {
-     cout<<"Memory allocation Failed!";
-     return 1;
-    }
-    
-    cout << "Give number of rooms:" << endl;
-    cin >> roomNumber;
+    cout << "Give number of rooms: " << endl;
+    cin >> numberOfRooms;
     cin.get();
-    cout <<"Assing data for " << roomNumber << " rooms: " << endl;
-    for (i = 0; i < roomNumber; i++){
+    try {
+       roomData = new room[numberOfRooms];
+    }  
+    catch (bad_alloc xa) {
+       cout<<"Memory allocation Failed!";
+    }
+    
+    readRoomData(roomData, numberOfRooms);
+    updateRoomData(roomData, numberOfRooms);
+    // printRoomData(roomData, numberOfRooms);
+
+
+    cout << "Give number of customers: " << endl;
+    cin >> numberOfCustomers;
+    cin.get();
+    try {
+      customerData = new customer[numberOfCustomers];
+    }   
+    catch (bad_alloc xa) {
+       cout<<"Memory allocation Failed!";
+    }
+
+    readCustomerData(roomData, customerData, numberOfCustomers, numberOfRooms);
+    printCustomerData(roomData, customerData, numberOfCustomers, numberOfRooms);
+
+    for(i = 0; i < numberOfCustomers; ++i) {
+        delete [] customerData;
+        customerData++;
+    }
+    for(i = 0; i < numberOfRooms; ++i) {
+        delete [] roomData;
+        roomData++;
+    }
+}
+
+void readRoomData(room * roomData, int numberOfRooms){
+    cout <<"Assing data for " << numberOfRooms << " rooms: " << endl;
+    for (int i = 0; i < numberOfRooms; i++){
         cout << "Give room " << i+1 << " id:" <<endl;
         cin.getline(roomData->room_id, 30, '\n');
 
@@ -67,21 +101,29 @@ int main(void) {
         cout << "price per night:" << endl;
         cin >> roomData->price;
         cin.get();
+        roomData++;
+    }
+    roomData -= numberOfRooms;
+}
 
-        cout << endl;
+void updateRoomData(room * roomData, int numberOfRooms){
+
+    cout << "\nUpdating room data: " << endl;
+    char resp;
+    for (int i = 0; i < numberOfRooms; i++){
         cout << "Room " << i+1 << " data is: " << endl;
         cout << "Id:" << roomData -> room_id << endl;
         cout << "Type:" << roomData -> type << endl;
         cout << "Price:" << roomData -> price << "e" << endl;
         cout << "Do you want to change information: (y/n)" << endl;
-        cin >> newInfo;
+        cin >> resp;
         cin.get();
-        while ((newInfo != 'y') && (newInfo != 'n')){
+        while ((resp != 'y') && (resp != 'n')){
             cout << "Give (y/n):" << endl;
-            cin >> newInfo;
+            cin >> resp;
             cin.get();
         }
-        if (newInfo == 'y'){
+        if (resp == 'y'){
             cout << "Give room " << i+1 << " id:" <<endl;
             cin.getline(roomData->room_id, 30, '\n');
 
@@ -92,23 +134,24 @@ int main(void) {
             cin >> roomData->price;
             cin.get();
         }
+
         cout << "Room data saved" << endl;
-        cout << endl;
         roomData++;
     }
-    roomData -= roomNumber;
+    roomData -= numberOfRooms;
+}
 
-    //Customer part here--->>
-    cout << "There is " << roomNumber << " rooms available" << endl;
-    cout << "Give number of customers: " << endl;
-    cin >> customerNumber;
-    cin.get();
-    for (i = 0; i < customerNumber; i++){
+void readCustomerData(room * roomData, customer * customerData, int numberOfCustomers, int NumberOfRooms){
+    bool roomAssigned = false;
+    int counter = 0, i = 0;
+    char compareId[25];
+    cout << "There is " << NumberOfRooms << " rooms available" << endl;
+    for (i = 0; i < numberOfCustomers; i++){
         cout << "Give customer name: " << endl;
         cin.getline(customerData -> name, 30, '\n');
 
         cout << "Rooms available are: " << endl;
-        for (int ii = 0; ii < roomNumber; ii++){
+        for (int ii = 0; ii < NumberOfRooms; ii++){
             cout << "Room " << ii+1 << " data is: " << endl;
             cout << "Id:" << roomData -> room_id << endl;
             cout << "Type:" << roomData -> type << endl;
@@ -117,7 +160,7 @@ int main(void) {
             cout << endl;
         }
 
-        roomData -= roomNumber;
+        roomData -= NumberOfRooms;
         cout << "What room customer wants(Give room id): " << endl;
         cin.getline(compareId, 30, '\n');
         counter = 0;
@@ -127,7 +170,7 @@ int main(void) {
                 strcpy(customerData -> room_id, compareId);
                 roomAssigned = true;
             }
-            else if (counter > roomNumber){
+            else if (counter > NumberOfRooms){
                 cout << "There is no room with that id" << endl;
                 cout << "Give new room id:" << endl;
                 cin.getline(compareId, 30, '\n');
@@ -148,21 +191,22 @@ int main(void) {
         customerData++;
 
     }
-    customerData -= customerNumber;
-
-    cout << "Room data starts here--->: " << endl;
-    for (i = 0; i < roomNumber; i++){
-        cout << "Room " << i+1 << " data is: " << endl;
-        cout << "Id:" << roomData -> room_id << endl;
-        cout << "Type:" << roomData -> type << endl;
-        cout << "Price:" << roomData -> price << "e" << endl;
-        roomData++;
-        cout << endl;
+    customerData -= numberOfCustomers;
+}
+void printRoomData(room * roomData, int numberOfRooms){
+    cout << "Print room data: " << endl;
+    for (int i = 0; i < numberOfRooms; i++){
+        cout << "Room " << i+1 << endl;
+        cout << "Room id: " << roomData[i].room_id << endl;
+        cout << "Room type: " << roomData[i].type << endl;
+        cout << "Room price: " << roomData[i].price << endl;
     }
-    roomData -= i;
+}
+void printCustomerData(room * roomData, customer * customerData, int numberOfCustomers, int numberOfRooms){
+    bool roomAssigned = false;
+    int i = 0, counter = 0;
 
-    cout << "Customer data starts here---->" << endl;
-    for (i = 0; i < customerNumber; i++){
+    for (i = 0; i < numberOfCustomers; i++){
         cout << "Customer name:" << customerData -> name << endl;
         cout << "Is in room: " << endl;
         counter = 0;
@@ -185,12 +229,4 @@ int main(void) {
         cout << endl;
     }
     customerData -= i;
-    for(i = 0; i < customerNumber; ++i) {
-        delete [] customerData;
-        customerData++;
-    }
-    for(i = 0; i < roomNumber; ++i) {
-        delete [] roomData;
-        roomData++;
-    }
 }
