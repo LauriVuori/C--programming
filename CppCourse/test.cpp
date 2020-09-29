@@ -1,11 +1,18 @@
 #include <iostream>
-#include <cstring>
+using namespace std;
 
-int main(void){
-    char temp[50] = {"terve"};
-    char asd[50] = {"ville"};
+#define ARSIZE 50
 
-    int a = 0;
-    a = strcmp(temp, asd);
-    printf("%d", a);
+void allocateMem(int *);
+
+int main(void) {
+   int * testi;
+
+allocateMem(testi);
+}
+
+void allocateMem(int * test){
+   int i = 5;
+   test = &i;
+   cout << *test << endl;
 }
