@@ -11,12 +11,6 @@ with generated dimensions.
 #include <ctime>
 #include <iomanip>
 
-#define ROWS 3
-#define COLS 3
-
-
-
-
 using namespace std;
 
 int main(void){
