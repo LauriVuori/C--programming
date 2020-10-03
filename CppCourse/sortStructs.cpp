@@ -10,7 +10,22 @@ and one for sorting the customers.*/
 3. descending order purchase amounts
 */
 
+/*
+allocate mem(customers **){
+    *data = new customers[x];
+}
+??
+or 
+allocate mem(customers *&){
+    data = new customers[x];
+}
+*/
+
 #include <iostream>
+#include <cstring>
+
+
+
 
 #define ARSIZE 50
 
@@ -22,7 +37,7 @@ struct customers{
     int totalCost;
 };
 
-int allocateMem(customers *); 
+int allocateMem(customers *&); 
 void readCustomerData(customers *, int);
 void printCustomerData(customers *, int);
 void sortCustomers(customers *, int);
@@ -32,6 +47,8 @@ int main(void){
     customers * customerData;
 
     numberOfCustomers = allocateMem(customerData);
+    // numberOfCustomers = 3;
+    // customerData = new customers[3];
     readCustomerData(customerData, numberOfCustomers);
     sortCustomers(customerData, numberOfCustomers);
     printCustomerData(customerData, numberOfCustomers);
@@ -40,7 +57,7 @@ int main(void){
     // cout << customerData[1].totalCost << endl;
 }
 
-int allocateMem(customers * customerData){
+int allocateMem(customers *& customerData){
     int numberOfCustomers = 0;
     cout << "How many customers there is: " << endl;
     cin >> numberOfCustomers;
@@ -55,17 +72,28 @@ int allocateMem(customers * customerData){
 }
 
 void readCustomerData(customers * customerData, int numberOfCustomers){
-    cout << "\nGive customer information" << endl;
-    for (int i = 0; i < numberOfCustomers; i++){
-        cout << "Customer " << i+1 << ":" << endl;
-        cout << "Give customer name: " << endl;
-        cin.getline(customerData[i].name, ARSIZE, '\n');
-        cout << "Give customer id: " << endl;
-        cin.getline(customerData[i].customerId, ARSIZE, '\n');
-        cout << "Give customers purchase total cost: " << endl;
-        cin >> customerData[i].totalCost;
-        cin.get();
-    }
+    // cout << "\nGive customer information" << endl;
+    // for (int i = 0; i < numberOfCustomers; i++){
+    //     cout << "Customer " << i+1 << ":" << endl;
+    //     cout << "Give customer name: " << endl;
+    //     cin.getline(customerData[i].name, ARSIZE, '\n');
+    //     cout << "Give customer id: " << endl;
+    //     cin.getline(customerData[i].customerId, ARSIZE, '\n');
+    //     cout << "Give customers purchase total cost: " << endl;
+    //     cin >> customerData[i].totalCost;
+    //     cin.get();
+    // }
+
+    strcpy(customerData[0].name, "petteri");
+    strcpy(customerData[1].name, "Ville");
+    strcpy(customerData[2].name, "lauri");
+    strcpy(customerData[0].customerId, "1");
+    strcpy(customerData[1].customerId, "2");
+    strcpy(customerData[2].customerId, "3");
+    customerData[0].totalCost = 10;
+    customerData[1].totalCost = 13;
+    customerData[2].totalCost = 15;
+
 }
 
 void printCustomerData(customers * customerData, int numberOfCustomers){
@@ -87,22 +115,22 @@ void sortCustomers(customers * customerData, int numberOfCustomers){
     catch (bad_alloc xa) {
        cout<<"Memory allocation Failed!";
     }
-    customerData[0] = customerData[1];
+
+
     for (i = 0; i < numberOfCustomers; i++){
         for (ii = i+1; ii < numberOfCustomers; ii++){
             if (customerData[i].totalCost < customerData[ii].totalCost){
-                cout << "ii:" << ii << endl;
-                temp = &customerData[i];
-                cout << "test1" << endl;
+                // cout << "ii:" << ii << endl;
+                temp[0] = customerData[i];
+                
+                // cout << "test1" << endl;
                 customerData[i] = customerData[ii];
-                cout << "test2" << endl;
-                customerData[ii] = *temp;
-                cout << "test3" << endl;
+                // cout << "test2" << endl;
+                customerData[ii] = temp[0];
+                // cout << "test3" << endl;
                 
             }
-        }
+        } 
     }
-    
     delete [] temp;
-    cout << "test" << endl;
 }
