@@ -72,27 +72,27 @@ int allocateMem(customers *& customerData){
 }
 
 void readCustomerData(customers * customerData, int numberOfCustomers){
-    // cout << "\nGive customer information" << endl;
-    // for (int i = 0; i < numberOfCustomers; i++){
-    //     cout << "Customer " << i+1 << ":" << endl;
-    //     cout << "Give customer name: " << endl;
-    //     cin.getline(customerData[i].name, ARSIZE, '\n');
-    //     cout << "Give customer id: " << endl;
-    //     cin.getline(customerData[i].customerId, ARSIZE, '\n');
-    //     cout << "Give customers purchase total cost: " << endl;
-    //     cin >> customerData[i].totalCost;
-    //     cin.get();
-    // }
+    cout << "\nGive customer information" << endl;
+    for (int i = 0; i < numberOfCustomers; i++){
+        cout << "Customer " << i+1 << ":" << endl;
+        cout << "Give customer name: " << endl;
+        cin.getline(customerData[i].name, ARSIZE, '\n');
+        cout << "Give customer id: " << endl;
+        cin.getline(customerData[i].customerId, ARSIZE, '\n');
+        cout << "Give customers purchase total cost: " << endl;
+        cin >> customerData[i].totalCost;
+        cin.get();
+    }
 
-    strcpy(customerData[0].name, "petteri");
-    strcpy(customerData[1].name, "Ville");
-    strcpy(customerData[2].name, "lauri");
-    strcpy(customerData[0].customerId, "1");
-    strcpy(customerData[1].customerId, "2");
-    strcpy(customerData[2].customerId, "3");
-    customerData[0].totalCost = 10;
-    customerData[1].totalCost = 13;
-    customerData[2].totalCost = 15;
+    // strcpy(customerData[0].name, "petteri");
+    // strcpy(customerData[1].name, "Ville");
+    // strcpy(customerData[2].name, "lauri");
+    // strcpy(customerData[0].customerId, "1");
+    // strcpy(customerData[1].customerId, "2");
+    // strcpy(customerData[2].customerId, "3");
+    // customerData[0].totalCost = 10;
+    // customerData[1].totalCost = 13;
+    // customerData[2].totalCost = 15;
 
 }
 
