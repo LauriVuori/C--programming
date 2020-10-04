@@ -19,17 +19,18 @@ using namespace std;
 class employee{
     private:
     char name[25];
-    char empId[25];
-    int salary;
+    char id[25];
+    float salary;
     public:
     void print_values();
     void set_values();
+    // char * search_employee(char findId);
 
 };
 void employee::set_values(){
     cout << "Give name: " << endl;
     cin.getline(name, 25, '\n');
-    cout << "Give salay:" << endl;
+    cout << "Give salary:" << endl;
     cin >> salary;
     cin.get(); 
 }
@@ -38,16 +39,37 @@ void employee::print_values(){
     cout << "print:" << name << endl;
     cout << "print sal " << salary << endl;
 }
+
+// char * employee::search_employee(char findId){
+//     int i = 0;
+    
+//     return b;
+// }
+void allocateMem(employee *&, int *);
 int main(void){
-    employee test[5];
-    char menu;
-    test[0].set_values();
-    test[1].set_values();
-    // test.salary = 5;
-    // test[0].print_values();
+    employee *test;
+    int *employeeCount;
+    employeeCount = new int;
+    allocateMem(test, employeeCount);
+    cout <<"main" << *employeeCount << endl;
+    // cout << "main i:" << i << endl;
+    // test = new employee[2];
+    // char menu;
+    // test[0].set_values();
+    // test[1].set_values();
+    // // test.salary = 5;
+    // // test[0].print_values();
 
-    for (int i = 0; i < 2; i++){
-        test[i].print_values();
-    }
+    // for (int i = 0; i < 2; i++){
+    //     test[i].print_values();
+    // }
 
+}
+
+void allocateMem(employee *& employ, int * count){
+    int empls = 0;
+    cin >> empls;
+    cin.get();
+    *count = empls;
+    cout <<"func" << *count << endl;
 }
