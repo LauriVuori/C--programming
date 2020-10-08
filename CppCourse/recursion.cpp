@@ -5,16 +5,18 @@
 #include <iostream>
 using namespace std;
 
-double firstRecursion(double);
-double secondRecursion(double);
+double firstRecursion(unsigned int);
+double secondRecursion(int);
 
 int main(void) {
-	double number, result1, result2;
+	double result1, result2;
+	unsigned int number;
 
 	cout << "Type an integer number: ";
 	cin >> number;
-	if (number < 0)
+	if (number < 0){
 		return -1;
+	}
 
 	result1 = firstRecursion(number);
 	
@@ -26,29 +28,30 @@ int main(void) {
 }
 
 
-double firstRecursion(double number) {
+double firstRecursion(unsigned int number) {
 	double value = 0;
-	if (number == 1.0) {
+	if (number == 1) {
 		cout << "number: " << number << "value: " << (1.0/(2.0 * number)) << endl;
         return (1.0 / (2.0 * number));
 	}
 
-    value = firstRecursion(number - 1.0) + 1.0/(2.0 * number);
+    value = firstRecursion(number - 1) + 1.0/(2.0 * number);
 	cout << "Num: " << number << " value: " << value <<endl;
 	return(value);
 }
 
-double secondRecursion(double number) {
+double secondRecursion(int number) {
 	double value = 0;
-	if (number == 1.0) {
-		cout << "number: " << number << "value: " << (1.0/(2.0 * number)) << endl;
+	if (number == 1) {
+		cout << "number: " << number << "value: " << (-number/(2.0 * number+1)) << endl;
         return (-number/(2.0 * number + 1.0));
 	}
 
-    value = secondRecursion(number - 1.0) * -number/(2.0 * number + 1.0);
+    value = secondRecursion(number - 1) * -number/(2.0 * number + 1.0);
 	cout << "Num: " << number << " value: " << value <<endl;
 	return(value);
 }
+
 
 /*
     for (i = 1.0; i <= counter; i++){
