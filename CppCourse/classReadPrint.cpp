@@ -11,17 +11,21 @@ A: add new employee information
 R: remove employee's information
 S: search based on employee's ID
 Q: quit
-The program must print to the standard output and update a counter which shows the number of employees whose information are saved in the database. The program must 
+The program must print to the standard output and update a counter which shows the number of employees 
+whose information are saved in the database. The program must 
 keep on showing the menu and letting the user to make a choice as long as Q is not pressed.*/
-#include <iostream>
 
+
+
+#include <iostream>
+#define MAXLEN 25
 using namespace std;
 class employee{
-    private:
-    char name[25];
-    char id[25];
+private:
+    char name[MAXLEN];
+    char id[MAXLEN];
     float salary;
-    public:
+public:
     void print_values();
     void set_values();
     // char * search_employee(char findId);
@@ -29,15 +33,18 @@ class employee{
 };
 void employee::set_values(){
     cout << "Give name: " << endl;
-    cin.getline(name, 25, '\n');
+    cin.getline(name, MAXLEN, '\n');
+    cout << "Give id" << endl;
+    cin.getline(id, MAXLEN, '\n');
     cout << "Give salary:" << endl;
     cin >> salary;
     cin.get(); 
 }
 
 void employee::print_values(){
-    cout << "print:" << name << endl;
-    cout << "print sal " << salary << endl;
+    cout << "Name: " << name << endl;
+    cout << "Id: " << id << endl;
+    cout << "Salary: " << salary << endl;
 }
 
 // char * employee::search_employee(char findId){
@@ -45,31 +52,45 @@ void employee::print_values(){
     
 //     return b;
 // }
-void allocateMem(employee *&, int *);
+
+
 int main(void){
-    employee *test;
-    int *employeeCount;
-    employeeCount = new int;
-    allocateMem(test, employeeCount);
-    cout <<"main" << *employeeCount << endl;
-    // cout << "main i:" << i << endl;
-    // test = new employee[2];
-    // char menu;
-    // test[0].set_values();
-    // test[1].set_values();
-    // // test.salary = 5;
-    // // test[0].print_values();
+    employee employeeList[25];
+    char menu;
+    int employeeCount = 0;
+    int i = 0;
 
-    // for (int i = 0; i < 2; i++){
-    //     test[i].print_values();
-    // }
+    while (menu != 'q'){
+        cout << "Options:\na) Add new employee information\nb) remove employee's information \nc)Search based on id \nd)print\nq)exit\n" << endl;
+        cout << "Give menu option" << endl;
+        cin >> menu;
+        cin.get();
+        if ((menu >= 'A') && (menu <= 'Z')){
+            menu += 32;
+        }
+        switch (menu){
+            case 'a':
+                employeeList[employeeCount].set_values();
+                employeeCount++;
+                break;
+            case 'b':
+                cout << "BBB" << endl;
+                break;
+            case 'd':
+                cout <<"which num: "<< endl;
+                cin >> i;
+                cin.get();
+                employeeList[i].print_values(); 
+                break;
+            case 'q':
+                cout << "Program shuts down" << endl;
+                return false;
+                break;
+            default:
+                cout << "Wrong input" << endl;
+                break;
+        }
+    }
+   return true;
 
-}
-
-void allocateMem(employee *& employ, int * count){
-    int empls = 0;
-    cin >> empls;
-    cin.get();
-    *count = empls;
-    cout <<"func" << *count << endl;
 }
