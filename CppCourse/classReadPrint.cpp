@@ -15,6 +15,7 @@ The program must print to the standard output and update a counter which shows t
 whose information are saved in the database. The program must 
 keep on showing the menu and letting the user to make a choice as long as Q is not pressed.*/
 
+// pointer -> objektiin, jos funktion saama id on sama kuin objektin id
 
 
 #include <iostream>
@@ -28,7 +29,7 @@ private:
 public:
     void print_values();
     void set_values();
-    // char * search_employee(char findId);
+    employee * search_employee(employee [], char, int);
 
 };
 void employee::set_values(){
@@ -47,18 +48,20 @@ void employee::print_values(){
     cout << "Salary: " << salary << endl;
 }
 
-// char * employee::search_employee(char findId){
-//     int i = 0;
+employee * employee::search_employee(employee list[], char findId[], int count){
+    int i = 0;
+
     
-//     return b;
-// }
+    return &list;
+}
 
 
 int main(void){
     employee employeeList[25];
+    employee *test;
     char menu;
     int employeeCount = 0;
-    int i = 0;
+    int i = 0, id = 0;
 
     while (menu != 'q'){
         cout << "Options:\na) Add new employee information\nb) remove employee's information \nc)Search based on id \nd)print\nq)exit\n" << endl;
@@ -76,6 +79,13 @@ int main(void){
             case 'b':
                 cout << "BBB" << endl;
                 break;
+            case 'c':
+                cout << "Which id to find:" << endl;
+                // cin >> id;
+                // cin.get();
+                test = search_employee(employeeList, 1, 1);
+                break;
+                
             case 'd':
                 cout <<"which num: "<< endl;
                 cin >> i;
