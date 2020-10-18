@@ -29,7 +29,7 @@ private:
 public:
     void print_values();
     void set_values();
-    employee * search_employee(employee [], char, int);
+    // employee * search_employee(employee [], char, int);
 
 };
 void employee::set_values(){
@@ -43,17 +43,19 @@ void employee::set_values(){
 }
 
 void employee::print_values(){
+    cout << "Employee information:" << endl;
     cout << "Name: " << name << endl;
     cout << "Id: " << id << endl;
     cout << "Salary: " << salary << endl;
+    cout << endl;
 }
 
-employee * employee::search_employee(employee list[], char findId[], int count){
-    int i = 0;
+// employee * employee::search_employee(employee list[], char findId[], int count){
+//     int i = 0;
 
     
-    return &list;
-}
+//     return &list;
+// }
 
 
 int main(void){
@@ -62,9 +64,10 @@ int main(void){
     char menu;
     int employeeCount = 0;
     int i = 0, id = 0;
+    int removeNum = 0;
 
     while (menu != 'q'){
-        cout << "Options:\na) Add new employee information\nb) remove employee's information \nc)Search based on id \nd)print\nq)exit\n" << endl;
+        cout << "Options:\na) Add new employee information\nb) remove employee's information \nc)Search based on id \nd)print\nr)Remove information\nq)exit\n" << endl;
         cout << "Give menu option" << endl;
         cin >> menu;
         cin.get();
@@ -80,17 +83,27 @@ int main(void){
                 cout << "BBB" << endl;
                 break;
             case 'c':
-                cout << "Which id to find:" << endl;
-                // cin >> id;
-                // cin.get();
-                test = search_employee(employeeList, 1, 1);
+                // cout << "Which id to find:" << endl;
+                // // cin >> id;
+                // // cin.get();
+                // test = search_employee(employeeList, 1, 1);
                 break;
-                
-            case 'd':
-                cout <<"which num: "<< endl;
-                cin >> i;
+
+            case 'r':
+                cout << "Which employee information to delete:" << endl;
+                cin >> removeNum;
                 cin.get();
-                employeeList[i].print_values(); 
+
+                for (int i = removeNum; i < employeeCount-1; i++){
+                    employeeList[i] = employeeList[i+1];
+                }
+                employeeCount--;
+                break;
+
+            case 'd':
+                for (int i = 0; i < employeeCount; i++){
+                    employeeList[i].print_values();
+                }
                 break;
             case 'q':
                 cout << "Program shuts down" << endl;
