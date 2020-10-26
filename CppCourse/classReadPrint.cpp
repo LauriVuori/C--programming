@@ -20,6 +20,7 @@ keep on showing the menu and letting the user to make a choice as long as Q is n
 
 #include <iostream>
 #define MAXLEN 25
+#define LOWERCASE 32
 using namespace std;
 class employee{
 private:
@@ -29,7 +30,8 @@ private:
 public:
     void print_values();
     void set_values();
-    // employee * search_employee(employee [], char, int);
+    employee * search_employee();
+    
 
 };
 void employee::set_values(){
@@ -50,16 +52,15 @@ void employee::print_values(){
     cout << endl;
 }
 
-// employee * employee::search_employee(employee list[], char findId[], int count){
-//     int i = 0;
-
-    
-//     return &list;
-// }
+employee * employee::search_employee(){
+    cout << name << endl;
+    employee * testptr = new employee();
+    return testptr;
+}
 
 
 int main(void){
-    employee employeeList[25];
+    employee employeeList[MAXLEN];
     employee *test;
     char menu;
     int employeeCount = 0;
@@ -67,12 +68,13 @@ int main(void){
     int removeNum = 0;
 
     while (menu != 'q'){
-        cout << "Options:\na) Add new employee information\nb) remove employee's information \nc)Search based on id \nd)print\nr)Remove information\nq)exit\n" << endl;
+    cout << "Options:\nA) Add new employee information\nR) remove employee's information \nS)Search based on id \nD)print\nQ)exit\n" << endl;
         cout << "Give menu option" << endl;
         cin >> menu;
         cin.get();
+        cout << endl;
         if ((menu >= 'A') && (menu <= 'Z')){
-            menu += 32;
+            menu += LOWERCASE;
         }
         switch (menu){
             case 'a':
@@ -82,11 +84,13 @@ int main(void){
             case 'b':
                 cout << "BBB" << endl;
                 break;
-            case 'c':
-                // cout << "Which id to find:" << endl;
-                // // cin >> id;
-                // // cin.get();
-                // test = search_employee(employeeList, 1, 1);
+            case 's':
+                cout << "Which id to find:" << endl;
+                // cin >> id;
+                // cin.get();
+                test = employeeList[0].search_employee();
+                test->print_values();
+                // cout << test << endl;
                 break;
 
             case 'r':
@@ -101,8 +105,13 @@ int main(void){
                 break;
 
             case 'd':
-                for (int i = 0; i < employeeCount; i++){
-                    employeeList[i].print_values();
+                if (employeeCount > 0){
+                    for (int i = 0; i < employeeCount; i++){
+                        employeeList[i].print_values();
+                    }
+                }
+                else{
+                    cout << "No employees at the moment" << endl;
                 }
                 break;
             case 'q':
