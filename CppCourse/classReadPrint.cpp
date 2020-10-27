@@ -19,6 +19,8 @@ keep on showing the menu and letting the user to make a choice as long as Q is n
 
 
 #include <iostream>
+#include <cstring>
+
 #define MAXLEN 25
 #define LOWERCASE 32
 using namespace std;
@@ -29,19 +31,17 @@ private:
     float salary;
 public:
     void print_values();
-    void set_values();
-    employee * search_employee();
+    void set_values(char* , char*, float);
+    employee* search_employee(char*);
     
 
 };
-void employee::set_values(){
-    cout << "Give name: " << endl;
-    cin.getline(name, MAXLEN, '\n');
-    cout << "Give id" << endl;
-    cin.getline(id, MAXLEN, '\n');
-    cout << "Give salary:" << endl;
-    cin >> salary;
-    cin.get(); 
+
+void employee::set_values(char* name, char* id, float salary){
+    strcpy(this->name, name);
+    strcpy(this->id, id);
+    this->salary = salary;
+
 }
 
 void employee::print_values(){
@@ -52,23 +52,37 @@ void employee::print_values(){
     cout << endl;
 }
 
-employee * employee::search_employee(){
-    cout << name << endl;
-    employee * testptr = new employee();
-    return testptr;
+employee* employee::search_employee(char* id){
+    if (!strcmp(this->id, id)){
+        return this;
+    }
+    return NULL;
 }
 
+void init_emp(employee* emp){
+    char name[MAXLEN], id[MAXLEN];
+    float salary;
+    cout << "Give name: " << endl;
+    cin.getline(name, MAXLEN, '\n');
+    cout << "Give id" << endl;
+    cin.getline(id, MAXLEN, '\n');
+    cout << "Give salary:" << endl;
+    cin >> salary;
+    cin.get(); 
+    emp->set_values(name, id, salary);
+}
 
 int main(void){
     employee employeeList[MAXLEN];
-    employee *test;
+    employee *emp;
     char menu;
+    char id[15];
     int employeeCount = 0;
-    int i = 0, id = 0;
+    int i = 0;
     int removeNum = 0;
 
     while (menu != 'q'){
-    cout << "Options:\nA) Add new employee information\nR) remove employee's information \nS)Search based on id \nD)print\nQ)exit\n" << endl;
+    cout << "Options:\nA) Add new employee information\nR) remove employee's information \nS)Search based on id \nD)print employees\nQ)exit\n" << endl;
         cout << "Give menu option" << endl;
         cin >> menu;
         cin.get();
@@ -78,7 +92,7 @@ int main(void){
         }
         switch (menu){
             case 'a':
-                employeeList[employeeCount].set_values();
+                init_emp(&employeeList[employeeCount]);
                 employeeCount++;
                 break;
             case 'b':
@@ -86,22 +100,28 @@ int main(void){
                 break;
             case 's':
                 cout << "Which id to find:" << endl;
-                // cin >> id;
-                // cin.get();
-                test = employeeList[0].search_employee();
-                test->print_values();
-                // cout << test << endl;
+                cin >> id;
+                for (i = 0; i < employeeCount; i++){
+                    emp = employeeList[i].search_employee(id);
+                    if (emp != NULL){
+                        // (*emp).print_values();
+                        emp->print_values();
+                    }
+                }
                 break;
 
             case 'r':
-                cout << "Which employee information to delete:" << endl;
-                cin >> removeNum;
-                cin.get();
-
-                for (int i = removeNum; i < employeeCount-1; i++){
-                    employeeList[i] = employeeList[i+1];
+                // id 
+                cout << "Which employee information to delete(id):" << endl;
+                cin >> id;
+                for (i = 0; i < employeeCount; i++){
+                    emp = employeeList[i].search_employee(id);
+                    if (emp != NULL){
+                        emp->set_values((*char)"",(*char)"", 0);
+                        // employeeList[i] = NULL;
+                    }
                 }
-                employeeCount--;
+
                 break;
 
             case 'd':
