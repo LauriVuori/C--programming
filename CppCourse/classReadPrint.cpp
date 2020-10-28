@@ -41,15 +41,16 @@ void employee::set_values(char* name, char* id, float salary){
     strcpy(this->name, name);
     strcpy(this->id, id);
     this->salary = salary;
-
 }
 
 void employee::print_values(){
+
     cout << "Employee information:" << endl;
     cout << "Name: " << name << endl;
     cout << "Id: " << id << endl;
     cout << "Salary: " << salary << endl;
     cout << endl;
+
 }
 
 employee* employee::search_employee(char* id){
@@ -82,7 +83,7 @@ int main(void){
     int removeNum = 0;
 
     while (menu != 'q'){
-    cout << "Options:\nA) Add new employee information\nR) remove employee's information \nS)Search based on id \nD)print employees\nQ)exit\n" << endl;
+    cout << "Options:\nA) Add new employee information\nR) Remove employee's information \nS) Search based on id \nD) Print employees\nQ)exit\n" << endl;
         cout << "Give menu option" << endl;
         cin >> menu;
         cin.get();
@@ -111,17 +112,20 @@ int main(void){
                 break;
 
             case 'r':
-                // id 
                 cout << "Which employee information to delete(id):" << endl;
                 cin >> id;
                 for (i = 0; i < employeeCount; i++){
                     emp = employeeList[i].search_employee(id);
                     if (emp != NULL){
-                        emp->set_values((*char)"",(*char)"", 0);
+                        emp->set_values((char*)"",(char*)"", 0);
                         // employeeList[i] = NULL;
+                        for (int ii = i; ii < employeeCount-1; ii++){
+                            employeeList[ii] = employeeList[ii+1];
+                        }
+                        employeeCount--;
+                        cout << "Employee deleted" << endl;
                     }
                 }
-
                 break;
 
             case 'd':
@@ -129,6 +133,7 @@ int main(void){
                     for (int i = 0; i < employeeCount; i++){
                         employeeList[i].print_values();
                     }
+                    cout << "There is " << employeeCount << " employees" << endl;
                 }
                 else{
                     cout << "No employees at the moment" << endl;
