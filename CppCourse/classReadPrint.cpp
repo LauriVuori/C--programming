@@ -23,7 +23,9 @@ keep on showing the menu and letting the user to make a choice as long as Q is n
 
 #define MAXLEN 25
 #define LOWERCASE 32
+
 using namespace std;
+
 class employee{
 private:
     char name[MAXLEN];
@@ -77,7 +79,7 @@ int main(void){
     employee employeeList[MAXLEN];
     employee *emp;
     char menu;
-    char id[15];
+    char id[MAXLEN];
     int employeeCount = 0;
     int i = 0;
     int removeNum = 0;
