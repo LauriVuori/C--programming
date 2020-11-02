@@ -43,7 +43,10 @@ public:
     void set_values();
     void print_values();
     void update();
+<<<<<<< HEAD
     string to_string();
+=======
+>>>>>>> 20ccd51465444339f3cd2086b48e01b0c52f7af6
     employee* search_employee(char*);
     // employee* search_employee(float);
 };
@@ -107,6 +110,7 @@ employee* employee::search_employee(char* searchValue){
 
     return NULL;
 }
+<<<<<<< HEAD
 string employee::to_string(){
     string text ="";
     text += name;
@@ -118,6 +122,8 @@ string employee::to_string(){
     text += std::to_string(salary);
     return text;
 }
+=======
+>>>>>>> 20ccd51465444339f3cd2086b48e01b0c52f7af6
 // employee* employee::search_employee(float salary){
 //     if (salary == salary){
 //         return this;
@@ -176,6 +182,7 @@ int main(void){
                 if (empFound == false){
                     cout << "No employee found" << endl;
                 }
+<<<<<<< HEAD
                 break;
             case 't':
                 cout << "Give information to find(Name,id,job,salary):" << endl;
@@ -193,6 +200,8 @@ int main(void){
                 if (empFound == false){
                     cout << "No employee found" << endl;
                 }
+=======
+>>>>>>> 20ccd51465444339f3cd2086b48e01b0c52f7af6
                 break;
             case 's':
                 cout << "Give information to find(Name,id,job,salary):" << endl;
