@@ -38,15 +38,36 @@ private:
     char job[MAXLEN];
     float salary;
 public:
+    void set_values(char* , char*, char*, float);
+    void set_values(char* , char*, char*);
+    void set_values();
     void print_values();
-    void set_values(char* , char*, float);
+    void update();
     employee* search_employee(char*);
+    // employee* search_employee(float);
 };
 
-void employee::set_values(char* name, char* id, float salary){
+//constructor with 4 values
+void employee::set_values(char* name, char* id, char* job, float salary){
     strcpy(this->name, name);
     strcpy(this->id, id);
+    strcpy(this->job, job);
     this->salary = salary;
+}
+//constructor with 3 values
+void employee::set_values(char* name, char* id, char* job){
+    strcpy(this->name, name);
+    strcpy(this->id, id);
+    strcpy(this->job, job);
+    this->salary = 0;
+}
+
+//constructor with 0 values
+void employee::set_values(){
+    strcpy(this->name, "Name not known");
+    strcpy(this->id, "Id not known");
+    strcpy(this->job, "Job not known");
+    this->salary = 0;
 }
 
 void employee::print_values(){
@@ -54,30 +75,49 @@ void employee::print_values(){
     cout << "Employee information:" << endl;
     cout << "Name: " << name << endl;
     cout << "Id: " << id << endl;
+    cout << "Job: " << job << endl;
     cout << "Salary: " << salary << endl;
     cout << endl;
-
 }
 
-employee* employee::search_employee(char* id){
-    if (!strcmp(this->id, id)){
-        return this;
-    }
-    return NULL;
-}
-
-void init_emp(employee* emp){
-    char name[MAXLEN], id[MAXLEN];
-    float salary;
+void employee::update(){
+    cin.get();
     cout << "Give name: " << endl;
     cin.getline(name, MAXLEN, '\n');
+    cout << "Give job: " << endl;
+    cin.getline(job, MAXLEN, '\n');
     cout << "Give id" << endl;
     cin.getline(id, MAXLEN, '\n');
     cout << "Give salary:" << endl;
     cin >> salary;
     cin.get(); 
-    emp->set_values(name, id, salary);
 }
+
+employee* employee::search_employee(char* searchValue){
+    if (!strcmp(this->name, searchValue)){
+        return this;
+    }
+    if (!strcmp(this->id, searchValue)){
+        return this;
+    }
+    if (!strcmp(this->job, searchValue)){
+        return this;
+    }
+
+    return NULL;
+}
+// employee* employee::search_employee(float salary){
+//     if (salary == salary){
+//         return this;
+//     }
+//     return NULL;
+// }
+void init_emp(employee* emp);
+
+// employee::employee(){
+
+
+// }
 
 int main(void){
     employee employeeList[MAXLEN];
@@ -87,9 +127,15 @@ int main(void){
     int employeeCount = 0;
     int i = 0;
     int removeNum = 0;
+    bool deleted = false, empFound = false;
+    employeeList[0].set_values((char*)"Ville",(char*)"1",(char*)"Carpenter", 500);
+    employeeList[1].set_values((char*)"Petteri",(char*)"emp2",(char*)"Architec", 1000);
+    employeeList[2].set_values((char*)"Kalle",(char*)"emp3",(char*)"Police", 700);
+    employeeList[3].set_values((char*)"Lauri",(char*)"emp4",(char*)"Student");
+    employeeCount = 4;
 
     while (menu != 'q'){
-    cout << "Options:\nA) Add new employee information\nR) Remove employee's information \nS) Search based on id \nD) Print employees\nQ)exit\n" << endl;
+    cout << "Options:\nA) Add new employee information\nB) Update employy information\nR) Remove employee's information \nS) Search based on id \nD) Print employees\nQ)exit\n" << endl;
         cout << "Give menu option" << endl;
         cin >> menu;
         cin.get();
@@ -103,23 +149,42 @@ int main(void){
                 employeeCount++;
                 break;
             case 'b':
-                cout << "BBB" << endl;
+                cout << "Give information to find(Name,id,job,salary):" << endl;
+                cin >> id;
+                empFound = false;
+                for (i = 0; i < employeeCount; i++){
+                    emp = employeeList[i].search_employee(id);
+                    if (emp != NULL){
+                        // (*emp).print_values();
+                        employeeList[i].update();
+                        empFound = true;
+                    }
+                }
+                if (empFound == false){
+                    cout << "No employee found" << endl;
+                }
                 break;
             case 's':
-                cout << "Which id to find:" << endl;
+                cout << "Give information to find(Name,id,job,salary):" << endl;
                 cin >> id;
+                empFound = false;
                 for (i = 0; i < employeeCount; i++){
                     emp = employeeList[i].search_employee(id);
                     if (emp != NULL){
                         // (*emp).print_values();
                         emp->print_values();
+                        empFound = true;
                     }
+                }
+                if (empFound == false){
+                    cout << "No employee found" << endl;
                 }
                 break;
 
             case 'r':
                 cout << "Which employee information to delete(id):" << endl;
                 cin >> id;
+                deleted = false;
                 for (i = 0; i < employeeCount; i++){
                     emp = employeeList[i].search_employee(id);
                     if (emp != NULL){
@@ -130,7 +195,11 @@ int main(void){
                         }
                         employeeCount--;
                         cout << "Employee deleted" << endl;
+                        deleted = true;
                     }
+                }
+                if (deleted == false){
+                    cout << "No employee deleted, wrong id" << endl;
                 }
                 break;
 
@@ -156,4 +225,19 @@ int main(void){
     }
    return true;
 
+}
+
+void init_emp(employee* emp){
+    char name[MAXLEN], id[MAXLEN],job[MAXLEN];
+    float salary;
+    cout << "Give name: " << endl;
+    cin.getline(name, MAXLEN, '\n');
+    cout << "Give job: " << endl;
+    cin.getline(job, MAXLEN, '\n');
+    cout << "Give id" << endl;
+    cin.getline(id, MAXLEN, '\n');
+    cout << "Give salary:" << endl;
+    cin >> salary;
+    cin.get(); 
+    emp->set_values(name, id, job, salary);
 }
