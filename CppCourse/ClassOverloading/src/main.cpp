@@ -156,7 +156,7 @@ int main(void){
                 cin >> salaryOrText;
                 cin.get();
                 if (salaryOrText == 1){
-                    cout << "Give salary::" << endl;
+                    cout << "Give information to find(Name,id,job):" << endl;
                     cin >> id;
                     empFound = false;
                     for (i = 0; i < employeeCount; i++){
@@ -172,7 +172,7 @@ int main(void){
                     }
                 }
                 else{
-                    cout << "Give information to find(Name,id,job):" << endl;
+                    cout << "Give salary:" << endl;
                     cin >> salary;
                     cin.get();
                     empFound = false;
@@ -191,32 +191,59 @@ int main(void){
                 break;
 
             case 'r':
-                cout << "Which employee information to delete(id):" << endl;
-                cin >> id;
-                deleted = false;
-                for (i = 0; i < employeeCount; i++){
-                    emp = employeeList[i].search_employee(id);
-                    if (emp != NULL){
-                        emp->set_values((char*)"",(char*)"", 0);
-                        // employeeList[i] = NULL;
-                        for (int ii = i; ii < employeeCount-1; ii++){
-                            employeeList[ii] = employeeList[ii+1];
+                cout << "Find employee:\n1)Name,id,job\n2)salary\nGive 1 or 2:"<< endl;
+                cin >> salaryOrText;
+                cin.get();
+                if (salaryOrText == 1){
+                    cout << "Give salary::" << endl;
+                    cin >> id;
+                    deleted = false;
+                    for (i = 0; i < employeeCount; i++){
+                        emp = employeeList[i].search_employee(id);
+                        if (emp != NULL){
+                            emp->set_values((char*)"",(char*)"", 0);
+                            // employeeList[i] = NULL;
+                            for (int ii = i; ii < employeeCount-1; ii++){
+                                employeeList[ii] = employeeList[ii+1];
+                            }
+                            employeeCount--;
+                            cout << "Employee deleted" << endl;
+                            deleted = true;
                         }
-                        employeeCount--;
-                        cout << "Employee deleted" << endl;
-                        deleted = true;
+                }
+                    if (empFound == false){
+                        cout << "No employee found" << endl;
                     }
                 }
-                if (deleted == false){
-                    cout << "No employee deleted, wrong id" << endl;
+                else{
+                    cout << "Give information to find(Name,id,job):" << endl;
+                    cin >> salary;
+                    cin.get();
+                    deleted = false;
+                    for (i = 0; i < employeeCount; i++){
+                        emp = employeeList[i].search_employee(salary);
+                        if (emp != NULL){
+                            emp->set_values((char*)"",(char*)"", 0);
+                            // employeeList[i] = NULL;
+                            for (int ii = i; ii < employeeCount-1; ii++){
+                                employeeList[ii] = employeeList[ii+1];
+                            }
+                            employeeCount--;
+                            cout << "Employee deleted" << endl;
+                            deleted = true;
+                        }
+                }
+                    if (empFound == false){
+                        cout << "No employee found" << endl;
+                    }
                 }
                 break;
 
             case 'd':
                 if (employeeCount > 0){
                     for (int i = 0; i < employeeCount; i++){
-                        print_employee_string(employeeList[i]);
-                        // employeeList[i].print_values();
+                        // print_employee_string(employeeList[i]);
+                        employeeList[i].print_values();
                     }
                     cout << "There is " << employeeCount << " employees" << endl;
                 }
