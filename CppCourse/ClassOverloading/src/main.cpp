@@ -67,10 +67,12 @@ int main(void){
             menu += LOWERCASE;
         }
         switch (menu){
+            //add new
             case 'a':
                 init_emp(&employeeList[employeeCount]);
                 employeeCount++;
                 break;
+            //update information
             case 'b':
                 cout << "Find employee:\n1)Name,id,job\n2)salary\nGive 1 or 2:"<< endl;
                 cin >> salaryOrText;
@@ -113,6 +115,7 @@ int main(void){
                     }
                 }
                 break;
+            //object data to text
             case 't':
                 cout << "Find employee:\n1)Name,id,job\n2)salary\nGive 1 or 2:"<< endl;
                 cin >> salaryOrText;
@@ -151,6 +154,7 @@ int main(void){
                     }
                 }
                 break;
+            //find employee
             case 's':
                 cout << "Find employee:\n1)Name,id,job\n2)salary\nGive 1 or 2:"<< endl;
                 cin >> salaryOrText;
@@ -189,19 +193,22 @@ int main(void){
                     }
                 }
                 break;
-
+            //remove
             case 'r':
                 cout << "Find employee:\n1)Name,id,job\n2)salary\nGive 1 or 2:"<< endl;
                 cin >> salaryOrText;
                 cin.get();
                 if (salaryOrText == 1){
-                    cout << "Give salary::" << endl;
+                    cout << "Give information to find(Name,id,job):" << endl;
                     cin >> id;
+                    
                     deleted = false;
                     for (i = 0; i < employeeCount; i++){
                         emp = employeeList[i].search_employee(id);
-                        if (emp != NULL){
-                            emp->set_values((char*)"",(char*)"", 0);
+                        if (emp != NULL){                        
+                            emp->set_values();
+                            print_employee_string(*emp);
+                            // cout << "test" << endl;
                             // employeeList[i] = NULL;
                             for (int ii = i; ii < employeeCount-1; ii++){
                                 employeeList[ii] = employeeList[ii+1];
@@ -210,13 +217,13 @@ int main(void){
                             cout << "Employee deleted" << endl;
                             deleted = true;
                         }
-                }
-                    if (empFound == false){
+                    }
+                    if (deleted == false){
                         cout << "No employee found" << endl;
                     }
                 }
                 else{
-                    cout << "Give information to find(Name,id,job):" << endl;
+                    cout << "Give salary:" << endl;
                     cin >> salary;
                     cin.get();
                     deleted = false;
@@ -233,12 +240,12 @@ int main(void){
                             deleted = true;
                         }
                 }
-                    if (empFound == false){
+                    if (deleted == false){
                         cout << "No employee found" << endl;
                     }
                 }
                 break;
-
+            //print
             case 'd':
                 if (employeeCount > 0){
                     for (int i = 0; i < employeeCount; i++){
