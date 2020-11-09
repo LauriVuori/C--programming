@@ -3,5 +3,6 @@
 
 #define MAXLEN 25
 #define LOWERCASE 32
+#define PHONENMBLEN 12
 
 #endif

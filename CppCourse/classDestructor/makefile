@@ -23,7 +23,7 @@ OBJECTS := $(patsubst %.cpp,%.o,$(wildcard $(SRC)*.cpp))
 
 #Here we rename object files by replacing .cpp by .o of files.
 #OBJECTS = $(SOURCES:.cpp=.o)
-EXECUTABLE = runEmployee
+EXECUTABLE = runStudents
 
 #Here we define all rule and its dependencies
 all: $(OBJECTS) $(EXECUTABLE)

@@ -6,7 +6,8 @@ Define necessaty constructors and destructor for the class. The destructor shoul
 -get_info() method, which returns as text all user information except for the password.
 -search() method, which receives the username as an argument and returns all the user information if the given username is the same as the user's username. 
 
-Define also class Admin as a friend class to class User. The attributes of class Admin should be username and password. Define necessary constructors and the destructor for this class too. The destructor should display a message saying that Admin object is being destroyed. Define also the following methods for the class:
+Define also class Admin as a friend class to class User. The attributes of class Admin should be username and password. Define necessary constructors and the destructor for this class too. 
+The destructor should display a message saying that Admin object is being destroyed. Define also the following methods for the class:
 set_usrname() method, which receives as argument a User object and a username and sets the username of the given object.
 set_password() method, which receives as argument a User object and a password and sets the password of the given object.
 In the main() function of the program create an array of User objects and an Admin object and pass User objects to the Admin object to initialize them. 
@@ -31,5 +32,19 @@ set_password() method, which receives as argument a User object and a password a
 
 In the main() function of the program create an array of User objects and an Admin object and pass User objects to the Admin object to initialize them. 
 After this call get_info() and search() methods of User objects to test their functionality. 
-
 */
+
+#include <./classes.h>
+#include <./constants.h>
+#include <iostream>
+
+using namespace std;
+
+int main(void){
+    class user testi;
+    int ar[5] = {1,2,3,4,5};
+    testi.set_values((char*)"Lauri", (char*)"Vuori",(char*)"kebab", (char*)"NotAPassword123", (char*)"0400123123");
+    testi.get_info();
+    testi.search((char*)"Lauri");
+    return 0;
+}
