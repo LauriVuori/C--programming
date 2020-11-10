@@ -10,7 +10,8 @@ Define also class Admin as a friend class to class User. The attributes of class
 The destructor should display a message saying that Admin object is being destroyed. Define also the following methods for the class:
 set_usrname() method, which receives as argument a User object and a username and sets the username of the given object.
 set_password() method, which receives as argument a User object and a password and sets the password of the given object.
-In the main() function of the program create an array of User objects and an Admin object and pass User objects to the Admin object to initialize them. 
+In the main() function of the program create an array of User objects and an Admin object 
+and pass User objects to the Admin object to initialize them. 
 After this call get_info() and search() methods of User objects to test their functionality. 
 Hint: To convert text to integere and decimal values you can use atoi(const char *_string) and atof(const char *_string) functions. 
 Respectively, numbers can be converted to text using int sprintf (char * str, const char * format, double number) function, 
@@ -50,18 +51,12 @@ int main(void){
         // userArr[i].set_values();
         userArr[i].get_info();
     }
-    int ar[5] = {1,2,3,4,5};
 
-    user usr((char*)"Lauri", (char*)"Vuori",(char*)"kebab", (char*)"NotAPassword123", (char*)"0400123123");
-    user *usr2 = new user((char*)"Lauri", (char*)"Vuori",(char*)"kebab", (char*)"NotAPassword123", (char*)"0400123123");
-    
-    usr.get_info();
-    usr2->get_info();
+    // user usr((char*)"Lauri", (char*)"Vuori",(char*)"kebab", (char*)"NotAPassword123", (char*)"0400123123");
+    // user *usr2 = new user((char*)"Lauri", (char*)"Vuori",(char*)"kebab", (char*)"NotAPassword123", (char*)"0400123123");
+    // usr.get_info();
+    // usr2->get_info();
     // testi.search((char*)"Lauri");
 
-    // admin.get_user_name(user);
-    admin.set_usrname(&usr);
-
-    // cout << "terve" << endl;
     return 0;
 }

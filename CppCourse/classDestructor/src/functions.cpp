@@ -28,7 +28,6 @@ user::user(){
 }
 
 void user::get_info(){
-    cout << "PASS::" << this->password << endl;
     cout << this->firstname << " " << this->surname << " " 
     << this->username << " " << this->phonenumber << " " << endl;
 }
@@ -50,13 +49,27 @@ user::~user() {
     cout<<"Freeing memory and quitting..."<<endl;
  }
 
-void admin::get_user_name(user _user){
-    cout << _user.firstname << " " << _user.surname << " " 
-    << _user.username << " " << _user.phonenumber << " " << endl;
+void admin::get_user_name(user* _user){
+    cout << _user->firstname << " " << _user->surname << " " 
+    << _user->username << " " << _user->phonenumber << " " << endl;
 }
 
-void admin::set_usrname(user* _user){
+
+
+admin::admin(){
+    strcpy(this->admin_name, "admin name not known");
+    strcpy(this->admin_username, "admin username not known");
+}
+
+void admin::set_user_password(user* _user){
     strcpy(_user->password, "000");
 }
 
-
+admin::admin(char* admin_name, char* admin_username){
+    strcpy(this->admin_name, admin_name);
+    strcpy(this->admin_username, admin_username);
+}
+admin::~admin() {
+    cout<<"Admin object destroyed "<<this->admin_name << endl;
+    cout<<"Freeing memory and quitting..."<<endl;
+ }

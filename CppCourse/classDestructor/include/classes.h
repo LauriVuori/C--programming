@@ -35,12 +35,15 @@ set_password() method, which receives as argument a User object and a password a
 */
 
 class admin{
-    char name[MAXLEN];
-    char username[MAXLEN];
+    char admin_name[MAXLEN];
+    char admin_username[MAXLEN];
 public:
-    void test();
+    admin();
+    admin(char*, char*);
     void set_usrname(user* );
-    void get_user_name(user);
+    void get_user_name(user* );
+    void set_user_password(user* );
+    ~admin();
 };
 
 
