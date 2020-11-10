@@ -5,7 +5,7 @@
 using namespace std;
 
 
-void user::set_values(  
+user::user(  
     char* fname, 
     char* sname, 
     char* usrname,
@@ -19,7 +19,7 @@ void user::set_values(
 
 }
 
-void user::set_values(){
+user::user(){
     strcpy(this->firstname, "Firstname not known");
     strcpy(this->surname, "Surname not known");
     strcpy(this->username, "Username not known");
@@ -28,15 +28,16 @@ void user::set_values(){
 }
 
 void user::get_info(){
-    cout << firstname << " " << surname << " " 
-    << username << " " << phonenumber << " " << endl;
+    cout << "PASS::" << this->password << endl;
+    cout << this->firstname << " " << this->surname << " " 
+    << this->username << " " << this->phonenumber << " " << endl;
 }
 
 void user::search(char* searchName){
     // if same values -> go into if
     if(!strcmp(this->firstname, searchName)){
         cout << "User found" << endl;
-        get_info();
+        this->get_info();
     }
     else{
         cout << "No user found " << endl;
@@ -48,3 +49,14 @@ user::~user() {
     cout<<"Destructor called for "<<this->username<< " " << this-> password << endl;
     cout<<"Freeing memory and quitting..."<<endl;
  }
+
+void admin::get_user_name(user _user){
+    cout << _user.firstname << " " << _user.surname << " " 
+    << _user.username << " " << _user.phonenumber << " " << endl;
+}
+
+void admin::set_usrname(user* _user){
+    strcpy(_user->password, "000");
+}
+
+

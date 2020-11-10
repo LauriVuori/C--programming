@@ -37,14 +37,31 @@ After this call get_info() and search() methods of User objects to test their fu
 #include <./classes.h>
 #include <./constants.h>
 #include <iostream>
-
+#define NUMBER_OF_USERS 5
 using namespace std;
 
 int main(void){
-    class user testi;
+    
+    user* userArr = new user[NUMBER_OF_USERS];
+
+    admin admin;
+
+    for (int i = 0; i < NUMBER_OF_USERS; i++){
+        // userArr[i].set_values();
+        userArr[i].get_info();
+    }
     int ar[5] = {1,2,3,4,5};
-    testi.set_values((char*)"Lauri", (char*)"Vuori",(char*)"kebab", (char*)"NotAPassword123", (char*)"0400123123");
-    testi.get_info();
-    testi.search((char*)"Lauri");
+
+    user usr((char*)"Lauri", (char*)"Vuori",(char*)"kebab", (char*)"NotAPassword123", (char*)"0400123123");
+    user *usr2 = new user((char*)"Lauri", (char*)"Vuori",(char*)"kebab", (char*)"NotAPassword123", (char*)"0400123123");
+    
+    usr.get_info();
+    usr2->get_info();
+    // testi.search((char*)"Lauri");
+
+    // admin.get_user_name(user);
+    admin.set_usrname(&usr);
+
+    // cout << "terve" << endl;
     return 0;
 }

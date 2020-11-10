@@ -9,19 +9,22 @@ constructors, destructors.
 */
 
 #include "constants.h"
-
+// Attributes:
+// Firstname, surname, username, password, phonenumber
 class user{
+private:
     char firstname[MAXLEN];
     char surname[MAXLEN];
     char username[MAXLEN];
     char password[MAXLEN];
     char phonenumber[PHONENMBLEN];
 public:
-    void set_values(char* , char*, char*, char*, char*);
-    void set_values();
+    user();
+    user(char* , char*, char*, char*, char*);
     void get_info();
     void search(char*);
     ~user();
+    friend class admin;
 };
 /*
 class admin, friend class to user
@@ -33,8 +36,11 @@ set_password() method, which receives as argument a User object and a password a
 
 class admin{
     char name[MAXLEN];
+    char username[MAXLEN];
 public:
     void test();
+    void set_usrname(user* );
+    void get_user_name(user);
 };
 
 
