@@ -44,12 +44,35 @@ using namespace std;
 int main(void){
     
     user* userArr = new user[NUMBER_OF_USERS];
+    admin _admin;
+    char usrname[MAXLEN];
 
-    admin admin;
+    userArr[0] = user((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
+    userArr[1] = user((char*)"Petteri", (char*)"Kauris", (char*)"0501323");
+    userArr[2] = user((char*)"Kalle", (char*)"Puska", (char*)"06132411");
+    // for (int i = 0; i < NUMBER_OF_USERS; i++){
+    //     // userArr[i].set_values();
+    //     userArr[i].get_info();
+    // }
+    _admin.set_usrname(&userArr[0],(char*)"LaVu");
+    _admin.set_user_password(&userArr[0], (char*)"abc");
 
+    _admin.set_usrname(&userArr[1],(char*)"Peka");
+    _admin.set_user_password(&userArr[1], (char*)"123");
+
+    _admin.set_usrname(&userArr[2],(char*)"Kapu");
+    _admin.set_user_password(&userArr[2], (char*)"9393");
+
+    userArr[0].get_info();
+    userArr[1].get_info();
+    userArr[2].get_info();
+
+
+    cout << "Give username to find: " << endl;
+    cin >> usrname;
+ 
     for (int i = 0; i < NUMBER_OF_USERS; i++){
-        // userArr[i].set_values();
-        userArr[i].get_info();
+        userArr[i].search((char*)usrname);
     }
 
     // user usr((char*)"Lauri", (char*)"Vuori",(char*)"kebab", (char*)"NotAPassword123", (char*)"0400123123");

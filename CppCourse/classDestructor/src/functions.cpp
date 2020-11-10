@@ -19,6 +19,16 @@ user::user(
 
 }
 
+user::user(  
+    char* fname, 
+    char* sname, 
+    char* phnumber){
+    strcpy(this->firstname, fname);
+    strcpy(this->surname, sname);
+    strcpy(this->phonenumber, phnumber);
+
+}
+
 user::user(){
     strcpy(this->firstname, "Firstname not known");
     strcpy(this->surname, "Surname not known");
@@ -34,12 +44,9 @@ void user::get_info(){
 
 void user::search(char* searchName){
     // if same values -> go into if
-    if(!strcmp(this->firstname, searchName)){
+    if(!strcmp(this->username, searchName)){
         cout << "User found" << endl;
         this->get_info();
-    }
-    else{
-        cout << "No user found " << endl;
     }
 }
 
@@ -61,15 +68,25 @@ admin::admin(){
     strcpy(this->admin_username, "admin username not known");
 }
 
-void admin::set_user_password(user* _user){
-    strcpy(_user->password, "000");
+void admin::set_user_password(user* _user, char* password){
+    strcpy(_user->password, password);
+}
+void admin:: set_usrname(user* _user, char* username){
+    strcpy(_user->username, username);
 }
 
 admin::admin(char* admin_name, char* admin_username){
     strcpy(this->admin_name, admin_name);
     strcpy(this->admin_username, admin_username);
 }
+
+
+
 admin::~admin() {
     cout<<"Admin object destroyed "<<this->admin_name << endl;
     cout<<"Freeing memory and quitting..."<<endl;
  }
+
+void admin::print_admin(){
+    cout << admin_name << " " << admin_username << endl;
+}

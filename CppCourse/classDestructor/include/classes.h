@@ -20,6 +20,7 @@ private:
     char phonenumber[PHONENMBLEN];
 public:
     user();
+    user(char*, char*, char*);
     user(char* , char*, char*, char*, char*);
     void get_info();
     void search(char*);
@@ -40,9 +41,10 @@ class admin{
 public:
     admin();
     admin(char*, char*);
-    void set_usrname(user* );
-    void get_user_name(user* );
-    void set_user_password(user* );
+    void set_usrname(user* , char*);
+    void set_user_password(user*, char*);
+    void get_user_name(user*);
+    void print_admin();
     ~admin();
 };
 
