@@ -26,7 +26,6 @@ user::user(
     strcpy(this->firstname, fname);
     strcpy(this->surname, sname);
     strcpy(this->phonenumber, phnumber);
-
 }
 
 user::user(){
@@ -38,8 +37,8 @@ user::user(){
 }
 
 void user::get_info(){
-    cout << this->firstname << " " << this->surname << " " 
-    << this->username << " " << this->phonenumber << " " << endl;
+    cout << this->firstname << "\n" << this->surname << "\n" 
+    << this->username << "\n" << this->phonenumber << endl;
 }
 
 void user::search(char* searchName){
@@ -64,29 +63,51 @@ void admin::get_user_name(user* _user){
 
 
 admin::admin(){
-    strcpy(this->admin_name, "admin name not known");
     strcpy(this->admin_username, "admin username not known");
+    strcpy(this->admin_password, "admin password not known");
 }
 
+admin::admin(char* admin_username, char* admin_password){
+    strcpy(this->admin_username, admin_username);
+    strcpy(this->admin_password, admin_password);
+}
+
+// set_password() method, which receives as argument a User 
+// object and a password and first calls authenticate() 
+// method to authenticate the admin and then sets the password 
+// of the given User object if authentication of admin succeeds 
+// and otherwise returns a failure message.
 void admin::set_user_password(user* _user, char* password){
     strcpy(_user->password, password);
 }
+
+//set_usrname() method, which receives as argument a 
+// User object and a username and first calls authenticate() 
+// method to authenticate the admin and then sets the username 
+// of the given User object if authentication of admin succeeds 
+// and otherwise returns a failure message.
 void admin:: set_usrname(user* _user, char* username){
     strcpy(_user->username, username);
 }
 
-admin::admin(char* admin_name, char* admin_username){
-    strcpy(this->admin_name, admin_name);
-    strcpy(this->admin_username, admin_username);
-}
+
 
 
 
 admin::~admin() {
-    cout<<"Admin object destroyed "<<this->admin_name << endl;
+    cout<<"Admin object destroyed "<<this->admin_username << endl;
     cout<<"Freeing memory and quitting..."<<endl;
  }
 
 void admin::print_admin(){
-    cout << admin_name << " " << admin_username << endl;
+    cout << admin_username << " " << admin_password << endl;
+}
+
+bool admin::authenticate(char* admin_username, char* admin_password){
+    if ((!strcmp(this->admin_username, admin_username)) && (!strcmp(this->admin_password, admin_password))){
+        return true;
+    }
+    else{
+        return false;
+    }
 }

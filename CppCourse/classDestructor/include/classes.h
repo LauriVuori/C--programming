@@ -17,7 +17,7 @@ private:
     char surname[MAXLEN];
     char username[MAXLEN];
     char password[MAXLEN];
-    char phonenumber[PHONENMBLEN];
+    char phonenumber[MAXLEN];
 public:
     user();
     user(char*, char*, char*);
@@ -36,7 +36,7 @@ set_password() method, which receives as argument a User object and a password a
 */
 
 class admin{
-    char admin_name[MAXLEN];
+    char admin_password[MAXLEN];
     char admin_username[MAXLEN];
 public:
     admin();
@@ -45,6 +45,7 @@ public:
     void set_user_password(user*, char*);
     void get_user_name(user*);
     void print_admin();
+    bool authenticate(char*, char*);
     ~admin();
 };
 
