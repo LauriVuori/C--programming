@@ -22,6 +22,7 @@ public:
     user();
     user(char*, char*, char*);
     user(char* , char*, char*, char*, char*);
+    void init_info(char*, char*, char*);
     void get_info();
     void search(char*);
     ~user();
@@ -41,11 +42,12 @@ class admin{
 public:
     admin();
     admin(char*, char*);
+    void set_admin_usrname_password(char*, char*);
     void set_usrname(user* , char*);
     void set_user_password(user*, char*);
     void get_user_name(user*);
     void print_admin();
-    bool authenticate(char*, char*);
+    bool authenticate();
     ~admin();
 };
 

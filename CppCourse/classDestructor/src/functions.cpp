@@ -37,8 +37,15 @@ user::user(){
 }
 
 void user::get_info(){
+    cout << "User information:" << endl;
     cout << this->firstname << "\n" << this->surname << "\n" 
     << this->username << "\n" << this->phonenumber << endl;
+}
+
+void user::init_info(char* firstname, char* surname, char* phonenumber){
+    strcpy(this->firstname, firstname);
+    strcpy(this->surname, surname);
+    strcpy(this->phonenumber, phonenumber);
 }
 
 void user::search(char* searchName){
@@ -47,6 +54,7 @@ void user::search(char* searchName){
         cout << "User found" << endl;
         this->get_info();
     }
+
 }
 
 // destuctor
@@ -78,6 +86,7 @@ admin::admin(char* admin_username, char* admin_password){
 // of the given User object if authentication of admin succeeds 
 // and otherwise returns a failure message.
 void admin::set_user_password(user* _user, char* password){
+    authenticate();
     strcpy(_user->password, password);
 }
 
@@ -103,11 +112,25 @@ void admin::print_admin(){
     cout << admin_username << " " << admin_password << endl;
 }
 
-bool admin::authenticate(char* admin_username, char* admin_password){
-    if ((!strcmp(this->admin_username, admin_username)) && (!strcmp(this->admin_password, admin_password))){
+bool admin::authenticate(){
+    char adm_username[MAXLEN], adm_password[MAXLEN];
+    cout << "Give admin username" << endl;
+    cin >> adm_username;
+    cout << "Give admin password" << endl;
+    cin >> adm_password;
+    if ((!strcmp(this->admin_username, adm_username)) && (!strcmp(this->admin_password, adm_password))){
+        cout << "Credentials correct" << endl;
         return true;
     }
     else{
+        cout << "Credentials incorrect" << endl;
         return false;
     }
+}
+
+
+void admin::set_admin_usrname_password(char* adminName, char* adminPassword){
+    strcpy(this->admin_username, adminName);
+    strcpy(this->admin_password, adminPassword);
+    cout << "Credentials changed" << endl;
 }

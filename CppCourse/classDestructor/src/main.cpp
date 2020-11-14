@@ -32,34 +32,37 @@ object and use the Admin object's set_username() and set_password() methods to s
 #include <iostream>
 #define NUMBER_OF_USERS 3
 using namespace std;
-
+void setAdminCredentials(admin * _admin);
 int main(void){
     user* userArr = new user[NUMBER_OF_USERS];
-    admin _admin = admin((char*)"admin", (char*)"admin1");
-    char usrname[MAXLEN], admin_usrname[MAXLEN], admin_password[MAXLEN];
+    admin _admin = admin((char*)"admin", (char*)"admin");
+    char usrname[MAXLEN], admin_usrname[MAXLEN], admin_password[MAXLEN], password[MAXLEN];
     char menu;
     bool admin_authenticated = false;
-
-    userArr[0] = user((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
-    userArr[1] = user((char*)"Petteri", (char*)"Kauris", (char*)"0501323");
-    userArr[2] = user((char*)"Kalle", (char*)"Puska", (char*)"06132411");
+    admin_authenticated = _admin.authenticate();
+    // setAdminCredentials(&_admin);
+    
+    userArr[0].init_info((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
+    userArr[1].init_info((char*)"Petteri", (char*)"Kauris", (char*)"0501323");
+    userArr[2].init_info((char*)"Kalle", (char*)"Puska", (char*)"06132411");
     //kysy admin username ja salasana-> jotta pääsee muokkaamaan
-    _admin.set_usrname(&userArr[0],(char*)"LaVu");
-    _admin.set_user_password(&userArr[0], (char*)"abcpassword1");
+    // _admin.set_usrname(&userArr[0],(char*)"LaVu");
+    // _admin.set_user_password(&userArr[0], (char*)"abcpassword1");
 
-    _admin.set_usrname(&userArr[1],(char*)"Peka");
-    _admin.set_user_password(&userArr[1], (char*)"123password2");
+    // _admin.set_usrname(&userArr[1],(char*)"Peka");
+    // _admin.set_user_password(&userArr[1], (char*)"123password2");
 
-    _admin.set_usrname(&userArr[2],(char*)"Kapu");
-    _admin.set_user_password(&userArr[2], (char*)"9393password3");
+    // _admin.set_usrname(&userArr[2],(char*)"Kapu");
+    // _admin.set_user_password(&userArr[2], (char*)"9393password3");
 
 
     userArr[0].get_info();
     userArr[1].get_info();
     userArr[2].get_info();
 
+
     while (menu != 'q'){
-        cout << "Options:\nA) Find student\nB) Print users\nC) Use admin\nQ) exit\n" << endl;
+        cout << "Options:\nA) Find student\nB) Print users\nC) Set credentials to users \nQ) exit\n" << endl;
         cout << "Give menu option" << endl;
         cin >> menu;
         cin.get();
@@ -82,13 +85,19 @@ int main(void){
                 }
                 break;
             case 'c':
-                cout << "Give admin username: " << endl;
-                cin >> admin_usrname;
-                cout << "Give admin password: " << endl;
-                cin >> admin_password;
-                admin_authenticated = _admin.authenticate(admin_usrname, admin_password);
+
+                admin_authenticated = _admin.authenticate();
                 if (admin_authenticated == true){
-                    
+                    for (int i = 0; i < NUMBER_OF_USERS; i++){
+                        userArr[i].get_info();
+                        cout << "Give username" << endl;
+                        cin >> usrname;
+                        cout << "Give password" << endl;
+                        cin >> password;
+                        _admin.set_usrname(&userArr[i], usrname);
+                        _admin.set_user_password(&userArr[i], password);
+                        cout << "Credentials changed\n" << endl;
+                    }
                 }
                 admin_authenticated = false;
                 break;
@@ -106,4 +115,26 @@ int main(void){
     // testi.search((char*)"Lauri");
     delete []userArr;
     return 0;
+}
+
+void setAdminCredentials(admin * _admin){
+    char choice = 'e', admin_usrname[MAXLEN], admin_password[MAXLEN];
+    bool admin_authenticated = false;
+    while((choice != 'n') && (choice != 'y')){
+    cout << "Do you want to change default admin username and password?(y/n)" << endl;
+    cin >> choice;
+    }
+    if (choice == 'y'){
+        admin_authenticated = _admin->authenticate();
+        if (admin_authenticated == true){
+            cout << "Give admin new username:" << endl;
+            cin >> admin_usrname;
+            cout << "Give admin new password:" << endl;
+            cin >> admin_password;
+            _admin->set_admin_usrname_password(admin_usrname, admin_password);
+        }
+    }
+    else{
+        cout << "Admin uses default credentials" << endl;
+    }
 }
