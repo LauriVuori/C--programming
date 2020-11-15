@@ -13,8 +13,6 @@ SRC=./src/
 #-I is to include the header directory 
 CFLAGS = -c -I$(INCLUDE)
 
-LIBS=-lncurses
-
 
 #We could have also mentioned the list of source files 
 #SOURCES =  profession.cpp employee.cpp main.cpp
@@ -25,14 +23,14 @@ OBJECTS := $(patsubst %.cpp,%.o,$(wildcard $(SRC)*.cpp))
 
 #Here we rename object files by replacing .cpp by .o of files.
 #OBJECTS = $(SOURCES:.cpp=.o)
-EXECUTABLE = runStudents
+EXECUTABLE = runShop
 
 #Here we define all rule and its dependencies
 all: $(OBJECTS) $(EXECUTABLE)
 
 # The $@ refers to the left side of : 
 $(EXECUTABLE) : $(OBJECTS)
-		$(CC) $(OBJECTS) -o $@ $(LIBS)
+		$(CC) $(OBJECTS) -o $@  
 
 #The $< refers to the first item in the dependency list
 #The $@ refers the target file, file.o.

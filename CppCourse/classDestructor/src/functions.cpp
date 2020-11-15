@@ -2,6 +2,7 @@
 #include "constants.h"
 #include "./classes.h"
 #include <cstring>
+#include <curses.h>
 using namespace std;
 
 
@@ -127,10 +128,26 @@ void admin::print_admin(){
     cout << admin_username << " " << admin_password << endl;
 }
 
+void obscure_password(char* pwd_input){
+    initscr(); // enable ncurses
+    printw(pwd_input);
+    printw("Give admin password:");
+
+    noecho();  // disable character echoing
+    getnstr(pwd_input,sizeof(pwd_input));
+    echo();
+
+    printw("\nPress any key to continue.");
+    getch(); // Wait for a keypress
+    endwin(); // disable ncurses
+}
+
 bool admin::authenticate(){
     char adm_username[MAXLEN], adm_password[MAXLEN];
     cout << "Give admin username" << endl;
     cin >> adm_username;
+    // obscure_password(adm_password);
+    // cout << "<<>>" << admin_password << "<<<>>>" << endl;
     cout << "Give admin password" << endl;
     cin >> adm_password;
     if ((!strcmp(this->admin_username, adm_username)) && (!strcmp(this->admin_password, adm_password))){
@@ -149,3 +166,4 @@ void admin::set_admin_usrname_password(char* adminName, char* adminPassword){
     strcpy(this->admin_password, adminPassword);
     cout << "Credentials changed" << endl;
 }
+

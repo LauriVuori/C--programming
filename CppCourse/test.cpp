@@ -10,10 +10,8 @@
 using namespace std; 
 
 int main(void){
-    float a = 500;
-    char test[500] = "500";
-    // cout << test << endl;
-    if (strncmp(test, a)){
-        printf("ASd");
-    }
+
+    char* test[5] = {(char*)"asd"};
+
+    cout << *test << endl;
 } 
