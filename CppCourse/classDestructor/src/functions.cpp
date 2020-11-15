@@ -86,8 +86,15 @@ admin::admin(char* admin_username, char* admin_password){
 // of the given User object if authentication of admin succeeds 
 // and otherwise returns a failure message.
 void admin::set_user_password(user* _user, char* password){
-    authenticate();
-    strcpy(_user->password, password);
+    bool admin_authenticated = false;
+    cout << "Authenticate to set password" << endl;
+    admin_authenticated = authenticate();
+    if (admin_authenticated == true){
+        strcpy(_user->password, password);
+    }
+    else{
+        cout << "Setting password failed" << endl;
+    }
 }
 
 //set_usrname() method, which receives as argument a 
@@ -96,7 +103,15 @@ void admin::set_user_password(user* _user, char* password){
 // of the given User object if authentication of admin succeeds 
 // and otherwise returns a failure message.
 void admin:: set_usrname(user* _user, char* username){
-    strcpy(_user->username, username);
+    bool admin_authenticated = false;
+    cout << "Authenticate to set username" << endl; 
+    admin_authenticated = authenticate();
+    if (admin_authenticated == true){
+        strcpy(_user->username, username);
+    }
+    else{
+        cout << "Setting username failed" << endl;
+    }
 }
 
 
