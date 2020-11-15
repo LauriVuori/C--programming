@@ -4,7 +4,7 @@ using namespace std;
 
 class rectangle{
 private:
-    int static object_counter;
+    static int object_counter;
     const char* object_name;
     int widht;
     int height;
