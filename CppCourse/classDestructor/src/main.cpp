@@ -45,9 +45,9 @@ int main(void){
     // admin_authenticated = _admin.authenticate();
     setAdminCredentials(&_admin);
     
-    userArr[0].init_info((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
-    userArr[1].init_info((char*)"Petteri", (char*)"Kauris", (char*)"0501323");
-    userArr[2].init_info((char*)"Kalle", (char*)"Puska", (char*)"06132411");
+    userArr[0] = user((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
+    userArr[1] = user((char*)"Petteri", (char*)"Kauris", (char*)"0501323");
+    userArr[2] = user((char*)"Kalle", (char*)"Puska", (char*)"06132411");
 
     // _admin.set_usrname(&userArr[0],(char*)"LaVu");
     // _admin.set_user_password(&userArr[0], (char*)"abcpassword1");

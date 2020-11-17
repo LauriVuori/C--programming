@@ -25,8 +25,9 @@ public:
     void init_info(char*, char*, char*);
     void get_info();
     void search(char*);
-    ~user();
+    // ~user();
     friend class admin;
+
 };
 /*
 class admin, friend class to user
@@ -37,7 +38,8 @@ set_password() method, which receives as argument a User object and a password a
 */
 
 class admin{
-    char admin_password[MAXLEN];
+    // char admin_password[MAXLEN];
+    char* admin_password;
     char admin_username[MAXLEN];
 public:
     admin();

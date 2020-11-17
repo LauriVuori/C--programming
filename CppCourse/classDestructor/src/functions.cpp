@@ -27,14 +27,16 @@ user::user(
     strcpy(this->firstname, fname);
     strcpy(this->surname, sname);
     strcpy(this->phonenumber, phnumber);
+    strcpy(this->username, "Username not known");
+    strcpy(this->password, "Password not known");
 }
 
 user::user(){
-    strcpy(this->firstname, "Firstname not known");
-    strcpy(this->surname, "Surname not known");
-    strcpy(this->username, "Username not known");
-    strcpy(this->password, "Password not known");
-    strcpy(this->phonenumber, "Phonenumber not known");
+    // strcpy(this->firstname, "Firstname not known");
+    // strcpy(this->surname, "Surname not known");
+    // strcpy(this->username, "Username not known");
+    // strcpy(this->password, "Password not known");
+    // strcpy(this->phonenumber, "Phonenumber not known");
 }
 
 void user::get_info(){
@@ -59,10 +61,10 @@ void user::search(char* searchName){
 }
 
 // destuctor
-user::~user() {
-    cout<<"Destructor called for "<<this->username<< " " << this-> password << endl;
-    cout<<"Freeing memory and quitting..."<<endl;
- }
+// user::~user() {
+//     cout<<"Destructor called for "<<this->username<< " " << this-> password << endl;
+//     cout<<"Freeing memory and quitting..."<<endl;
+//  }
 
 void admin::get_user_name(user* _user){
     cout << _user->firstname << " " << _user->surname << " " 
@@ -72,11 +74,13 @@ void admin::get_user_name(user* _user){
 
 
 admin::admin(){
+    admin_password = new char[MAXLEN];
     strcpy(this->admin_username, "admin username not known");
     strcpy(this->admin_password, "admin password not known");
 }
 
 admin::admin(char* admin_username, char* admin_password){
+    admin_password = new char[MAXLEN];
     strcpy(this->admin_username, admin_username);
     strcpy(this->admin_password, admin_password);
 }
@@ -120,9 +124,10 @@ void admin:: set_usrname(user* _user, char* username){
 
 
 admin::~admin() {
-    cout<<"Admin object destroyed "<<this->admin_username << endl;
-    cout<<"Freeing memory and quitting..."<<endl;
- }
+    delete [] admin_password;
+    // cout<<"Admin object destroyed "<<this->admin_username << endl;
+    // cout<<"Freeing memory and quitting..."<<endl;
+}
 
 void admin::print_admin(){
     cout << admin_username << " " << admin_password << endl;
