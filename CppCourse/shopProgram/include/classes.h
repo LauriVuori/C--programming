@@ -15,6 +15,7 @@ private:
 public:
     firm_info();
     firm_info(char*, char*);
+    void print_firm_info();
 };
 
 // Define class Basic_Info, whicn includes name, id and category as instance variables. Define also necessary constructors in addition to the following methods:
