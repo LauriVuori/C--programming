@@ -10,13 +10,16 @@
 // update_shop_info(), which receives shop information and udates the current shop information. 
 class firm_info{
 private:
-    char* shop_phone_number;
-public:
+    char * shop_category;
     static const char* shop_name;
+    static const char* shop_phone_number;
+public:
+
     firm_info();
-    firm_info(char*);
-    void print_firm_info();
-    void set_name(const char*);
+    firm_info(const char*, const char*, char*);
+    void get_shop_info();
+    void update_firm_info(const char*, const char*, char*);
+    ~firm_info();
 };
 
 // Define class Basic_Info, whicn includes name, id and category as instance variables. Define also necessary constructors in addition to the following methods:
