@@ -1,6 +1,6 @@
 #include <iostream>
-#include "../include/constants.h"
-#include "../include/classes.h"
+#include "shopconstants.h"
+#include "shopclasses.h"
 #include <cstring>
 
 using namespace std;

@@ -1,5 +1,6 @@
-#include <../include/classes.h>
-#include <../include/constants.h>
+#include "shopconstants.h"
+#include "shopclasses.h"
+
 #include <iostream>
 #include <cstring>
 
@@ -51,11 +52,6 @@ int main(void){
 }
 
 void update_shop_info(firm_info* firms){
-    char firm_name[MAXLEN], firm_phonenumber[MAXLEN], firm_category[MAXLEN];
-    cout << "Give firm name:"<< endl;
-    cin >> firm_name;
-    cout << "Give firm phone number: " << endl;
-    cin >> firm_phonenumber
-    firms[0].update_firm_info((char*)"f1",(char*)"f2" ,(char*)"f3");
+    char* firm_name = new char[MAXLEN];
 
 }
