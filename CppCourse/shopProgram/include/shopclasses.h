@@ -26,8 +26,18 @@ public:
 // get_all_info(), which returns full information of the object as text.
 // search_info(), which receives the id of the object and returns full information of the object as text if the given id matches the object's id.
 
-class basicInfo{
-
+class basic_info{
+private:
+    char* basic_name;
+    char* basic_id;
+    char* basic_category;
+public:
+    basic_info();
+    basic_info(char*, char*, char*);
+    void init_basic_info(char*, char*, char*);
+    void get_all_info();
+    basic_info* search_info(char* );
+    ~basic_info();
 };
 
 // Define class Product so that it inherits Firm_Info and Basic_Info classes in public mode. 
@@ -35,7 +45,12 @@ class basicInfo{
 // necessary constructors in addition to the following methods:
 // get_unit_price(), which receives the name of the product and returns its unit price.
 // update_amount(), which receives a value and updates the current amount by the given value.
-class product{
+class product : public firm_info, basic_info{
+    int unit_price;
+    int unit_amount;
+
+
+public:
 
 };
 

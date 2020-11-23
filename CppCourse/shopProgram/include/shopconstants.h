@@ -1,2 +1,4 @@
 #define MAXLEN 50
 #define LOWERCASE 32
+#define NUMBER_OF_FIRMS 2
+#define NUBMER_OF_BASICINFO 2
