@@ -45,14 +45,17 @@ private:
     char phonenumber[MAXLEN];
     char permissions[3][50];
 private:
-    void set_permissions(int []);
+    void set_permissions(char [][50]);
 public:
     user();
     user(char*, char*, char*);
     user(char* , char*, char*, char*, char*);
     void init_info(char*, char*, char*);
+    user* find_user(char* );
     void get_info();
     void search(char*);
+    void print_permissions();
+    bool compare_phonenumber(char *);
     // ~user();
     friend class admin;
 };

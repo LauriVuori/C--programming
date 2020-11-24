@@ -47,11 +47,12 @@ void init_person(person* _persons){
 int main(void){
     user* _users = new user[NUMBER_OF_USERS];
     person* _persons = new person[NUMBER_OF_PERSONS];
-    person* temp;
+    person* temp_person;
+    user* temp_user;
     admin _admin = admin((char*)"admin", (char*)"admin");
     char usrname[MAXLEN], admin_usrname[MAXLEN], admin_password[MAXLEN], password[MAXLEN], find_person[MAXLEN], menu;
-    bool admin_authenticated = false;
-    set_permis(&_admin, _users);
+    bool admin_authenticated = false, correct_phone_number = false;
+
     setAdminCredentials(&_admin);
 
     init_users(_users);
@@ -64,7 +65,7 @@ int main(void){
     // _admin.set_permissions(&_users[0], (char*)"read");
 
     while (menu != 'q'){
-        cout << "Options:\nA) Find student\nB) Print users\nC) Set credentials to users \n D) Find Person\n E) Set permissions Q) exit\n" << endl;
+        cout << "Options:\nA) Find student\nB) Print users\nC) Set credentials to users \n D) Find Person\n E) Set permissions\n F) Compare phonenumber\n Q) exit\n" << endl;
         cout << "Give menu option" << endl;
         cin >> menu;
         cin.get();
@@ -103,14 +104,37 @@ int main(void){
                 cin >> find_person;
 
                 for (int i = 0; i < NUMBER_OF_PERSONS; i++){
-                    temp = _persons[i].find_person(find_person);
-                    if (temp != NULL){
-                        temp->print_data();
+                    temp_person = _persons[i].find_person(find_person);
+                    if (temp_person != NULL){
+                        temp_person->print_data();
                     }
                 }
                 break;
-            case 'e':
-                
+            case 'e': //set permissions
+                admin_authenticated = false;
+                admin_authenticated = _admin.authenticate();
+                if (admin_authenticated = true){
+                    cout << "Find user(firstname, surname, username):" << endl;
+                    cin >> find_person;
+                    for (int i = 0; i < NUMBER_OF_USERS; i++){
+                        temp_user = _users[i].find_user(find_person);
+                        if (temp_user != NULL){
+                            set_permis(&_admin, &_users[i]);
+                            _users[i].get_info();
+                            cout << "Permissions:" << endl;
+                            _users[i].print_permissions();
+                        }
+                    }
+                }
+                break;
+            case 'f':
+                cout << "Give phonenumber" << endl;
+                cin >> find_person;
+                for (int i = 0; i < NUMBER_OF_USERS; i++){
+                    correct_phone_number = _users[i].compare_phonenumber(find_person);
+                    _users[i].get_info();
+                }
+                break;
             case 'q':
                 break;
         }
@@ -183,6 +207,10 @@ void set_permis(admin * _admin, user * _users){
                     cout << "[]read[x]execute[]write" << endl;
                     i = 15;
                 }
+                else if ((confirmed[0] == 1) && (confirmed[1] == 0) && (confirmed[2] == 1)){
+                    cout << "[x]read[]execute[x]write" << endl;
+                    i = 15;
+                }
             }
             i++;
         }
@@ -199,7 +227,8 @@ void set_permis(admin * _admin, user * _users){
                 confirmed[2] = 1;
                 break;
             case 'e':
-                _admin->set_permissions(_users, confirmed);
+                _admin->set_permissions(&_users[0], confirmed);
+                choice = 'q';
                 break;
             case 'r':
                 for (int i = 0; i < PERMISSIONS; i++){

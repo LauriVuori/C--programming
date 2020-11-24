@@ -60,6 +60,28 @@ person::~person(){
 }
 
 
+user* user::find_user(char* find_user){
+    
+    if (!strcmp(this->firstname, find_user)){
+        return this;
+    }
+    if (!strcmp(this->surname, find_user)){
+        return this;
+    }
+    if (!strcmp(this->username, find_user)){
+        return this;
+    }
+    return NULL;
+}
+
+
+bool user::compare_phonenumber(char* phonenmber){
+    if (!strcmp(this->phonenumber, phonenmber)){
+        cout << "Phone numbers is same" << endl;
+        return true;
+    }
+    return false;
+}
 
 user::user(  
     char* fname, 
@@ -216,32 +238,41 @@ void admin::set_admin_usrname_password(char* adminName, char* adminPassword){
 }
 
 void admin::set_permissions(user* _user, int confirmed_permissions[]){
-    char perm[3][50];
+    char perm[3][50] = {"","",""};
+
+    // for (int i = 0; i < PERMISSIONS; i++){
+    //     strcpy(perm[i], "");
+    // }
+
     int counter = 0;
     for (int i = 0; i < PERMISSIONS; i++){
-        if(confirmed_permissions[0] == 1){
+        if((confirmed_permissions[0] == 1) && (i == 0)){
             strcpy(perm[counter], "read");
             counter++;
         }
-        if(confirmed_permissions[1] == 1){
+        if((confirmed_permissions[1] == 1) && (i == 1)){
             strcpy(perm[counter], "execute");
             counter++;
         }
-        if(confirmed_permissions[2] == 1){
+        if((confirmed_permissions[2] == 1) && (i == 2)){
             strcpy(perm[counter], "write");
             counter++;
         }
     }
-    // _user->set_permissions(perm);
+    for (int i = 0; i < PERMISSIONS; i++){
+        cout << perm[i] << endl;
+    }
+    _user->set_permissions(perm);
 }
 
-void user::set_permissions(int confirmed_permissions[]){
-    // strcpy(permissions, "execute");
-    // cout << permissions << endl;
-    // strcpy(perm[0], "read");
-    // strcpy(perm[1], "execute");
-    // strcpy(perm[2], "write");
-    cout << confirmed_permissions[0] << endl;
-    cout << confirmed_permissions[1] << endl;
-    cout << confirmed_permissions[2] << endl;
+void user::set_permissions(char confirmed_permissions[][50]){
+    for (int i = 0; i < PERMISSIONS; i++){
+        strcpy(permissions[i], confirmed_permissions[i]);
+    }
+}
+
+void user::print_permissions(){
+    for (int i = 0; i < PERMISSIONS; i++){
+        cout << permissions[i] << endl;
+    }
 }
