@@ -16,7 +16,8 @@ int main(void){
     basic_info* temp = new basic_info;
     basic_infos[0] = basic_info((char*)"Opel", (char*)"123", (char*)"Autot");
     basic_infos[1] = basic_info((char*)"Lada", (char*)"678", (char*)"Autot");
-
+    product test;
+    test.print();
     while (menu != 'q'){
         cout << "Options:\n A) Print firm info\n B) update firm info\n C) Print Basic_info\n D) Find basic info\n Q) Exit" << endl;
         cout << "Give menu option" << endl;
@@ -54,6 +55,7 @@ int main(void){
 
         }
     }
+    delete [] firms;
 }
 
 void update_shop_info(firm_info* firms){

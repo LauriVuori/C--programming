@@ -73,3 +73,7 @@ basic_info::~basic_info(){
     delete [] basic_name;
 }
 //---------------------------------------------//
+
+void product::print(){
+    get_all_info();
+}

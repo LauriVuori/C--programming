@@ -49,9 +49,8 @@ class product : public firm_info, basic_info{
     int unit_price;
     int unit_amount;
 
-
 public:
-
+    void print();
 };
 
 // Define class Customer so that it also inherits Firm_Info and Basic_Info classes in public mode. 

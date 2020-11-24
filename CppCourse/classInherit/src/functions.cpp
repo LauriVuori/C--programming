@@ -1,9 +1,64 @@
 #include <iostream>
-#include "constants.h"
-#include "./classes.h"
+#include "../include/classesinh.h"
+#include "../include/constantsinh.h"
 #include <cstring>
-#include <curses.h>
+
 using namespace std;
+
+
+person::person(){
+    this->first_name = new char[MAXLEN];
+    this->surname = new char[MAXLEN];
+    this->phonenumber = new char[MAXLEN];
+    this->username = new char[MAXLEN];
+    this->password = new char[MAXLEN];
+
+    strcpy(this->first_name, "First name not known");
+    strcpy(this->surname, "Surname not known");
+    strcpy(this->phonenumber, "phonenumber name not known");
+    strcpy(this->username, "username name not known");
+    strcpy(this->password, "password name not known");
+
+}
+
+person::person(char* firstname, char* surname, char* phonenumber){
+    this->first_name = new char[MAXLEN];
+    this->surname = new char[MAXLEN];
+    this->phonenumber = new char[MAXLEN];
+    this->username = new char[MAXLEN];
+    this->password = new char[MAXLEN];
+    this->first_name = firstname;
+    this->surname = surname;
+    this->phonenumber = phonenumber;
+    strcpy(this->username, "username name not known");
+    strcpy(this->password, "password name not known");
+}
+void person::print_data(){
+    cout << first_name << " " << surname << " " << phonenumber << " "
+    << username << endl; 
+}
+
+person* person::find_person(char* find_person){
+    
+    if (!strcmp(this->first_name, find_person)){
+        return this;
+    }
+    if (!strcmp(this->surname, find_person)){
+        return this;
+    }
+    if (!strcmp(this->phonenumber, find_person)){
+        return this;
+    }
+    return NULL;
+}
+person::~person(){
+    delete [] first_name;
+    delete [] surname;
+    delete [] phonenumber;
+    delete [] username;
+    delete [] password;
+}
+
 
 
 user::user(  
@@ -133,19 +188,7 @@ void admin::print_admin(){
     cout << admin_username << " " << admin_password << endl;
 }
 
-void obscure_password(char* pwd_input){
-    initscr(); // enable ncurses
-    printw(pwd_input);
-    printw("Give admin password:");
 
-    noecho();  // disable character echoing
-    getnstr(pwd_input,sizeof(pwd_input));
-    echo();
-
-    printw("\nPress any key to continue.");
-    getch(); // Wait for a keypress
-    endwin(); // disable ncurses
-}
 
 bool admin::authenticate(){
     char adm_username[MAXLEN], adm_password[MAXLEN];
@@ -172,3 +215,33 @@ void admin::set_admin_usrname_password(char* adminName, char* adminPassword){
     cout << "Credentials changed" << endl;
 }
 
+void admin::set_permissions(user* _user, int confirmed_permissions[]){
+    char perm[3][50];
+    int counter = 0;
+    for (int i = 0; i < PERMISSIONS; i++){
+        if(confirmed_permissions[0] == 1){
+            strcpy(perm[counter], "read");
+            counter++;
+        }
+        if(confirmed_permissions[1] == 1){
+            strcpy(perm[counter], "execute");
+            counter++;
+        }
+        if(confirmed_permissions[2] == 1){
+            strcpy(perm[counter], "write");
+            counter++;
+        }
+    }
+    // _user->set_permissions(perm);
+}
+
+void user::set_permissions(int confirmed_permissions[]){
+    // strcpy(permissions, "execute");
+    // cout << permissions << endl;
+    // strcpy(perm[0], "read");
+    // strcpy(perm[1], "execute");
+    // strcpy(perm[2], "write");
+    cout << confirmed_permissions[0] << endl;
+    cout << confirmed_permissions[1] << endl;
+    cout << confirmed_permissions[2] << endl;
+}
