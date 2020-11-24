@@ -244,19 +244,19 @@ void admin::set_permissions(user* _user, int confirmed_permissions[]){
     //     strcpy(perm[i], "");
     // }
 
-    int counter = 0;
+
     for (int i = 0; i < PERMISSIONS; i++){
         if((confirmed_permissions[0] == 1) && (i == 0)){
-            strcpy(perm[counter], "read");
-            counter++;
+            strcpy(perm[0], "read");
+
         }
         if((confirmed_permissions[1] == 1) && (i == 1)){
-            strcpy(perm[counter], "execute");
-            counter++;
+            strcpy(perm[1], "execute");
+
         }
         if((confirmed_permissions[2] == 1) && (i == 2)){
-            strcpy(perm[counter], "write");
-            counter++;
+            strcpy(perm[2], "write");
+
         }
     }
     for (int i = 0; i < PERMISSIONS; i++){
@@ -275,4 +275,26 @@ void user::print_permissions(){
     for (int i = 0; i < PERMISSIONS; i++){
         cout << permissions[i] << endl;
     }
+}
+
+void admin::remove_permissions(user* _user, int confirmed_permissions[]){
+    char perm[3][50] = {"","",""};
+    for (int i = 0; i < PERMISSIONS; i++){
+        if((confirmed_permissions[0] == 1) && (i == 0)){
+            strcpy(perm[0], "");
+
+        }
+        if((confirmed_permissions[1] == 1) && (i == 1)){
+            strcpy(perm[1], "");
+
+        }
+        if((confirmed_permissions[2] == 1) && (i == 2)){
+            strcpy(perm[2], "");
+
+        }
+    }
+    for (int i = 0; i < PERMISSIONS; i++){
+        cout << perm[i] << endl;
+    }
+    _user->set_permissions(perm);
 }

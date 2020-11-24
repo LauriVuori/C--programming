@@ -95,6 +95,7 @@ public:
     void print_admin();
     bool authenticate();
     void set_permissions(user*, int[]);
+    void remove_permissions(user*, int[]);
     ~admin();
 };
 

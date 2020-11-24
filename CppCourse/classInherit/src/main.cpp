@@ -214,7 +214,7 @@ void set_permis(admin * _admin, user * _users){
             }
             i++;
         }
-        cout << "Which permissions to: \n add 1) read 2) execute 3) write\n e) set permissions\n r) reset permissions\n q)exit:" << endl;
+        cout << "Which permissions to: \n add 1) read 2) execute 3) write\n e) set permissions\n f) remove users permissions \nr) reset selected permissions\n  q)exit:" << endl;
         cin >> choice;
         switch (choice){
             case '1':
@@ -227,9 +227,12 @@ void set_permis(admin * _admin, user * _users){
                 confirmed[2] = 1;
                 break;
             case 'e':
-                _admin->set_permissions(&_users[0], confirmed);
+                _admin->set_permissions(_users, confirmed);
                 choice = 'q';
                 break;
+            case 'f':
+                _admin->remove_permissions(_users, confirmed);
+                choice = 'q';
             case 'r':
                 for (int i = 0; i < PERMISSIONS; i++){
                     confirmed[i] = 0;
