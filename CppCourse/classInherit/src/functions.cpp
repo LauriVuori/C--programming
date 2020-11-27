@@ -10,14 +10,12 @@ person::person(){
     this->first_name = new char[MAXLEN];
     this->surname = new char[MAXLEN];
     this->phonenumber = new char[MAXLEN];
-    this->username = new char[MAXLEN];
-    this->password = new char[MAXLEN];
+
 
     strcpy(this->first_name, "First name not known");
     strcpy(this->surname, "Surname not known");
     strcpy(this->phonenumber, "phonenumber name not known");
-    strcpy(this->username, "username name not known");
-    strcpy(this->password, "password name not known");
+
 
 }
 
@@ -25,13 +23,9 @@ person::person(char* firstname, char* surname, char* phonenumber){
     this->first_name = new char[MAXLEN];
     this->surname = new char[MAXLEN];
     this->phonenumber = new char[MAXLEN];
-    this->username = new char[MAXLEN];
-    this->password = new char[MAXLEN];
-    this->first_name = firstname;
-    this->surname = surname;
-    this->phonenumber = phonenumber;
-    strcpy(this->username, "username name not known");
-    strcpy(this->password, "password name not known");
+    strcpy(this->first_name, firstname);
+    strcpy(this->surname, surname);
+    strcpy(this->phonenumber, phonenumber);
 }
 void person::print_data(){
     cout << first_name << " " << surname << " " << phonenumber << " "
@@ -39,7 +33,7 @@ void person::print_data(){
 }
 
 person* person::find_person(char* find_person){
-    
+    //yhdistä ||
     if (!strcmp(this->first_name, find_person)){
         return this;
     }
@@ -55,28 +49,28 @@ person::~person(){
     delete [] first_name;
     delete [] surname;
     delete [] phonenumber;
-    delete [] username;
-    delete [] password;
 }
 
 
 user* user::find_user(char* find_user){
-    
-    if (!strcmp(this->firstname, find_user)){
-        return this;
-    }
-    if (!strcmp(this->surname, find_user)){
-        return this;
-    }
-    if (!strcmp(this->username, find_user)){
-        return this;
-    }
-    return NULL;
+    // //yhdistä ||
+    // if (!strcmp(this->firstname, find_user)){
+    //     return this;
+    // }
+    // if (!strcmp(this->surname, find_user)){
+    //     return this;
+    // }
+    // if (!strcmp(this->username, find_user)){
+    //     return this;
+    // }
+    // return NULL;
+
+    return (user*)person::find_person(find_user);
 }
 
 
-bool user::compare_phonenumber(char* phonenmber){
-    if (!strcmp(this->phonenumber, phonenmber)){
+bool user::compare(user* _user){
+    if (!strcmp(this->phonenumber, _user->phonenumber)){
         cout << "Phone numbers is same" << endl;
         return true;
     }
@@ -85,35 +79,32 @@ bool user::compare_phonenumber(char* phonenmber){
 
 user::user(  
     char* fname, 
-    char* sname, 
+    char* sname,
+    char* phnumber,
     char* usrname,
-    char* password,
-    char* phnumber){
-    strcpy(this->firstname, fname);
-    strcpy(this->surname, sname);
+    char* password
+    ):person(fname,sname, phnumber){
     strcpy(this->username, usrname);
     strcpy(this->password, password);
-    strcpy(this->phonenumber, phnumber);
+  
 
 }
 
 user::user(  
     char* fname, 
     char* sname, 
-    char* phnumber){
-    strcpy(this->firstname, fname);
-    strcpy(this->surname, sname);
-    strcpy(this->phonenumber, phnumber);
+    char* phnumber):person(fname, sname, phonenumber){
+  
     strcpy(this->username, "Username not known");
     strcpy(this->password, "Password not known");
 }
 
-user::user(){
+user::user():person(){
     // strcpy(this->firstname, "Firstname not known");
     // strcpy(this->surname, "Surname not known");
     // strcpy(this->username, "Username not known");
-    // strcpy(this->password, "Password not known");
-    // strcpy(this->phonenumber, "Phonenumber not known");
+     strcpy(this->password, "Password not known");
+     strcpy(this->phonenumber, "Phonenumber not known");
 }
 
 void user::get_info(){
@@ -238,7 +229,7 @@ void admin::set_admin_usrname_password(char* adminName, char* adminPassword){
 }
 
 void admin::set_permissions(user* _user, int confirmed_permissions[]){
-    char perm[3][50] = {"","",""};
+    char perm[3][MAXLEN] = {"","",""};
 
     // for (int i = 0; i < PERMISSIONS; i++){
     //     strcpy(perm[i], "");
@@ -265,7 +256,7 @@ void admin::set_permissions(user* _user, int confirmed_permissions[]){
     _user->set_permissions(perm);
 }
 
-void user::set_permissions(char confirmed_permissions[][50]){
+void user::set_permissions(char confirmed_permissions[][MAXLEN]){
     for (int i = 0; i < PERMISSIONS; i++){
         strcpy(permissions[i], confirmed_permissions[i]);
     }
@@ -278,7 +269,7 @@ void user::print_permissions(){
 }
 
 void admin::remove_permissions(user* _user, int confirmed_permissions[]){
-    char perm[3][50] = {"","",""};
+    char perm[3][MAXLEN] = {"","",""};
     for (int i = 0; i < PERMISSIONS; i++){
         if((confirmed_permissions[0] == 1) && (i == 0)){
             strcpy(perm[0], "");

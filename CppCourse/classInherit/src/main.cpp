@@ -58,14 +58,14 @@ int main(void){
     init_users(_users);
     init_person(_persons);
 
-    _persons[0].print_data();
-    _persons[1].print_data();
-    _persons[2].print_data();
+    // _persons[0].print_data();
+    // _persons[1].print_data();
+    // _persons[2].print_data();
 
     // _admin.set_permissions(&_users[0], (char*)"read");
 
     while (menu != 'q'){
-        cout << "Options:\nA) Find student\nB) Print users\nC) Set credentials to users \n D) Find Person\n E) Set permissions\n F) Compare phonenumber\n Q) exit\n" << endl;
+        cout << "Options:\nA) Find student\nB) Print users\nC) Set credentials to users \n D) Find Person\n E) Set permissions\n F) Compare phonenumber\n G) Print persons \nQ) exit\n" << endl;
         cout << "Give menu option" << endl;
         cin >> menu;
         cin.get();
@@ -133,6 +133,11 @@ int main(void){
                 for (int i = 0; i < NUMBER_OF_USERS; i++){
                     correct_phone_number = _users[i].compare_phonenumber(find_person);
                     _users[i].get_info();
+                }
+                break;
+            case 'g':
+                for (int i = 0; i < NUMBER_OF_PERSONS; i++){
+                    _persons[i].print_data();
                 }
                 break;
             case 'q':

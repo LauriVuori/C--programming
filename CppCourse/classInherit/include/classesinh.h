@@ -8,12 +8,11 @@ Define also the default constructor and a constructor, which can be used to init
 */
 
 class person{
-private:
+protected:
     char* first_name;
     char* surname;
     char* phonenumber;
-    char* username;
-    char* password;
+
 public:
     person();
     person(char*, char*, char*);
@@ -38,14 +37,12 @@ argument and returns the results as a Boolean value.
 */
 class user:public person{
 private:
-    char firstname[MAXLEN];
-    char surname[MAXLEN];
-    char username[MAXLEN];
-    char password[MAXLEN];
-    char phonenumber[MAXLEN];
-    char permissions[3][50];
+
+  char username[MAXLEN];
+  char password[MAXLEN];
+    char permissions[3][MAXLEN];
 private:
-    void set_permissions(char [][50]);
+    void set_permissions(char [][MAXLEN]);
 public:
     user();
     user(char*, char*, char*);
@@ -55,7 +52,7 @@ public:
     void get_info();
     void search(char*);
     void print_permissions();
-    bool compare_phonenumber(char *);
+    bool compare(char *);
     // ~user();
     friend class admin;
 };
@@ -80,7 +77,7 @@ remove_permissions() as a public method, which receives as argument a User objec
 calls authenticate() method to authenticate the admin and then removes the 
 specified permissions of the given User object if authentication of admin succeeds and otherwise returns a failure message.
 */
-
+// adminille nimi yms..
 class admin:public person{
     // char admin_password[MAXLEN];
     char* admin_password;
