@@ -10,13 +10,9 @@ person::person(){
     this->first_name = new char[MAXLEN];
     this->surname = new char[MAXLEN];
     this->phonenumber = new char[MAXLEN];
-
-
     strcpy(this->first_name, "First name not known");
     strcpy(this->surname, "Surname not known");
     strcpy(this->phonenumber, "phonenumber name not known");
-
-
 }
 
 person::person(char* firstname, char* surname, char* phonenumber){
@@ -28,8 +24,7 @@ person::person(char* firstname, char* surname, char* phonenumber){
     strcpy(this->phonenumber, phonenumber);
 }
 void person::print_data(){
-    cout << first_name << " " << surname << " " << phonenumber << " "
-    << username << endl; 
+    cout << first_name << " " << surname << " " << phonenumber << endl;
 }
 
 person* person::find_person(char* find_person){
@@ -53,18 +48,6 @@ person::~person(){
 
 
 user* user::find_user(char* find_user){
-    // //yhdistä ||
-    // if (!strcmp(this->firstname, find_user)){
-    //     return this;
-    // }
-    // if (!strcmp(this->surname, find_user)){
-    //     return this;
-    // }
-    // if (!strcmp(this->username, find_user)){
-    //     return this;
-    // }
-    // return NULL;
-
     return (user*)person::find_person(find_user);
 }
 
@@ -83,7 +66,7 @@ user::user(
     char* phnumber,
     char* usrname,
     char* password
-    ):person(fname,sname, phnumber){
+    ):person(fname, sname, phnumber){
     strcpy(this->username, usrname);
     strcpy(this->password, password);
   
@@ -109,12 +92,12 @@ user::user():person(){
 
 void user::get_info(){
     cout << "User information:" << endl;
-    cout << this->firstname << "\n" << this->surname << "\n" 
+    cout << this->first_name << "\n" << this->surname << "\n" 
     << this->username << "\n" << this->phonenumber << endl;
 }
 
 void user::init_info(char* firstname, char* surname, char* phonenumber){
-    strcpy(this->firstname, firstname);
+    strcpy(this->first_name, firstname);
     strcpy(this->surname, surname);
     strcpy(this->phonenumber, phonenumber);
 }
@@ -135,7 +118,7 @@ void user::search(char* searchName){
 //  }
 
 void admin::get_user_name(user* _user){
-    cout << _user->firstname << " " << _user->surname << " " 
+    cout << _user->first_name << " " << _user->surname << " " 
     << _user->username << " " << _user->phonenumber << " " << endl;
 }
 

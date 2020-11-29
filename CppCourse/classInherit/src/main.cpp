@@ -33,9 +33,9 @@ void setAdminCredentials(admin * _admin);
 void set_permis(admin * _admin, user * _users);
 
 void init_users(user* _users){
-    _users[0] = user((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
-    _users[1] = user((char*)"Petteri", (char*)"Kauris", (char*)"0501323");
-    _users[2] = user((char*)"Kalle", (char*)"Puska", (char*)"06132411");
+    _users[0].init_info((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
+    _users[1].init_info((char*)"Petteri", (char*)"Kauris", (char*)"0501323");
+    _users[2].init_info((char*)"Kalle", (char*)"Puska", (char*)"06132411");
 }
 
 void init_person(person* _persons){
@@ -54,9 +54,10 @@ int main(void){
     bool admin_authenticated = false, correct_phone_number = false;
 
     setAdminCredentials(&_admin);
-
+     printf("test");
     init_users(_users);
-    init_person(_persons);
+    printf("test");
+    // init_person(_persons);
 
     // _persons[0].print_data();
     // _persons[1].print_data();
@@ -131,7 +132,7 @@ int main(void){
                 cout << "Give phonenumber" << endl;
                 cin >> find_person;
                 for (int i = 0; i < NUMBER_OF_USERS; i++){
-                    correct_phone_number = _users[i].compare_phonenumber(find_person);
+                    correct_phone_number = _users[i].compare(&_users[i]);
                     _users[i].get_info();
                 }
                 break;

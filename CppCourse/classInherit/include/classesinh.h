@@ -38,8 +38,8 @@ argument and returns the results as a Boolean value.
 class user:public person{
 private:
 
-  char username[MAXLEN];
-  char password[MAXLEN];
+    char username[MAXLEN];
+    char password[MAXLEN];
     char permissions[3][MAXLEN];
 private:
     void set_permissions(char [][MAXLEN]);
@@ -52,7 +52,7 @@ public:
     void get_info();
     void search(char*);
     void print_permissions();
-    bool compare(char *);
+    bool compare(user* _user);
     // ~user();
     friend class admin;
 };
