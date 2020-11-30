@@ -15,13 +15,13 @@ person::person(){
     strcpy(this->phonenumber, "phonenumber name not known");
 }
 
-person::person(char* firstname, char* surname, char* phonenumber){
+person::person(char* firstname, char* surname, char* phnenumber){
     this->first_name = new char[MAXLEN];
     this->surname = new char[MAXLEN];
     this->phonenumber = new char[MAXLEN];
     strcpy(this->first_name, firstname);
     strcpy(this->surname, surname);
-    strcpy(this->phonenumber, phonenumber);
+    strcpy(this->phonenumber, phnenumber);
 }
 void person::print_data(){
     cout << first_name << " " << surname << " " << phonenumber << endl;
@@ -69,25 +69,20 @@ user::user(
     ):person(fname, sname, phnumber){
     strcpy(this->username, usrname);
     strcpy(this->password, password);
-  
-
 }
 
 user::user(  
     char* fname, 
     char* sname, 
-    char* phnumber):person(fname, sname, phonenumber){
-  
+    char* phnumber):person(fname, sname, phnumber){
     strcpy(this->username, "Username not known");
     strcpy(this->password, "Password not known");
 }
 
 user::user():person(){
-    // strcpy(this->firstname, "Firstname not known");
-    // strcpy(this->surname, "Surname not known");
-    // strcpy(this->username, "Username not known");
-     strcpy(this->password, "Password not known");
-     strcpy(this->phonenumber, "Phonenumber not known");
+    strcpy(this->username, "Username not known");
+    strcpy(this->password, "Password not known");
+    strcpy(this->phonenumber, "Phonenumber not known");
 }
 
 void user::get_info(){

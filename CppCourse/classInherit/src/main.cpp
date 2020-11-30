@@ -33,9 +33,9 @@ void setAdminCredentials(admin * _admin);
 void set_permis(admin * _admin, user * _users);
 
 void init_users(user* _users){
-    _users[0].init_info((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
-    _users[1].init_info((char*)"Petteri", (char*)"Kauris", (char*)"0501323");
-    _users[2].init_info((char*)"Kalle", (char*)"Puska", (char*)"06132411");
+    _users[0] = user((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
+    _users[1] = user((char*)"Petteri", (char*)"Kauris", (char*)"0501323");
+    _users[2] = user((char*)"Kalle", (char*)"Puska", (char*)"06132411");
 }
 
 void init_person(person* _persons){
@@ -54,9 +54,7 @@ int main(void){
     bool admin_authenticated = false, correct_phone_number = false;
 
     setAdminCredentials(&_admin);
-     printf("test");
     init_users(_users);
-    printf("test");
     // init_person(_persons);
 
     // _persons[0].print_data();
@@ -105,9 +103,9 @@ int main(void){
                 cin >> find_person;
 
                 for (int i = 0; i < NUMBER_OF_PERSONS; i++){
-                    temp_person = _persons[i].find_person(find_person);
-                    if (temp_person != NULL){
-                        temp_person->print_data();
+                    temp_user = _users[i].find_user(find_person);
+                    if (temp_user != NULL){
+                        temp_user->print_data();
                     }
                 }
                 break;
@@ -138,7 +136,7 @@ int main(void){
                 break;
             case 'g':
                 for (int i = 0; i < NUMBER_OF_PERSONS; i++){
-                    _persons[i].print_data();
+                   _users[i].print_data();
                 }
                 break;
             case 'q':
