@@ -5,6 +5,51 @@
 
 using namespace std;
 
+credentials::credentials(){
+    this->username = new char[MAXLEN];
+    this->password = new char[MAXLEN];
+    strcpy(this->username, "Username name not known");
+    strcpy(this->password, "Password name not known");
+    cout << "testpassw" << endl;
+    cout << this->username << endl;
+}
+
+credentials::credentials(char* username, char* password){
+    this->username = new char[MAXLEN];
+    this->password = new char[MAXLEN];
+    strcpy(this->username, username);
+    strcpy(this->password, password);
+}
+
+credentials::~credentials(){
+    delete [] username;
+    delete [] password;
+}
+
+// void credentials::print_data(){
+//     // del pass
+//     cout << username << " " << password << endl;
+// }
+// organization::organization(){
+//     this->org_name = new char[MAXLEN];
+//     this->org_phonenumber = new char[MAXLEN];
+//     strcpy(this->org_name, "Organizations name not known");
+//     this->number_of_employees = 0;
+//     strcpy(this->org_phonenumber, "Organizations phonenumber not known");
+// }
+
+// organization::organization(char* org_name, int number_of_employees, char* org_phonenumber){
+//     this->org_name = new char[MAXLEN];
+//     this->org_phonenumber = new char[MAXLEN];
+//     strcpy(this->org_name, org_name);
+//     this->number_of_employees = number_of_employees;
+//     strcpy(this->org_phonenumber, org_phonenumber);
+// }
+
+// organization::~organization(){
+//     delete [] org_name;
+//     delete [] org_phonenumber;
+// };
 
 person::person(){
     this->first_name = new char[MAXLEN];
@@ -22,6 +67,8 @@ person::person(char* firstname, char* surname, char* phnenumber){
     strcpy(this->first_name, firstname);
     strcpy(this->surname, surname);
     strcpy(this->phonenumber, phnenumber);
+    cout << "testfirstname" << endl;
+    cout << first_name << endl;
 }
 void person::print_data(){
     cout << first_name << " " << surname << " " << phonenumber << endl;
@@ -66,23 +113,18 @@ user::user(
     char* phnumber,
     char* usrname,
     char* password
-    ):person(fname, sname, phnumber){
-    strcpy(this->username, usrname);
-    strcpy(this->password, password);
+    ):person(fname, sname, phnumber),credentials(usrname, password){
 }
 
 user::user(  
     char* fname, 
     char* sname, 
-    char* phnumber):person(fname, sname, phnumber){
-    strcpy(this->username, "Username not known");
-    strcpy(this->password, "Password not known");
+    char* phnumber):person(fname, sname, phnumber), credentials(){
+    cout << "testuser" << endl;
+    cout << fname << endl;
 }
 
-user::user():person(){
-    strcpy(this->username, "Username not known");
-    strcpy(this->password, "Password not known");
-    strcpy(this->phonenumber, "Phonenumber not known");
+user::user():person(),credentials(){
 }
 
 void user::get_info(){

@@ -38,31 +38,31 @@ void init_users(user* _users){
     _users[2] = user((char*)"Kalle", (char*)"Puska", (char*)"06132411");
 }
 
-void init_person(person* _persons){
-    _persons[0] = person((char*)"Juho", (char*)"Maki", (char*)"05000");
-    _persons[1] = person((char*)"Kaisa", (char*)"Kuopio", (char*)"06000");
-    _persons[2] = person((char*)"Martti", (char*)"Koivu", (char*)"07000");
-}
 
 int main(void){
     user* _users = new user[NUMBER_OF_USERS];
-    person* _persons = new person[NUMBER_OF_PERSONS];
-    person* temp_person;
     user* temp_user;
     admin _admin = admin((char*)"admin", (char*)"admin");
     char usrname[MAXLEN], admin_usrname[MAXLEN], admin_password[MAXLEN], password[MAXLEN], find_person[MAXLEN], menu;
     bool admin_authenticated = false, correct_phone_number = false;
 
-    setAdminCredentials(&_admin);
+    // setAdminCredentials(&_admin);
+
+    // init_users(_users);
+    // for (int i = 0; i < NUMBER_OF_USERS; i++){
+    //     cout << "User " << i+1 << ":" << endl;
+    //     _users[i].get_info();
+    // }
+
     init_users(_users);
-    // init_person(_persons);
-
-    // _persons[0].print_data();
-    // _persons[1].print_data();
-    // _persons[2].print_data();
-
+    // for (int i = 0; i < NUMBER_OF_USERS; i++){
+    //     cout << "User " << i+1 << ":" << endl;
+    //     _users[i].get_info();
+    // }
+    // _users[1] = user((char*)"Petteri", (char*)"Kauris", (char*)"0501323");
+    // _users[2] = user((char*)"Kalle", (char*)"Puska", (char*)"06132411");
     // _admin.set_permissions(&_users[0], (char*)"read");
-
+    // menu = 'q';
     while (menu != 'q'){
         cout << "Options:\nA) Find student\nB) Print users\nC) Set credentials to users \n D) Find Person\n E) Set permissions\n F) Compare phonenumber\n G) Print persons \nQ) exit\n" << endl;
         cout << "Give menu option" << endl;
@@ -151,7 +151,6 @@ int main(void){
     // usr2->get_info();
     // testi.search((char*)"Lauri");
     delete [] _users;
-    delete [] _persons;
     return 0;
 }
 
