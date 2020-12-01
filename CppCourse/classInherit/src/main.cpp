@@ -46,7 +46,7 @@ int main(void){
     char usrname[MAXLEN], admin_usrname[MAXLEN], admin_password[MAXLEN], password[MAXLEN], find_person[MAXLEN], menu;
     bool admin_authenticated = false, correct_phone_number = false;
 
-    // setAdminCredentials(&_admin);
+    setAdminCredentials(&_admin);
 
     // init_users(_users);
     // for (int i = 0; i < NUMBER_OF_USERS; i++){
