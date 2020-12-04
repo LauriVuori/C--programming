@@ -4,8 +4,9 @@
 #include <cstring>
 
 using namespace std;
-char user::permissions[PERMISSIONS];
+char user::permissions[PERMISSIONS][MAXLEN];
 char user::denied_list[MAX_DENY][MAXLEN];
+int user::denied_list_counter;
 
 user::user(){
     this->first_name = new char[MAXLEN];
@@ -53,41 +54,71 @@ void user::get_info(){
     << endl;
 }
 user* user::search(char* searchName){
-    // check denied list
-    if(!strcmp(this->first_name, searchName)){
+    if(this->authenticate() == false){
+        cout << "User denied" << endl;
+        return NULL;
+    }
+    if(!strcmp(this->username, searchName)){
         cout << "User found" << endl;
         return this;
     }
     return NULL;
 }
 
+
 bool user::authenticate(){
     for (int i = 0; i < MAX_DENY; i++){
-        if (strcmp(this->first_name, denied_list[i]) == 0){
-            return true;
+        if (strcmp(this->username, denied_list[i]) == 0){
+            return false;
         }
     }
-    return false;
+    return true;
 }
 
 void user::set_denied_list(char* denied_user){
-
-    strcpy(this->denied_list[0], "Lauri");
+    // muokkaa, dynaamisesti kasvattaa. static laskuri/indeksi-> nollan tilalle, poistaessa indeksiä vähennetää
+    strcpy(user::denied_list[0], denied_user);
 }
 
 void user::set_permissions(int confirmed_permissions[]){
 
     for (int i = 0; i < PERMISSIONS; i++){
         if((confirmed_permissions[0] == 1) && (i == 0)){
-            strcpy(this->permissions[0], "R");
-        }
-        if((confirmed_permissions[1] == 1) && (i == 1)){
-            strcpy(this->permissions[1], "E");
-        }
-        if((confirmed_permissions[2] == 1) && (i == 2)){
-            strcpy(this->permissions[2], "W");
+            strcpy(user::permissions[0], "READ");
 
         }
+        if((confirmed_permissions[1] == 1) && (i == 1)){
+            strcpy(user::permissions[1], "EXECUTE");
+        }
+        if((confirmed_permissions[2] == 1) && (i == 2)){
+            strcpy(user::permissions[2], "WRITE");
+
+        }
+    }
+}
+void user::remove_permissions(int confirmed_permissions[]){
+    char perm[3][MAXLEN] = {"","",""};
+    for (int i = 0; i < PERMISSIONS; i++){
+        if((confirmed_permissions[0] == 1) && (i == 0)){
+            strcpy(user::permissions[0], "");
+
+        }
+        if((confirmed_permissions[1] == 1) && (i == 1)){
+            strcpy(user::permissions[0], "");
+
+        }
+        if((confirmed_permissions[2] == 1) && (i == 2)){
+            strcpy(user::permissions[0], "");
+
+        }
+    }
+}
+
+void user::get_permissions(){
+
+    cout << "Permissions:" << endl;
+    for (int i = 0; i < PERMISSIONS; i++){
+        cout << user::permissions[i] << endl;
     }
 }
 // user::~user(){
@@ -97,3 +128,9 @@ void user::set_permissions(int confirmed_permissions[]){
 //     delete [] username;
 //     delete [] password;
 // }
+
+void user::get_denied_list(){
+    for(int i = 0; i < MAX_DENY; i++){
+        cout << denied_list[i] << endl;
+    }
+}

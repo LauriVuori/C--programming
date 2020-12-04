@@ -29,17 +29,20 @@ private:
     char* phonenumber;
     char* username;
     char* password;
-    static char permissions[PERMISSIONS];
+    static char permissions[PERMISSIONS][MAXLEN];
     static char denied_list[MAX_DENY][MAXLEN];
+    static int denied_list_counter;
 public:
     user();
     user(char*, char*, char*);
     user(char*, char*, char*, char*, char*);
     void get_info();
     user* search(char*);
-    void set_denied_list(char*);
-    void set_permissions(int[]);
-    void get_permissions();
+    static void set_denied_list(char*);
+    static void set_permissions(int[]);
+    static void get_permissions();
+    static void get_denied_list();
+    static void remove_permissions(int[]);
     bool authenticate();
     // ~user();
 };

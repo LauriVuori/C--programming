@@ -3,8 +3,8 @@
 #include <iostream>
 #include <cstring>
 using namespace std;
-void permissions(user* _users);
-void set_perm(user* _users);
+void permissions();
+// void set_perm(user* _users);
 
 void find_user(user* _users){
     user* temp_user = new user;
@@ -13,29 +13,29 @@ void find_user(user* _users){
     int i = 0;
     cout << "Which user use to find user:" << endl;
     cin >> find_person;
+    cout << find_person << endl;
     for (i = 0; i < NUMBER_USERS; i++){
             temp_user = _users[i].search(find_person);
             if (temp_user != NULL){
-                authenticate = _users[i].authenticate();
-                i = NUMBER_USERS;
-                cout << authenticate << endl;
-                if (authenticate == false){
-                    cout << "Which user to find:" << endl;
-                    cin >> find_person;
-                    // temp_user = NULL;
-                    for (int b = 0; b < NUMBER_USERS; b++){
-                        temp_user = _users[b].search(find_person);
-                        if (temp_user != NULL){
-                            _users[b].get_info();
-                        }
-                    }
-                }
-                else{
-                    cout << "User denied" << endl;
-                }
+                temp_user->get_info();
+            
+                // cout << "Which user to find:" << endl;
+                // cin >> find_person;
+                // cout << find_person << endl;
+                // // temp_user = NULL;
+                // for (int b = 0; b < NUMBER_USERS; b++){
+                //     temp_user = _users[b].search(find_person);
+                //     if (temp_user != NULL){
+                //         _users[b].get_info();
+                //     }
+                // }
+                // }
+                // else{
+                //     cout << "User denied" << endl;
+                // }
             }
     }
-
+    delete temp_user;
 }
 
 int main(void){
@@ -44,14 +44,14 @@ int main(void){
     _users[0] = user((char*)"Lauri", (char*)"Vuori", (char*)"0400123123", (char*)"lavu", (char*)"LAVU");
     _users[1] = user((char*)"Petteri", (char*)"Kauris", (char*)"0501323",(char*)"peka",(char*)"PEKA");
     _users[2] = user((char*)"Kalle", (char*)"Puska", (char*)"06132411",(char*)"kapu",(char*)"KAPU");
-    // _users[0].set_denied_list((char*)"Lauri");
+    user::set_denied_list((char*)"lavu");
 
     for (int i = 0; i < NUMBER_USERS; i++){
         _users[i].get_info();
     }
 
     while (menu != 'q'){
-    cout << "Options:\nA) Add new employee information\nB)Find user\nC)Set permissions\nQ)exit\n" << endl;
+    cout << "Options:\nA) Print users information \nB)Find user\nC)Set permissions\nQ)exit\n" << endl;
         cout << "Give menu option" << endl;
         cin >> menu;
         cin.get();
@@ -64,12 +64,15 @@ int main(void){
                 for (int i = 0; i < NUMBER_USERS; i++){
                     _users[i].get_info();
                 }
+                user::get_permissions();
+                user::get_denied_list();
                 break;
             case 'b': // search
                 find_user(_users);
                 break;
             case 'c':
-                set_perm(_users);
+                // set_perm(_users);
+                permissions();
                 break;
             case 'q':
                 cout << "Program shuts down" << endl;
@@ -78,26 +81,36 @@ int main(void){
     }
 }
 
-void set_perm(user* _users){
-    char permission[PERMISSIONS] = "";
-    user* temp_user = new user;
-    char find_person[MAXLEN];
+// void set_perm(user* _users){
+//     char permission[PERMISSIONS] = "";
+//     user* temp_user = new user;
+//     char find_person[MAXLEN];
 
-    cout << "Which user to find:" << endl;
-    cin >> find_person;
-    for (int i = 0; i < NUMBER_USERS; i++){
-        temp_user = _users[i].search(find_person);
-        if (temp_user != NULL){
-            permissions(&_users[i]);
-        }
-    }
-}
+//     cout << "Which user to find:" << endl;
+//     cin >> find_person;
+//     for (int i = 0; i < NUMBER_USERS; i++){
+//         temp_user = _users[i].search(find_person);
+//         if (temp_user != NULL){
+//             permissions(&_users[i]);
+//         }
+//     }
+// }
 
-void permissions(user* _users){
+void permissions(){
     char choice = 'i';
     int confirmed[PERMISSIONS] = {0,0,0};
     int i = 0;
-
+    char* confirmed_char[PERMISSIONS] = {"[x]eXecute","[x]Read","[x]Write"};
+      char* dened_char[PERMISSIONS] = {"[]eXecute","[]Read","[]Write"};
+    
+    for(int counter=0; counter<PERMISSIONS; counter++ ){
+      if(confirmed[counter])
+         cout<<confirmed_char[counter];
+         else
+                cout<<denied__char[counter];
+      cout<<endl;
+    }
+         
 
     while (choice != 'q'){
         i = 0;
@@ -134,7 +147,7 @@ void permissions(user* _users){
             }
             i++;
         }
-        cout << "Which permissions to: \n add 1) read 2) execute 3) write\n\n e) set permissions\nr) reset selected permissions\n  q)exit:" << endl;
+        cout << "Which permissions to: \n add 1) read 2) execute 3) write\n\n e) set permissions\nr) reset selected permissions\n f)Remove permissions q)exit:" << endl;
         cin >> choice;
         switch (choice){
             case '1':
@@ -147,7 +160,9 @@ void permissions(user* _users){
                 confirmed[2] = 1;
                 break;
             case 'e':
-                _users->set_permissions(confirmed);
+                user::set_permissions(confirmed);
+                // _users->get_info();
+                user::get_permissions();
                 choice = 'q';
                 break;
             case 'r':
@@ -156,6 +171,10 @@ void permissions(user* _users){
                 }
                 cout << "Permissions resetted" << endl;
                 break;
+            case 'f':
+                user::remove_permissions(confirmed);
+                // _users->get_info();
+                user::get_permissions();
             case 'q':
                 break;
         }
