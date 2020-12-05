@@ -66,7 +66,7 @@ checks if the user has already the specified permission and removes it if the us
 compare(), which receives an object of User, and compares the phone numbers of the current 
 object with the phone number of the object passed as argument and returns the results as a Boolean value.
 */
-class user:public person, credentials{
+class user:public person, public credentials{
 private:
     char permissions[3][MAXLEN];
 private:
@@ -81,7 +81,8 @@ public:
     void search(char*);
     void print_permissions();
     bool compare(user* _user);
-    // ~user();
+    void get_all_info();
+    ~user();
     friend class admin;
 };
 /*
@@ -102,13 +103,12 @@ User object if authentication of admin succeeds and otherwise returns a failure 
 */
 
 // adminille nimi yms..
-class admin:public person, credentials{
-    // char admin_password[MAXLEN];
-    char* admin_password;
-    char admin_username[MAXLEN];
+class admin: public person, public credentials{
+
 public:
     admin();
     admin(char*, char*);
+    admin(char*, char*, char*, char*, char*);
     void set_admin_usrname_password(char*, char*);
     void set_usrname(user* , char*);
     void set_user_password(user*, char*);

@@ -32,35 +32,27 @@ using namespace std;
 void setAdminCredentials(admin * _admin);
 void set_permis(admin * _admin, user * _users);
 
-void init_users(user* _users){
-    _users[0] = user((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
-    _users[1] = user((char*)"Petteri", (char*)"Kauris", (char*)"0501323");
-    _users[2] = user((char*)"Kalle", (char*)"Puska", (char*)"06132411");
-}
+
 
 
 int main(void){
     user* _users = new user[NUMBER_OF_USERS];
     user* temp_user;
-    admin _admin = admin((char*)"admin", (char*)"admin");
+    admin _admin = admin((char*)"adminsNAME", (char*)"adminsSURNAME", (char*)"adminphonenm040", (char*)"admin", (char*)"admin");
     char usrname[MAXLEN], admin_usrname[MAXLEN], admin_password[MAXLEN], password[MAXLEN], find_person[MAXLEN], menu;
     bool admin_authenticated = false, correct_phone_number = false;
+    // setAdminCredentials(&_admin);
+    _users[0] = user((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
+    _users[1] = user((char*)"Petteri", (char*)"Kauris", (char*)"0501323");
+    _users[2] = user((char*)"Kalle", (char*)"Puska", (char*)"06132411");
 
-    setAdminCredentials(&_admin);
-
-    // init_users(_users);
     // for (int i = 0; i < NUMBER_OF_USERS; i++){
     //     cout << "User " << i+1 << ":" << endl;
-    //     _users[i].get_info();
+    //     // _users[i].get_info();
+    //     _users[i].get_all_info();
     // }
+    _admin.print_admin();
 
-    init_users(_users);
-    // for (int i = 0; i < NUMBER_OF_USERS; i++){
-    //     cout << "User " << i+1 << ":" << endl;
-    //     _users[i].get_info();
-    // }
-    // _users[1] = user((char*)"Petteri", (char*)"Kauris", (char*)"0501323");
-    // _users[2] = user((char*)"Kalle", (char*)"Puska", (char*)"06132411");
     // _admin.set_permissions(&_users[0], (char*)"read");
     // menu = 'q';
     while (menu != 'q'){

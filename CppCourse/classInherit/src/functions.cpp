@@ -10,8 +10,6 @@ credentials::credentials(){
     this->password = new char[MAXLEN];
     strcpy(this->username, "Username name not known");
     strcpy(this->password, "Password name not known");
-    cout << "testpassw" << endl;
-    cout << this->username << endl;
 }
 
 credentials::credentials(char* username, char* password){
@@ -67,8 +65,6 @@ person::person(char* firstname, char* surname, char* phnenumber){
     strcpy(this->first_name, firstname);
     strcpy(this->surname, surname);
     strcpy(this->phonenumber, phnenumber);
-    cout << "testfirstname" << endl;
-    cout << first_name << endl;
 }
 void person::print_data(){
     cout << first_name << " " << surname << " " << phonenumber << endl;
@@ -120,8 +116,6 @@ user::user(
     char* fname, 
     char* sname, 
     char* phnumber):person(fname, sname, phnumber), credentials(){
-    cout << "testuser" << endl;
-    cout << fname << endl;
 }
 
 user::user():person(),credentials(){
@@ -133,6 +127,12 @@ void user::get_info(){
     << this->username << "\n" << this->phonenumber << endl;
 }
 
+void user::get_all_info(){
+    cout << "All info " << endl;
+    cout << this->first_name << "\n" << this->surname << "\n" 
+    << this->username << "\n" << this->phonenumber << "\n" << this->password <<  endl;
+}
+
 void user::init_info(char* firstname, char* surname, char* phonenumber){
     strcpy(this->first_name, firstname);
     strcpy(this->surname, surname);
@@ -140,19 +140,15 @@ void user::init_info(char* firstname, char* surname, char* phonenumber){
 }
 
 void user::search(char* searchName){
-    // if same values -> go into if
     if(!strcmp(this->username, searchName)){
         cout << "User found" << endl;
         this->get_info();
     }
-
 }
 
 // destuctor
-// user::~user() {
-//     cout<<"Destructor called for "<<this->username<< " " << this-> password << endl;
-//     cout<<"Freeing memory and quitting..."<<endl;
-//  }
+user::~user() {
+}
 
 void admin::get_user_name(user* _user){
     cout << _user->first_name << " " << _user->surname << " " 
@@ -161,16 +157,14 @@ void admin::get_user_name(user* _user){
 
 
 
-admin::admin(){
-    this->admin_password = new char[MAXLEN];
-    strcpy(this->admin_username, "admin username not known");
-    strcpy(this->admin_password, "admin password not known");
+admin::admin():person(),credentials(){
 }
 
-admin::admin(char* admin_username, char* admin_password){
-    this->admin_password = new char[MAXLEN];
-    strcpy(this->admin_username, admin_username);
-    strcpy(this->admin_password, admin_password);
+admin::admin(char* admin_username, char* admin_password):person(), credentials(admin_username, admin_password){
+}
+
+admin::admin(char* fname, char* sname, char* phnumber,char* admin_username, char* admin_password):person(fname, sname, phnumber), credentials(admin_username, admin_password){
+
 }
 
 // set_password() method, which receives as argument a User 
@@ -190,7 +184,7 @@ void admin::set_user_password(user* _user, char* password){
     }
 }
 
-//set_usrname() method, which receives as argument a 
+// set_usrname() method, which receives as argument a 
 // User object and a username and first calls authenticate() 
 // method to authenticate the admin and then sets the username 
 // of the given User object if authentication of admin succeeds 
@@ -212,13 +206,11 @@ void admin:: set_usrname(user* _user, char* username){
 
 
 admin::~admin() {
-    delete [] admin_password;
-    // cout<<"Admin object destroyed "<<this->admin_username << endl;
-    // cout<<"Freeing memory and quitting..."<<endl;
 }
 
 void admin::print_admin(){
-    cout << admin_username << " " << admin_password << endl;
+    this->print_data();
+    cout << username << " " << password << endl;
 }
 
 
@@ -231,7 +223,7 @@ bool admin::authenticate(){
     // cout << "<<>>" << admin_password << "<<<>>>" << endl;
     cout << "Give admin password" << endl;
     cin >> adm_password;
-    if ((!strcmp(this->admin_username, adm_username)) && (!strcmp(this->admin_password, adm_password))){
+    if ((!strcmp(this->username, adm_username)) && (!strcmp(this->password, adm_password))){
         cout << "Credentials correct" << endl;
         return true;
     }
@@ -243,8 +235,8 @@ bool admin::authenticate(){
 
 
 void admin::set_admin_usrname_password(char* adminName, char* adminPassword){
-    strcpy(this->admin_username, adminName);
-    strcpy(this->admin_password, adminPassword);
+    strcpy(this->username, adminName);
+    strcpy(this->password, adminPassword);
     cout << "Credentials changed" << endl;
 }
 
