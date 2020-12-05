@@ -45,7 +45,7 @@ int main(void){
     _users[1] = user((char*)"Petteri", (char*)"Kauris", (char*)"0501323",(char*)"peka",(char*)"PEKA");
     _users[2] = user((char*)"Kalle", (char*)"Puska", (char*)"06132411",(char*)"kapu",(char*)"KAPU");
     user::set_denied_list((char*)"lavu");
-
+    user::get_denied_list_counter();
     for (int i = 0; i < NUMBER_USERS; i++){
         _users[i].get_info();
     }
@@ -100,53 +100,56 @@ void permissions(){
     char choice = 'i';
     int confirmed[PERMISSIONS] = {0,0,0};
     int i = 0;
-    char* confirmed_char[PERMISSIONS] = {"[x]eXecute","[x]Read","[x]Write"};
-      char* dened_char[PERMISSIONS] = {"[]eXecute","[]Read","[]Write"};
+    char* confirmed_char[PERMISSIONS] = {(char*)"[x]eXecute",(char*)"[x]Read",(char*)"[x]Write"};
+    char* denied_char[PERMISSIONS] = {(char*)"[]eXecute",(char*)"[]Read",(char*)"[]Write"};
     
-    for(int counter=0; counter<PERMISSIONS; counter++ ){
-      if(confirmed[counter])
-         cout<<confirmed_char[counter];
-         else
-                cout<<denied__char[counter];
-      cout<<endl;
-    }
-         
+   
 
     while (choice != 'q'){
         i = 0;
-        while (i < PERMISSIONS){
-            if (confirmed[i] != 0){
-                if ((confirmed[0] == 1) && (confirmed[1] == 0) && (confirmed[2] == 0)){
-                    cout << "[x]read[]execute[]write" << endl;
-                    i = 15;
-                }
-                else if ((confirmed[0] == 1) && (confirmed[1] == 1) && (confirmed[2] == 0)){
-                    cout << "[x]read[x]execute[]write" << endl;
-                    i = 15;
-                }
-                else if ((confirmed[0] == 1) && (confirmed[1] == 1) && (confirmed[2] == 1)){
-                    cout << "[x]read[x]execute[x]write" << endl;
-                    i = 15;
-                }
-                else if ((confirmed[0] == 0) && (confirmed[1] == 1) && (confirmed[2] == 1)){
-                    cout << "[]read[x]execute[x]write" << endl;
-                    i = 15;
-                }
-                else if ((confirmed[0] == 0) && (confirmed[1] == 0) && (confirmed[2] == 1)){
-                    cout << "[]read[]execute[x]write" << endl;
-                    i = 15;
-                }
-                else if ((confirmed[0] == 0) && (confirmed[1] == 1) && (confirmed[2] == 0)){
-                    cout << "[]read[x]execute[]write" << endl;
-                    i = 15;
-                }
-                else if ((confirmed[0] == 1) && (confirmed[1] == 0) && (confirmed[2] == 1)){
-                    cout << "[x]read[]execute[x]write" << endl;
-                    i = 15;
-                }
+        for(int counter=0; counter<PERMISSIONS; counter++ ){
+            if(confirmed[counter]){
+                cout<< confirmed_char[counter];
             }
-            i++;
+            else{
+                cout<<denied_char[counter];
+            }
+        cout<<endl;
         }
+         
+        // while (i < PERMISSIONS){
+        //     if (confirmed[i] != 0){
+        //         if ((confirmed[0] == 1) && (confirmed[1] == 0) && (confirmed[2] == 0)){
+        //             cout << "[x]read[]execute[]write" << endl;
+        //             i = 15;
+        //         }
+        //         else if ((confirmed[0] == 1) && (confirmed[1] == 1) && (confirmed[2] == 0)){
+        //             cout << "[x]read[x]execute[]write" << endl;
+        //             i = 15;
+        //         }
+        //         else if ((confirmed[0] == 1) && (confirmed[1] == 1) && (confirmed[2] == 1)){
+        //             cout << "[x]read[x]execute[x]write" << endl;
+        //             i = 15;
+        //         }
+        //         else if ((confirmed[0] == 0) && (confirmed[1] == 1) && (confirmed[2] == 1)){
+        //             cout << "[]read[x]execute[x]write" << endl;
+        //             i = 15;
+        //         }
+        //         else if ((confirmed[0] == 0) && (confirmed[1] == 0) && (confirmed[2] == 1)){
+        //             cout << "[]read[]execute[x]write" << endl;
+        //             i = 15;
+        //         }
+        //         else if ((confirmed[0] == 0) && (confirmed[1] == 1) && (confirmed[2] == 0)){
+        //             cout << "[]read[x]execute[]write" << endl;
+        //             i = 15;
+        //         }
+        //         else if ((confirmed[0] == 1) && (confirmed[1] == 0) && (confirmed[2] == 1)){
+        //             cout << "[x]read[]execute[x]write" << endl;
+        //             i = 15;
+        //         }
+        //     }
+        //     i++;
+        // }
         cout << "Which permissions to: \n add 1) read 2) execute 3) write\n\n e) set permissions\nr) reset selected permissions\n f)Remove permissions q)exit:" << endl;
         cin >> choice;
         switch (choice){

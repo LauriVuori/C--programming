@@ -43,6 +43,7 @@ public:
     static void get_permissions();
     static void get_denied_list();
     static void remove_permissions(int[]);
+    static void get_denied_list_counter();
     bool authenticate();
     // ~user();
 };

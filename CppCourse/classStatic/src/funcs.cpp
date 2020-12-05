@@ -76,8 +76,12 @@ bool user::authenticate(){
 }
 
 void user::set_denied_list(char* denied_user){
-    // muokkaa, dynaamisesti kasvattaa. static laskuri/indeksi-> nollan tilalle, poistaessa indeksiä vähennetää
-    strcpy(user::denied_list[0], denied_user);
+    strcpy(user::denied_list[denied_list_counter], denied_user);
+    user::denied_list_counter++;
+}
+
+void user::get_denied_list_counter(){
+    cout << "denied list counter = " << denied_list_counter << endl;
 }
 
 void user::set_permissions(int confirmed_permissions[]){
