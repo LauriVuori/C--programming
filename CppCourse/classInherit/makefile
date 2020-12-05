@@ -44,4 +44,4 @@ clean :
 
 
 #Here we define a new rule by combining two predefined rules
-reset: all clean
+full: all clean

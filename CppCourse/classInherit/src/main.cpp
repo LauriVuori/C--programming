@@ -42,19 +42,25 @@ int main(void){
     char usrname[MAXLEN], admin_usrname[MAXLEN], admin_password[MAXLEN], password[MAXLEN], find_person[MAXLEN], menu;
     bool admin_authenticated = false, correct_phone_number = false;
     // setAdminCredentials(&_admin);
-    _users[0] = user((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
-    _users[1] = user((char*)"Petteri", (char*)"Kauris", (char*)"0501323");
-    _users[2] = user((char*)"Kalle", (char*)"Puska", (char*)"06132411");
+    // _users[0] = user((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
+    // _users[1] = user((char*)"Petteri", (char*)"Kauris", (char*)"0501323");
+    // _users[2] = user((char*)"Kalle", (char*)"Puska", (char*)"06132411");
 
+  
+    // organization org_test = organization();
+    // org_test.print_organization();
+    _users[0].get_all_info();
+
+    cout << "JOU" << endl;
     // for (int i = 0; i < NUMBER_OF_USERS; i++){
     //     cout << "User " << i+1 << ":" << endl;
     //     // _users[i].get_info();
     //     _users[i].get_all_info();
     // }
-    _admin.print_admin();
+    // _admin.print_admin();
 
     // _admin.set_permissions(&_users[0], (char*)"read");
-    // menu = 'q';
+    menu = 'q';
     while (menu != 'q'){
         cout << "Options:\nA) Find student\nB) Print users\nC) Set credentials to users \n D) Find Person\n E) Set permissions\n F) Compare phonenumber\n G) Print persons \nQ) exit\n" << endl;
         cout << "Give menu option" << endl;

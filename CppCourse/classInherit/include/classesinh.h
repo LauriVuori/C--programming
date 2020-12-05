@@ -23,16 +23,17 @@ class Person, which includes the following protected attributes: first name, sur
 to_string() method, which returns as text all person's information except for the password.
 search() method, which receives first name, surname or phone and returns the current object if any of these attributes matches object's data.
 Define also the default constructor and a constructor, which can be used to initialize all attributes of the object.*/
-// class organization{
-// protected:
-//     char* org_name;
-//     int number_of_employees;
-//     char* org_phonenumber;
-// public:
-//     organization();
-//     organization(char*, int, char*);
-//     ~organization();
-// };
+class organization{
+protected:
+    char* org_name;
+    int number_of_employees;
+    char* org_phonenumber;
+public:
+    organization();
+    organization(char*, int, char*);
+    void print_organization();
+    ~organization();
+};
 
 /*
 class Person, which includes the following protected attributes: first name, surname and phone number  as well as the following methods:
@@ -66,7 +67,7 @@ checks if the user has already the specified permission and removes it if the us
 compare(), which receives an object of User, and compares the phone numbers of the current 
 object with the phone number of the object passed as argument and returns the results as a Boolean value.
 */
-class user:public person, public credentials{
+class user:public person, public credentials, public organization{
 private:
     char permissions[3][MAXLEN];
 private:
