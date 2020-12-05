@@ -172,42 +172,19 @@ void set_permis(admin * _admin, user * _users){
     char choice = 'i';
     int confirmed[PERMISSIONS] = {0,0,0};
     int i = 0;
-
+    char* confirmed_char[PERMISSIONS] = {(char*)"[x]eXecute",(char*)"[x]Read",(char*)"[x]Write"};
+    char* denied_char[PERMISSIONS] = {(char*)"[]eXecute",(char*)"[]Read",(char*)"[]Write"};
 
     while (choice != 'q'){
         i = 0;
-        while (i < PERMISSIONS){
-            if (confirmed[i] != 0){
-                if ((confirmed[0] == 1) && (confirmed[1] == 0) && (confirmed[2] == 0)){
-                    cout << "[x]read[]execute[]write" << endl;
-                    i = 15;
-                }
-                else if ((confirmed[0] == 1) && (confirmed[1] == 1) && (confirmed[2] == 0)){
-                    cout << "[x]read[x]execute[]write" << endl;
-                    i = 15;
-                }
-                else if ((confirmed[0] == 1) && (confirmed[1] == 1) && (confirmed[2] == 1)){
-                    cout << "[x]read[x]execute[x]write" << endl;
-                    i = 15;
-                }
-                else if ((confirmed[0] == 0) && (confirmed[1] == 1) && (confirmed[2] == 1)){
-                    cout << "[]read[x]execute[x]write" << endl;
-                    i = 15;
-                }
-                else if ((confirmed[0] == 0) && (confirmed[1] == 0) && (confirmed[2] == 1)){
-                    cout << "[]read[]execute[x]write" << endl;
-                    i = 15;
-                }
-                else if ((confirmed[0] == 0) && (confirmed[1] == 1) && (confirmed[2] == 0)){
-                    cout << "[]read[x]execute[]write" << endl;
-                    i = 15;
-                }
-                else if ((confirmed[0] == 1) && (confirmed[1] == 0) && (confirmed[2] == 1)){
-                    cout << "[x]read[]execute[x]write" << endl;
-                    i = 15;
-                }
+        for(int counter=0; counter<PERMISSIONS; counter++ ){
+            if(confirmed[counter]){
+                cout<< confirmed_char[counter];
             }
-            i++;
+            else{
+                cout<<denied_char[counter];
+            }
+        cout<<endl;
         }
         cout << "Which permissions to: \n add 1) read 2) execute 3) write\n e) set permissions\n f) remove users permissions \nr) reset selected permissions\n  q)exit:" << endl;
         cin >> choice;
