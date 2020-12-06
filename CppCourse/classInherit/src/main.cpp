@@ -35,10 +35,10 @@ void find_and_print(user* _users);
 
 void init(user* _users){
     _users[0] = user((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
-
-    // _users[1] = user((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
-    // _users[2] = user((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
     _users[1] = user((char*)"Petteri", (char*)"Kauris", (char*)"0501323");
+    _users[2] = user((char*)"Kalle", (char*)"Puska", (char*)"06132411");
+
+    _users[0].set_info((char*)"mcdonalds", 25, (char*)"+358400303");
 
 }
 
@@ -52,40 +52,14 @@ int main(void){
     bool admin_authenticated = false, correct_phone_number = false;
     setAdminCredentials(&_admin);
     init(_users);
-    // _users[0] = user((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
 
-    // _users[1] = user((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
-    // _users[2] = user((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
-    // _users[1] = user((char*)"Petteri", (char*)"Kauris", (char*)"0501323");
 
-    // _users[2] = user((char*)"Kalle", (char*)"Puska", (char*)"06132411");
-    // _users[0].prints();
-    // _users[1].prints();
-    // _users[2].get_info();
+    for (int i = 0; i < NUMBER_OF_USERS; i++){
+        cout << "User " << i+1 << ":" << endl;
+        _users[i].get_info();
+    }
 
-    _users[0].prints();
-    _users[1].prints();
-  
-    // organization org_test = organization();
-    // org_test.print_organization();
-    // _users[0].set_credentials((char*)"lavu",(char*)"kebab");
-    // _users[0].set_info((char*)"mcdonalds", 25, (char*)"+358400303");
-    // _users[0].print_data();
-    // _users[0].get_info();
-    // temp_user = _users[0].find_organization((char*)"25");
-    // temp_user->get_info();
-
-    // for (int i = 0; i < NUMBER_OF_USERS; i++){
-    //     cout << "User " << i+1 << ":" << endl;
-    //     cout << "test" << endl;
-    //     _users[i].prints();
-    //     // _users[i].get_all_info();
-    // }
-    // _admin.print_admin();
-
-    // _admin.set_permissions(&_users[0], (char*)"read");
-
-    menu = 'q';
+    // menu = 'q';
     while (menu != 'q'){
         cout << "Options:\n"
                            "A) Find users\n"

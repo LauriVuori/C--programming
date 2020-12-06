@@ -76,6 +76,7 @@ private:
     char permissions[3][MAXLEN];
 private:
     void set_permissions(char [][MAXLEN]);
+    void remove_permissions(char [][MAXLEN]);
 public:
     user();
     user(char*, char*, char*);
@@ -84,7 +85,6 @@ public:
     user* find_user(char* );
     user* find_organization(char* );
     void get_info();
-    void prints();
     void search(char*);
     void print_permissions();
     bool compare(user* _user);

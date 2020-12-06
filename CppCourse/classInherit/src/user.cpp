@@ -45,12 +45,6 @@ void user::get_info(){
     this->print_organization();
 }
 
-void user::prints(){
-    cout << "All info: " << endl;
-    this->print_data();
-    this->print_info();
-    this->print_organization();
-}
 
 void user::init_info(char* firstname, char* surname, char* phonenumber){
     strcpy(this->first_name, firstname);
@@ -71,6 +65,12 @@ void user::search(char* searchName){
 // }
 
 void user::set_permissions(char confirmed_permissions[][MAXLEN]){
+    for (int i = 0; i < PERMISSIONS; i++){
+        strcpy(permissions[i], confirmed_permissions[i]);
+    }
+}
+
+void user::remove_permissions(char confirmed_permissions[][MAXLEN]){
     for (int i = 0; i < PERMISSIONS; i++){
         strcpy(permissions[i], confirmed_permissions[i]);
     }

@@ -145,5 +145,5 @@ void admin::remove_permissions(user* _user, int confirmed_permissions[]){
     for (int i = 0; i < PERMISSIONS; i++){
         cout << perm[i] << endl;
     }
-    _user->set_permissions(perm);
+    _user->remove_permissions(perm);
 }
