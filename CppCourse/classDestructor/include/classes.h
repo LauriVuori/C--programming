@@ -11,7 +11,7 @@ constructors, destructors.
 #include "constants.h"
 // Attributes:
 // Firstname, surname, username, password, phonenumber
-class user{
+class users{
 private:
     char firstname[MAXLEN];
     char surname[MAXLEN];
@@ -19,9 +19,9 @@ private:
     char password[MAXLEN];
     char phonenumber[MAXLEN];
 public:
-    user();
-    user(char*, char*, char*);
-    user(char* , char*, char*, char*, char*);
+    users();
+    users(char*, char*, char*);
+    users(char* , char*, char*, char*, char*);
     void init_info(char*, char*, char*);
     void get_info();
     void search(char*);
@@ -45,9 +45,9 @@ public:
     admin();
     admin(char*, char*);
     void set_admin_usrname_password(char*, char*);
-    void set_usrname(user* , char*);
-    void set_user_password(user*, char*);
-    void get_user_name(user*);
+    void set_usrname(users* , char*);
+    void set_user_password(users*, char*);
+    void get_user_name(users*);
     void print_admin();
     bool authenticate();
     ~admin();

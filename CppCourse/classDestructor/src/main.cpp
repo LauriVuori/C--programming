@@ -37,7 +37,7 @@ using namespace std;
 void setAdminCredentials(admin * _admin);
 
 int main(void){
-    user* userArr = new user[NUMBER_OF_USERS];
+    users* userArr = new users[NUMBER_OF_USERS];
     admin _admin = admin((char*)"admin", (char*)"admin");
     char usrname[MAXLEN], admin_usrname[MAXLEN], admin_password[MAXLEN], password[MAXLEN];
     char menu;
@@ -45,9 +45,9 @@ int main(void){
     // admin_authenticated = _admin.authenticate();
     setAdminCredentials(&_admin);
     
-    userArr[0] = user((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
-    userArr[1] = user((char*)"Petteri", (char*)"Kauris", (char*)"0501323");
-    userArr[2] = user((char*)"Kalle", (char*)"Puska", (char*)"06132411");
+    userArr[0] = users((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
+    userArr[1] = users((char*)"Petteri", (char*)"Kauris", (char*)"0501323");
+    userArr[2] = users((char*)"Kalle", (char*)"Puska", (char*)"06132411");
 
     // _admin.set_usrname(&userArr[0],(char*)"LaVu");
     // _admin.set_user_password(&userArr[0], (char*)"abcpassword1");

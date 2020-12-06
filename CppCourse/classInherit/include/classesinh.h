@@ -11,7 +11,9 @@ protected:
 public:
     credentials();
     credentials(char*, char*);
-    ~credentials();
+    void set_credentials(char*, char*);
+    void print_info();
+    // ~credentials();
 };
 
 /*
@@ -31,8 +33,10 @@ protected:
 public:
     organization();
     organization(char*, int, char*);
+    organization* search(char* findvalue);
+    void set_info(char*, int , char* );
     void print_organization();
-    ~organization();
+    // ~organization();
 };
 
 /*
@@ -53,7 +57,7 @@ public:
     person(char*, char*, char*);
     void print_data();
     person* find_person(char*);
-    ~person();
+    // ~person();
 };
 
 
@@ -78,12 +82,13 @@ public:
     user(char* , char*, char*, char*, char*);
     void init_info(char*, char*, char*);
     user* find_user(char* );
+    user* find_organization(char* );
     void get_info();
+    void prints();
     void search(char*);
     void print_permissions();
     bool compare(user* _user);
-    void get_all_info();
-    ~user();
+    // ~user();
     friend class admin;
 };
 /*

@@ -19,12 +19,16 @@ user::user(
 user::user(  
     char* fname, 
     char* sname, 
-    char* phnumber):person(fname, sname, phnumber), credentials(){
+    char* phnumber):person(fname, sname, phnumber), organization(), credentials(){
 }
 
 
 user* user::find_user(char* find_user){
     return (user*)person::find_person(find_user);
+}
+
+user* user::find_organization(char* find_org){
+    return (user*) organization::search(find_org);
 }
 
 bool user::compare(user* _user){
@@ -35,14 +39,17 @@ bool user::compare(user* _user){
     return false;
 }
 void user::get_info(){
-    cout << "User information:" << endl;
-    cout << this->first_name << "\n" << this->surname << "\n" 
-    << this->username << "\n" << this->phonenumber << endl;
+    cout << "All info: " << endl;
+    this->print_data();
+    this->print_info();
+    this->print_organization();
 }
 
-void user::get_all_info(){
+void user::prints(){
     cout << "All info: " << endl;
-    person::print_data();
+    this->print_data();
+    this->print_info();
+    this->print_organization();
 }
 
 void user::init_info(char* firstname, char* surname, char* phonenumber){
@@ -59,8 +66,9 @@ void user::search(char* searchName){
 }
 
 // destuctor
-user::~user() {
-}
+// user::~user(){
+
+// }
 
 void user::set_permissions(char confirmed_permissions[][MAXLEN]){
     for (int i = 0; i < PERMISSIONS; i++){

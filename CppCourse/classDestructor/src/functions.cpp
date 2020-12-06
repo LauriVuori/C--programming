@@ -6,7 +6,7 @@
 using namespace std;
 
 
-user::user(  
+users::users(  
     char* fname, 
     char* sname, 
     char* usrname,
@@ -20,7 +20,7 @@ user::user(
 
 }
 
-user::user(  
+users::users(  
     char* fname, 
     char* sname, 
     char* phnumber){
@@ -31,7 +31,7 @@ user::user(
     strcpy(this->password, "Password not known");
 }
 
-user::user(){
+users::users(){
     // strcpy(this->firstname, "Firstname not known");
     // strcpy(this->surname, "Surname not known");
     // strcpy(this->username, "Username not known");
@@ -39,19 +39,19 @@ user::user(){
     // strcpy(this->phonenumber, "Phonenumber not known");
 }
 
-void user::get_info(){
+void users::get_info(){
     cout << "User information:" << endl;
     cout << this->firstname << "\n" << this->surname << "\n" 
     << this->username << "\n" << this->phonenumber << endl;
 }
 
-void user::init_info(char* firstname, char* surname, char* phonenumber){
+void users::init_info(char* firstname, char* surname, char* phonenumber){
     strcpy(this->firstname, firstname);
     strcpy(this->surname, surname);
     strcpy(this->phonenumber, phonenumber);
 }
 
-void user::search(char* searchName){
+void users::search(char* searchName){
     // if same values -> go into if
     if(!strcmp(this->username, searchName)){
         cout << "User found" << endl;
@@ -66,7 +66,7 @@ void user::search(char* searchName){
 //     cout<<"Freeing memory and quitting..."<<endl;
 //  }
 
-void admin::get_user_name(user* _user){
+void admin::get_user_name(users* _user){
     cout << _user->firstname << " " << _user->surname << " " 
     << _user->username << " " << _user->phonenumber << " " << endl;
 }
@@ -90,7 +90,7 @@ admin::admin(char* admin_username, char* admin_password){
 // method to authenticate the admin and then sets the password 
 // of the given User object if authentication of admin succeeds 
 // and otherwise returns a failure message.
-void admin::set_user_password(user* _user, char* password){
+void admin::set_user_password(users* _user, char* password){
     bool admin_authenticated = false;
     cout << "Authenticate to set password" << endl;
     admin_authenticated = authenticate();
@@ -107,7 +107,7 @@ void admin::set_user_password(user* _user, char* password){
 // method to authenticate the admin and then sets the username 
 // of the given User object if authentication of admin succeeds 
 // and otherwise returns a failure message.
-void admin:: set_usrname(user* _user, char* username){
+void admin:: set_usrname(users* _user, char* username){
     bool admin_authenticated = false;
     cout << "Authenticate to set username" << endl; 
     admin_authenticated = authenticate();

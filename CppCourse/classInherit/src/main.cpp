@@ -31,7 +31,16 @@ using namespace std;
 
 void setAdminCredentials(admin * _admin);
 void set_permis(admin * _admin, user * _users);
+void find_and_print(user* _users);
 
+void init(user* _users){
+    _users[0] = user((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
+
+    // _users[1] = user((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
+    // _users[2] = user((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
+    _users[1] = user((char*)"Petteri", (char*)"Kauris", (char*)"0501323");
+
+}
 
 
 
@@ -41,28 +50,51 @@ int main(void){
     admin _admin = admin((char*)"adminsNAME", (char*)"adminsSURNAME", (char*)"adminphonenm040", (char*)"admin", (char*)"admin");
     char usrname[MAXLEN], admin_usrname[MAXLEN], admin_password[MAXLEN], password[MAXLEN], find_person[MAXLEN], menu;
     bool admin_authenticated = false, correct_phone_number = false;
-    // setAdminCredentials(&_admin);
+    setAdminCredentials(&_admin);
+    init(_users);
     // _users[0] = user((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
-    // _users[1] = user((char*)"Petteri", (char*)"Kauris", (char*)"0501323");
-    // _users[2] = user((char*)"Kalle", (char*)"Puska", (char*)"06132411");
 
+    // _users[1] = user((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
+    // _users[2] = user((char*)"Lauri", (char*)"Vuori", (char*)"0400123123");
+    // _users[1] = user((char*)"Petteri", (char*)"Kauris", (char*)"0501323");
+
+    // _users[2] = user((char*)"Kalle", (char*)"Puska", (char*)"06132411");
+    // _users[0].prints();
+    // _users[1].prints();
+    // _users[2].get_info();
+
+    _users[0].prints();
+    _users[1].prints();
   
     // organization org_test = organization();
     // org_test.print_organization();
-    _users[0].get_all_info();
+    // _users[0].set_credentials((char*)"lavu",(char*)"kebab");
+    // _users[0].set_info((char*)"mcdonalds", 25, (char*)"+358400303");
+    // _users[0].print_data();
+    // _users[0].get_info();
+    // temp_user = _users[0].find_organization((char*)"25");
+    // temp_user->get_info();
 
-    cout << "JOU" << endl;
     // for (int i = 0; i < NUMBER_OF_USERS; i++){
     //     cout << "User " << i+1 << ":" << endl;
-    //     // _users[i].get_info();
-    //     _users[i].get_all_info();
+    //     cout << "test" << endl;
+    //     _users[i].prints();
+    //     // _users[i].get_all_info();
     // }
     // _admin.print_admin();
 
     // _admin.set_permissions(&_users[0], (char*)"read");
+
     menu = 'q';
     while (menu != 'q'){
-        cout << "Options:\nA) Find student\nB) Print users\nC) Set credentials to users \n D) Find Person\n E) Set permissions\n F) Compare phonenumber\n G) Print persons \nQ) exit\n" << endl;
+        cout << "Options:\n"
+                           "A) Find users\n"
+                           "B) Print users\n"
+                           "C) Set credentials to users \n"
+                           "E) Set permissions\n"
+                           "F) Compare phonenumber\n"
+                           "G) Print admins info\n"
+                           "Q) exit\n" << endl;
         cout << "Give menu option" << endl;
         cin >> menu;
         cin.get();
@@ -72,11 +104,7 @@ int main(void){
         }
         switch (menu){
             case 'a': // find user
-                cout << "Give username to find: " << endl;
-                cin >> usrname;
-                for (int i = 0; i < NUMBER_OF_USERS; i++){
-                    _users[i].search((char*)usrname);
-                }
+                find_and_print(_users);
                 break;
             case 'b': // print users
                 for (int i = 0; i < NUMBER_OF_USERS; i++){
@@ -94,17 +122,6 @@ int main(void){
                     _admin.set_usrname(&_users[i], usrname);
                     _admin.set_user_password(&_users[i], password);
                     cout << "Credentials changed\n" << endl;
-                }
-                break;
-            case 'd': // find persons
-                cout << "Find person(firstname, surname, phonenumber):" << endl;
-                cin >> find_person;
-
-                for (int i = 0; i < NUMBER_OF_PERSONS; i++){
-                    temp_user = _users[i].find_user(find_person);
-                    if (temp_user != NULL){
-                        temp_user->print_data();
-                    }
                 }
                 break;
             case 'e': //set permissions
@@ -133,9 +150,7 @@ int main(void){
                 }
                 break;
             case 'g':
-                for (int i = 0; i < NUMBER_OF_PERSONS; i++){
-                   _users[i].print_data();
-                }
+                _admin.print_admin();
                 break;
             case 'q':
                 break;
@@ -150,6 +165,55 @@ int main(void){
     // testi.search((char*)"Lauri");
     delete [] _users;
     return 0;
+}
+void find_and_print(user* _users){
+    char choice = 's';
+    char temp_find[MAXLEN];
+    user* temp_user;
+    while (choice != 'q'){
+        cout << "Options:\n"
+                           "A) Find user using username\n"
+                           "B) Find user using (firstname, surname, phonenumber)\n"
+                           "C) Find user using (org. name, org. employ coutn, org. phonenumber)\n"
+                           "Q) exit\n" << endl;
+        cout << "Give menu option" << endl;
+        cin >> choice;
+        cin.get();
+        cout << endl;
+        if ((choice >= 'A') && (choice <= 'Z')){
+            choice += LOWERCASE;
+        }
+        switch (choice){
+            case 'a':
+                cout << "Give username to find:" << endl;
+                cin >> temp_find;
+                for (int i = 0; i < NUMBER_OF_USERS; i++){
+                    _users[i].search((char*)temp_find);
+                }
+                break;
+            case 'b':
+                cout << "Give (firstname, surname, phonenumber) to find:" << endl;
+                cin >> temp_find;
+                for (int i = 0; i < NUMBER_OF_USERS; i++){
+                    temp_user = _users[i].find_user(temp_find);
+                    if (temp_user != NULL){
+                        temp_user->get_info();
+                    }
+                }
+                break;
+            case 'c':
+                cout << "Give (org. name, org. employ coutn, org. phonenumber) to find:" << endl;
+                cin >> temp_find;
+                for (int i = 0; i < NUMBER_OF_USERS; i++){
+                    temp_user = _users[i].find_organization((char*)temp_find);
+                    if (temp_user != NULL){
+                        temp_user->get_info();
+                    }
+                }
+            case 'q':
+                break;
+        }
+    }
 }
 
 void setAdminCredentials(admin * _admin){

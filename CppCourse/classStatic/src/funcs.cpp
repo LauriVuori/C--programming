@@ -49,7 +49,7 @@ user::user(char* first_name, char*surname, char* phonenumber, char* username, ch
 
 }
 
-void user::get_info(){
+void user::get_infos(){
     cout << this->first_name << " " << this->surname << " " << this->phonenumber << " " << this->username 
     << endl;
 }

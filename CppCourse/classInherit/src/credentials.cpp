@@ -19,10 +19,22 @@ credentials::credentials(char* username, char* password){
     strcpy(this->password, password);
 }
 
-credentials::~credentials(){
-    delete [] username;
-    delete [] password;
+void credentials::print_info(){
+    cout << "Username:" << username << endl;
+    // del
+    cout << "password: " << password << endl;
 }
+
+void credentials::set_credentials(char* username, char*password){
+    strcpy(this->username, username);
+    strcpy(this->password, password);
+
+}
+// credentials::~credentials(){
+
+//     delete [] username;
+//     delete [] password;
+// }
 
 // void credentials::print_data(){
 //     // del pass

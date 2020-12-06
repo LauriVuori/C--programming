@@ -23,24 +23,20 @@ person::person(char* firstname, char* surname, char* phnenumber){
     strcpy(this->phonenumber, phnenumber);
 }
 void person::print_data(){
-    cout << "Firstname: " << first_name << "\n" << "Surname: " << surname << "\nPhonenumber: " << phonenumber << endl;
+    cout << "Firstname: " << this->first_name << endl;
+    cout << "Surname: " << this->surname << endl;
+    cout << "Phonenumber: " << this->phonenumber << endl;
 }
 
 person* person::find_person(char* find_person){
     //yhdistä ||
-    if (!strcmp(this->first_name, find_person)){
-        return this;
-    }
-    if (!strcmp(this->surname, find_person)){
-        return this;
-    }
-    if (!strcmp(this->phonenumber, find_person)){
+    if ((!strcmp(this->first_name, find_person)) || (!strcmp(this->surname, find_person)) || (!strcmp(this->phonenumber, find_person))){
         return this;
     }
     return NULL;
 }
-person::~person(){
-    delete [] first_name;
-    delete [] surname;
-    delete [] phonenumber;
-}
+// person::~person(){
+//     delete [] first_name;
+//     delete [] surname;
+//     delete [] phonenumber;
+// }

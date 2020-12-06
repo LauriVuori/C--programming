@@ -22,9 +22,27 @@ organization::organization(char* org_name, int number_of_employees, char* org_ph
 }
 
 void organization::print_organization(){
-    cout << org_name << " " << number_of_employees << " " << org_phonenumber;
+    cout << "Organization name:" << org_name << endl;
+    cout << "Number of employees: " << number_of_employees << endl;
+    cout << "Organization phone number: " << org_phonenumber << endl;
+    // cout << org_name << " " << number_of_employees << " " << org_phonenumber;
 }
-organization::~organization(){
-    delete [] org_name;
-    delete [] org_phonenumber;
-};
+
+void organization::set_info(char* org_name, int numb_of_empl, char* org_phone){
+    strcpy(this->org_name, org_name);
+    number_of_employees = numb_of_empl;
+    strcpy(this->org_phonenumber, org_phone);
+}
+
+organization* organization::search(char* findvalue){
+    int temp = atoi(findvalue);
+
+    if ((!strcmp(this->org_name, findvalue)) || (!strcmp(this->org_phonenumber, findvalue)) || ((this->number_of_employees == temp) && (this->number_of_employees != 0))){
+        return this;
+    }
+    return NULL;
+}
+// organization::~organization(){
+//     delete [] org_name;
+//     delete [] org_phonenumber;
+// };

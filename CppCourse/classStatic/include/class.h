@@ -36,7 +36,7 @@ public:
     user();
     user(char*, char*, char*);
     user(char*, char*, char*, char*, char*);
-    void get_info();
+    void get_infos();
     user* search(char*);
     static void set_denied_list(char*);
     static void set_permissions(int[]);

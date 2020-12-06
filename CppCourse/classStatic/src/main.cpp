@@ -17,7 +17,7 @@ void find_user(user* _users){
     for (i = 0; i < NUMBER_USERS; i++){
             temp_user = _users[i].search(find_person);
             if (temp_user != NULL){
-                temp_user->get_info();
+                temp_user->get_infos();
             
                 // cout << "Which user to find:" << endl;
                 // cin >> find_person;
@@ -47,7 +47,7 @@ int main(void){
     user::set_denied_list((char*)"lavu");
     user::get_denied_list_counter();
     for (int i = 0; i < NUMBER_USERS; i++){
-        _users[i].get_info();
+        _users[i].get_infos();
     }
 
     while (menu != 'q'){
@@ -62,7 +62,7 @@ int main(void){
         switch (menu){
             case 'a': //print
                 for (int i = 0; i < NUMBER_USERS; i++){
-                    _users[i].get_info();
+                    _users[i].get_infos();
                 }
                 user::get_permissions();
                 user::get_denied_list();
