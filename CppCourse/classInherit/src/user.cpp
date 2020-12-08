@@ -13,7 +13,7 @@ user::user(
     char* phnumber,
     char* usrname,
     char* password
-    ):person(fname, sname, phnumber),credentials(usrname, password){
+    ):person(fname, sname, phnumber), credentials(usrname, password), organization(){
 }
 
 user::user(  
@@ -33,7 +33,7 @@ user* user::find_organization(char* find_org){
 
 bool user::compare(user* _user){
     if (!strcmp(this->phonenumber, _user->phonenumber)){
-        cout << "Phone numbers is same" << endl;
+        // cout << "Phone numbers is same" << endl;
         return true;
     }
     return false;

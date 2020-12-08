@@ -61,8 +61,8 @@ void admin:: set_usrname(user* _user, char* username){
 
 
 
-admin::~admin() {
-}
+// admin::~admin() {
+// }
 
 void admin::print_admin(){
     this->print_data();

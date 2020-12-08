@@ -21,8 +21,6 @@ credentials::credentials(char* username, char* password){
 
 void credentials::print_info(){
     cout << "Username:" << username << endl;
-    // del
-    cout << "password: " << password << endl;
 }
 
 void credentials::set_credentials(char* username, char*password){

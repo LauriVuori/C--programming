@@ -120,7 +120,13 @@ int main(void){
                 cin >> find_person;
                 for (int i = 0; i < NUMBER_OF_USERS; i++){
                     correct_phone_number = _users[i].compare(&_users[i]);
-                    _users[i].get_info();
+                    if (correct_phone_number == true){
+                        cout << "Phonenumber is same" << endl;
+                        _users[i].get_info();
+                    }
+                    else{
+                        cout << "Phonenumber not found" << endl;
+                    }
                 }
                 break;
             case 'g':
